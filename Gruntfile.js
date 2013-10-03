@@ -1,6 +1,6 @@
 /*
- * grunt-readme
- * https://github.com/assemble/grunt-readme
+ * Assemble Plugin: Permalinks
+ * https://github.com/assemble/permalinks
  *
  * Copyright (c) 2013 Jon Schlinkert, contributors
  * Licensed under the MIT license.
