@@ -47,7 +47,7 @@ blog/2014/01/01/business-finance/index.html
 ## More examples
 
 ```js
-:year/:month/:day/:name:ext
+:year/:month/:day/:basename:ext
 //=> dest + '/2014/01/01/my-post.html'
 
 :year/:month/:day/:category/index.html
