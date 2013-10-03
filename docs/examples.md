@@ -1,64 +1,59 @@
-```js
-module.exports = function(grunt) {
+## Path separators
 
-  // Project configuration.
-  grunt.initConfig({
-    assemble: {
-      options: {
-        plugins: ['permalinks', 'foo/*.js']
-      },
-      permalinks: {
-        options: {
-          permalinks: {
-            pattern: ':year/:month/:day/:name:ext'
-            pattern: ':year/:month/:day/:slug/index.html'
-          }
-        },
-        files: {
-          'site/': ['templates/permalinks/*.hbs']
-        }
-      },
-      permalinks2: {
-        options: {
-          permalinks: {
-            // Separators can be any legal character: '', '/', '-', '_'
-            pattern: ':YYYY_:MM-:DD/:slug/:category/:foo/index.html',
-            replacements: [
-              {
-                pattern: ':foo',
-                replacement: 'bar'
-              }
-            ]
-          }
-        },
-        files: {
-          'site/': ['templates/permalinks/*.hbs']
-        }
-      }
-    }
-  });
-  grunt.loadNpmTasks('assemble');
-  grunt.registerTask('default', ['assemble']);
-};
+You don't have to use slashes (`/`) only in your permalinks, you can use `-` or `_` wherever you need them as well. For example, this is perfectly valid:
+
 ```
+pattern: ':YYYY_:MM-:DD/:slug:category:foo/:bar/index.html'
+```
+
+**Warning**, this should be obvious, but make sure not to use a `.` in the middle of your paths, especially if you use Windows.
+
+
+## Dynamically build slugs
+
+You can even dynamically build up strings using Lo-Dash templates:
 
 ```yaml
 ---
-title: Snowshoe Crabs Are Swarthy and Devious
-date: 02-13-2013
-description: This is an example blog post.
+date: 1-1-2014
 
-# Dynamically build the slug with lodash templates
-one: alpha
-two: beta
-three: gamma
-slug: <%= one %>-<%= two %>-<%= three %>
-
-categories:
-  - node.js
+# Dynamically build the slug for example
+area: business
+section: finance
+slug: <%= area %>-<%= section %>
 ---
-<h1>{{{data.title}}}</h1>
-<p>{{{description}}}</p>
+```
+With this config:
+
+```js
+blog: {
+  options: {
+    permalinks: {
+      pattern: ':year/:month/:day/:slug/:title.html'
+    }
+  },
+  files: {
+    'blog/': ['posts/*.hbs']
+  }
+}
 ```
 
+Would render to:
+
+```
+blog/2014/01/01/business-finance/index.html
+```
+
+## More examples
+
+```js
+:year/:month/:day/:name:ext
+//=> dest + '/2014/01/01/my-post.html'
+
+:year/:month/:day/:category/index.html
+//=> dest + '/2014/01/01/javascript/index.html'
+
+:year/:month/:day/:slug/index.html
+//=> dest + '/2014/01/01/business-finance/index.html'
+```
 

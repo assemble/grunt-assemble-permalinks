@@ -1,6 +1,6 @@
 {
   "name": "permalinks",
-  "description": "Permalinks plugin for Assemble.",
+  "description": "Permalinks plugin for Assemble, enables powerful and configurable URI patterns, uses [Moment.js](http://momentjs.com/) for parsing dates, and lots more.",
   "version": "0.1.0",
   "homepage": "https://github.com/helpers/permalinks",
   "author": {
@@ -34,7 +34,16 @@
     "grunt-contrib-jshint": "~0.6.4"
   },
   "keywords": [
+    "blog",
+    "moment",
+    "moment.js",
+    "parse url",
     "permalinks",
-    "pretty links"
+    "post",
+    "pretty links",
+    "slug",
+    "uri",
+    "url",
+    "yaml front matter"
   ]
 }

@@ -12,17 +12,14 @@ username: jonschlinkert
 ## Options
 {%= _.doc("options.md") %}
 
+## Patterns
+{%= _.doc("patterns.md") %}
+
 ## Usage Examples
 {%= _.doc("examples.md") %}
 
 ## Contributing
 Please see the [Contributing to {%= name %}]({%= homepage %}/blob/master/CONTRIBUTING.md) guide for information on contributing to this project.
-
-{% if (changelog) { %}
-## Release History
-{%= _.include("docs-changelog.md") %} {% } else { %}
- * {%= grunt.template.today('yyyy') %}   v0.1.0   First commit
-{% } %}
 
 ## Author
 

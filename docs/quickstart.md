@@ -5,7 +5,7 @@ From the same directory as your project's [Gruntfile][Getting Started] and [pack
 npm install {%= name %} --save-dev
 ```
 
-Once that's done, register the plugin with Assemble:
+Once that's done, just add `permalinks`, the name of this module, to the `plugins` option in the Assemble task:
 
 ```js
 module.exports = function(grunt) {
@@ -14,18 +14,12 @@ module.exports = function(grunt) {
   grunt.initConfig({
     assemble: {
       options: {
-        plugins: ['permalinks']
-      },
-      blog: {
-        options: {
-          permalinks: {
-            pattern: ':year/:month/:day/:name:ext'
-          }
-        },
-        files: {
-          'blog/': ['templates/posts/*.hbs']
+        plugins: ['permalinks'],
+        permalinks: {
+          pattern: ':year/:month/:day/:name:ext'
         }
-      }
+      },
+      ...
     }
   });
   grunt.loadNpmTasks('assemble');
@@ -33,28 +27,5 @@ module.exports = function(grunt) {
 };
 ```
 
-```js
-module.exports = function(grunt) {
+If everything was installed and configured correctly, you should be ready to go!
 
-  // Project configuration.
-  grunt.initConfig({
-    assemble: {
-      options: {
-        plugins: ['permalinks', 'foo/*.js']
-      },
-      my_blog: {
-        options: {
-          permalinks: {
-            pattern: ':year/:month/:day/:name:ext'
-          }
-        },
-        files: {
-          'blog/': ['templates/posts/*.hbs']
-        }
-      }
-    }
-  });
-  grunt.loadNpmTasks('assemble');
-  grunt.registerTask('default', ['assemble']);
-};
-```
