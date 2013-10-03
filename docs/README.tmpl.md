@@ -5,7 +5,6 @@ username: jonschlinkert
 
 > {%= description %}
 
-{% if (grunt.file.exists('EXAMPLES.md')) { %}[Also see examples →](./EXAMPLES.md){% } %}
 ## Quickstart
 {%= _.doc("quickstart.md") %}
 

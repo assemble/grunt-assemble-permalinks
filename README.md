@@ -2,7 +2,6 @@
 
 > Permalinks plugin for Assemble, enables powerful and configurable URI patterns, uses [Moment.js](http://momentjs.com/) for parsing dates, and lots more.
 
-
 ## Quickstart
 
 From the same directory as your project's [Gruntfile][Getting Started] and [package.json][], install this plugin with the following command:
@@ -35,7 +34,9 @@ module.exports = function(grunt) {
 
 If everything was installed and configured correctly, you should be ready to go!
 
-
+[grunt]: http://gruntjs.com/
+[Getting Started]: https://github.com/gruntjs/grunt/blob/devel/docs/getting_started.md
+[package.json]: https://npmjs.org/doc/json.html
 
 
 ## Options
@@ -327,4 +328,4 @@ Released under the MIT license
 
 ***
 
-_This file was generated on Thu Oct 03 2013 16:33:08._
+_This file was generated on Thu Oct 03 2013 16:35:15._
