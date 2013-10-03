@@ -46,9 +46,23 @@ blog/2014/01/01/business-finance/index.html
 
 ## More examples
 
+Keep in mind that the date is formatted the way you want it, you don't need to follow these examples. Also, some of these variables will only work if you add that property to your pages, and setup the replacement patterns.
+
 ```js
+:YYYY/:MM/:DD/news/:id/index:ext
+//=> dest + '/2014/01/01/news/001/index.html'
+
+:YYYY/:MM/:DD/:mm/:ss/news/:id/index:ext
+//=> dest + '/2014/01/01/40/16/news/001/index.html'
+
 :year/:month/:day/:basename:ext
 //=> dest + '/2014/01/01/my-post.html'
+
+blog/:year-:month-:day/:basename:ext
+//=> dest + 'blog/2014-01-01/my-post.html'
+
+:date/:basename:ext
+//=> dest + '2014-01-01/my-post.html'
 
 :year/:month/:day/:category/index.html
 //=> dest + '/2014/01/01/javascript/index.html'

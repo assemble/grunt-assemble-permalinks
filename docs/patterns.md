@@ -23,7 +23,7 @@ assemble: {
 
 ## How patterns work
 
-This plugin comes with a number of built-in replacement patterns that will automatically parse and convert the patterns into the appropriate string. Assemble provides a number of generic variables for accessing data from page, such as `basename`, `ext`, `filename` and so on. This plugin simply dynamically builds the replacement patterns from those generic variables, so barring a few exceptions (`_page`, `data`, `filePair`, `page`, `pageName`), you should be able to use any _applicable_ variable that is on the page context in your replacement patterns.
+This plugin comes with a number of built-in replacement patterns that will automatically parse and convert the patterns into the appropriate string. Assemble provides a number of generic variables for accessing page data, such as `basename`, `ext`, `filename` and so on. This plugin simply dynamically builds the replacement patterns from those generic variables, so barring a few exceptions (`_page`, `data`, `filePair`, `page`, `pageName`), you should be able to use any _applicable_ variable that is on the page context in your replacement patterns.
 
 Such as:
 

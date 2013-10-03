@@ -122,7 +122,7 @@ assemble: {
 
 ### How patterns work
 
-This plugin comes with a number of built-in replacement patterns that will automatically parse and convert the patterns into the appropriate string. Assemble provides a number of generic variables for accessing data from page, such as `basename`, `ext`, `filename` and so on. This plugin simply dynamically builds the replacement patterns from those generic variables, so barring a few exceptions (`_page`, `data`, `filePair`, `page`, `pageName`), you should be able to use any _applicable_ variable that is on the page context in your replacement patterns.
+This plugin comes with a number of built-in replacement patterns that will automatically parse and convert the patterns into the appropriate string. Assemble provides a number of generic variables for accessing page data, such as `basename`, `ext`, `filename` and so on. This plugin simply dynamically builds the replacement patterns from those generic variables, so barring a few exceptions (`_page`, `data`, `filePair`, `page`, `pageName`), you should be able to use any _applicable_ variable that is on the page context in your replacement patterns.
 
 Such as:
 
@@ -300,9 +300,23 @@ blog/2014/01/01/business-finance/index.html
 
 ### More examples
 
+Keep in mind that the date is formatted the way you want it, you don't need to follow these examples. Also, some of these variables will only work if you add that property to your pages, and setup the replacement patterns.
+
 ```js
+:YYYY/:MM/:DD/news/:id/index:ext
+//=> dest + '/2014/01/01/news/001/index.html'
+
+:YYYY/:MM/:DD/:mm/:ss/news/:id/index:ext
+//=> dest + '/2014/01/01/40/16/news/001/index.html'
+
 :year/:month/:day/:basename:ext
 //=> dest + '/2014/01/01/my-post.html'
+
+blog/:year-:month-:day/:basename:ext
+//=> dest + 'blog/2014-01-01/my-post.html'
+
+:date/:basename:ext
+//=> dest + '2014-01-01/my-post.html'
 
 :year/:month/:day/:category/index.html
 //=> dest + '/2014/01/01/javascript/index.html'
@@ -328,4 +342,4 @@ Released under the MIT license
 
 ***
 
-_This file was generated on Thu Oct 03 2013 16:35:15._
+_This file was generated on Thu Oct 03 2013 16:46:13._
