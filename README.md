@@ -22,7 +22,7 @@ module.exports = function(grunt) {
       options: {
         plugins: ['permalinks'],
         permalinks: {
-          pattern: ':year/:month/:day/:name:ext'
+          pattern: ':year/:month/:day/foo:/index.html'
         }
       },
       ...
@@ -106,7 +106,7 @@ assemble: {
   blog: {
     options: {
       permalinks: {
-        pattern: ':year/:month/:day/:name:ext'
+        pattern: ':year/:month/:day/:basename:ext'
       }
     },
     files: {
@@ -142,7 +142,7 @@ Adding patterns is easy, just add a `replacements: []` property to the `permalin
 ```js
 options: {
   permalinks: {
-    pattern: ':year/:month/:day/:author/:name:ext',
+    pattern: ':year/:month/:day/:author/:slug:ext',
     replacements: []
   }
 }
@@ -154,7 +154,7 @@ Since `:authors` is not a built-in variable, we need to add a replacement patter
 ```js
 options: {
   permalinks: {
-    pattern: ':year/:month/:day/:author/:name:ext',
+    pattern: ':year/:month/:day/:author/:slug:ext',
     replacements: [
       {
         pattern: ':author',
@@ -165,12 +165,14 @@ options: {
 }
 ...
 ```
+#### with custom properties
 
 Any string pattern is acceptable, as long as a `:` precedes the variable, but don't forget that there must also be a matching property in the context or Assemble will might an error (or worse, not). In other words, when you add a replacement pattern for `:foo`, it's good practice to make sure this property exists:
 
 ```yaml
 ---
 foo: bar
+slug:
 ---
 ```
 
@@ -298,7 +300,7 @@ blog/2014/01/01/business-finance/index.html
 ### More examples
 
 ```js
-:year/:month/:day/:name:ext
+:year/:month/:day/:basename:ext
 //=> dest + '/2014/01/01/my-post.html'
 
 :year/:month/:day/:category/index.html
@@ -325,4 +327,4 @@ Released under the MIT license
 
 ***
 
-_This file was generated on Thu Oct 03 2013 16:08:44._
+_This file was generated on Thu Oct 03 2013 16:33:08._
