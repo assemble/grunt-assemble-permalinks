@@ -29,3 +29,6 @@ module.exports = function(grunt) {
 
 If everything was installed and configured correctly, you should be ready to go!
 
+[grunt]: http://gruntjs.com/
+[Getting Started]: https://github.com/gruntjs/grunt/blob/devel/docs/getting_started.md
+[package.json]: https://npmjs.org/doc/json.html
