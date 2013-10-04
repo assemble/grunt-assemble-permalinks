@@ -25,6 +25,8 @@ We welcome all kinds of contributions! The most basic way to show your support i
 
 ## Author
 
+**Jon Schlinkert**
+
 + [github.com/{%= username %}](https://github.com/{%= username %})
 + [twitter.com/{%= username %}](http://twitter.com/{%= username %})
 

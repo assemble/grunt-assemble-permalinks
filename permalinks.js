@@ -10,6 +10,7 @@
 var path  = require('path');
 
 // node_modules
+var chalk  = require('chalk');
 var moment = require('moment');
 var frep   = require('frep');
 
@@ -20,128 +21,159 @@ var frep   = require('frep');
  * @param  {Function} callback
  * @return {String}   The permalink string
  */
-var permalinks = function(config, callback) {
+module.exports = function(config, callback) {
 
   'use strict';
 
-  var _          = config.grunt.util._;
-  var pages      = config.context.pages;
   var permalinks = config.context.permalinks;
+  var pages      = config.context.pages;
+  var grunt      = config.grunt;
+  var async      = grunt.util.async;
+  var _          = grunt.util._;
+
 
   // Skip over the plugin if it isn't defined in the optiosn.
   if(!_.isUndefined(permalinks)) {
 
-    // Get the permalink pattern to use from the
-    // Assemble options (options.permalinks.pattern)
-    var structure = permalinks.structure;
+    async.forEachSeries(pages, function(page, next) {
 
-    pages.map(function(page) {
+      // Get the permalink pattern to use from options.permalinks.structure.
+      // If one isn't defined, don't change anything.
+      var structure = permalinks.structure || page.dest;
 
       // Create a placeholder for page properties.
       var props = [];
 
-      // Properties to omit from the config object.
-      var exclusions = ['_page', 'data', 'filePair', 'page', 'pageName'];
-          exclusions = _.union([], exclusions, permalinks.exclusions || []);
-
       // Convenience variable for YAML front matter.
       var yfm  = page.data;
 
-      // Set the default language.
+
+      /**
+       * EXCLUSION PATTERNS OPTION
+       * Properties to omit from the config object.
+       */
+      var exclusions = ['_page', 'data', 'filePair', 'page', 'pageName'];
+          exclusions = _.union([], exclusions, permalinks.exclusions || []);
+
+
+      /**
+       * LANGUAGE OPTION
+       * Set the default language.
+       */
       moment.lang(permalinks.lang || 'en');
 
-      // Replacement patterns
+
+      /**
+       * REPLACEMENT PATTERNS
+       * Replacement variables for permalink structure.
+       */
+      var format = function(date) {
+        return moment(yfm.date).format(date);
+      };
+
       var datePatterns = [
         // Full date
         {pattern: ':date',      replacement: moment(yfm.date, permalinks.dateFormats || ["YYYY-MM-DD"])._i || ''},
-
         // Long date formats
-        {pattern: ':L',         replacement: moment(yfm.date).format("MM/DD/YYYY")},
-        {pattern: ':1',         replacement: moment(yfm.date).format("M/D/YYYY")},
-
+        {pattern: ':L',         replacement: format("MM/DD/YYYY")},
+        {pattern: ':1',         replacement: format("M/D/YYYY")},
         // Year (2013, 13)
-        {pattern: ':year',      replacement: moment(yfm.date).format("YYYY")},
-        {pattern: ':YYYY',      replacement: moment(yfm.date).format("YYYY")},
-        {pattern: ':YY',        replacement: moment(yfm.date).format("YY")},
+        {pattern: ':year',      replacement: format("YYYY")},
+        {pattern: ':YYYY',      replacement: format("YYYY")},
+        {pattern: ':YY',        replacement: format("YY")},
         // Month name (January, Jan)
-        {pattern: ':monthname', replacement: moment(yfm.date).format("MMMM")},
-        {pattern: ':MMMM',      replacement: moment(yfm.date).format("MMMM")},
-        {pattern: ':MMM',       replacement: moment(yfm.date).format("MMM")},
+        {pattern: ':monthname', replacement: format("MMMM")},
+        {pattern: ':MMMM',      replacement: format("MMMM")},
+        {pattern: ':MMM',       replacement: format("MMM")},
         // Month number (1, 01)
-        {pattern: ':month',     replacement: moment(yfm.date).format("MM")},
-        {pattern: ':MM',        replacement: moment(yfm.date).format("MM")},
-        {pattern: ':mo',        replacement: moment(yfm.date).format("MM")},
-        {pattern: ':M',         replacement: moment(yfm.date).format("M")},
+        {pattern: ':month',     replacement: format("MM")},
+        {pattern: ':MM',        replacement: format("MM")},
+        {pattern: ':mo',        replacement: format("MM")},
+        {pattern: ':M',         replacement: format("M")},
         // Day of the year
-        {pattern: ':DDDD',      replacement: moment(yfm.date).format("DDDD")},
-        {pattern: ':DDD',       replacement: moment(yfm.date).format("DDD")},
+        {pattern: ':DDDD',      replacement: format("DDDD")},
+        {pattern: ':DDD',       replacement: format("DDD")},
         // Day of the month
-        {pattern: ':day',       replacement: moment(yfm.date).format("DD")},
-        {pattern: ':DD',        replacement: moment(yfm.date).format("DD")},
-        {pattern: ':D',         replacement: moment(yfm.date).format("D")},
+        {pattern: ':day',       replacement: format("DD")},
+        {pattern: ':DD',        replacement: format("DD")},
+        {pattern: ':D',         replacement: format("D")},
         // Day of the week (wednesday/wed)
-        {pattern: ':dddd',      replacement: moment(yfm.date).format("dddd")},
-        {pattern: ':ddd',       replacement: moment(yfm.date).format("ddd")},
-        {pattern: ':dd',        replacement: moment(yfm.date).format("dd")},
-        {pattern: ':d',         replacement: moment(yfm.date).format("d")},
+        {pattern: ':dddd',      replacement: format("dddd")},
+        {pattern: ':ddd',       replacement: format("ddd")},
+        {pattern: ':dd',        replacement: format("dd")},
+        {pattern: ':d',         replacement: format("d")},
         // Hour
-        {pattern: ':hour',      replacement: moment(yfm.date).format("HH")},
-        {pattern: ':HH',        replacement: moment(yfm.date).format("HH")},
-        {pattern: ':H',         replacement: moment(yfm.date).format("H")},
-        {pattern: ':hh',        replacement: moment(yfm.date).format("hh")},
-        {pattern: ':h',         replacement: moment(yfm.date).format("h")},
+        {pattern: ':hour',      replacement: format("HH")},
+        {pattern: ':HH',        replacement: format("HH")},
+        {pattern: ':H',         replacement: format("H")},
+        {pattern: ':hh',        replacement: format("hh")},
+        {pattern: ':h',         replacement: format("h")},
         // Minute
-        {pattern: ':minute',    replacement: moment(yfm.date).format("mm")},
-        {pattern: ':min',       replacement: moment(yfm.date).format("mm")},
-        {pattern: ':mm',        replacement: moment(yfm.date).format("mm")},
-        {pattern: ':m',         replacement: moment(yfm.date).format("m")},
+        {pattern: ':minute',    replacement: format("mm")},
+        {pattern: ':min',       replacement: format("mm")},
+        {pattern: ':mm',        replacement: format("mm")},
+        {pattern: ':m',         replacement: format("m")},
         // Second
-        {pattern: ':second',    replacement: moment(yfm.date).format("ss")},
-        {pattern: ':sec',       replacement: moment(yfm.date).format("ss")},
-        {pattern: ':ss',        replacement: moment(yfm.date).format("ss")},
-        {pattern: ':s',         replacement: moment(yfm.date).format("s")},
+        {pattern: ':second',    replacement: format("ss")},
+        {pattern: ':sec',       replacement: format("ss")},
+        {pattern: ':ss',        replacement: format("ss")},
+        {pattern: ':s',         replacement: format("s")},
         // AM/PM, am/pm
-        {pattern: ':A',         replacement: moment(yfm.date).format("A")},
-        {pattern: ':a',         replacement: moment(yfm.date).format("a")},
-        {pattern: ':P',         replacement: moment(yfm.date).format("P")},
-        {pattern: ':p',         replacement: moment(yfm.date).format("p")},
+        {pattern: ':A',         replacement: format("A")},
+        {pattern: ':a',         replacement: format("a")},
+        {pattern: ':P',         replacement: format("P")},
+        {pattern: ':p',         replacement: format("p")},
       ];
-
 
       // Best guesses at some useful patterns
       var specialPatterns = [
         {pattern: ':category',  replacement: _.slugify(_.first(yfm.categories))}
       ];
 
-
-      // Dynamically construct replacement patterns from properties on the
-      // `page` object, and push them into the "props" array.
+      // Push properties on the `page` object into the "props" array
+      // so we can use them to dynamically construct replacement patterns
       _.keys(_.omit(page, exclusions)).map(function(key) {
         props.push({pattern: ':' + key, replacement: page[key]});
       });
 
-
-      // Dynamically construct replacement patterns from properties on the
-      // `page.data` object, and push them into the "props" array.
+      // Push properties on the `page.data` object into the "props" array
+      // so we can use them to dynamically construct replacement patterns
       _.keys(_.omit(yfm, exclusions)).map(function(key) {
         props.push({pattern: ':' + key, replacement: _.slugify(yfm[key])});
       });
 
-
       // All the replacement patterns contructed from dates, the page obj, and page.data obj.
-      var replacements = _.union([], props || [], specialPatterns || [], permalinks.patterns || [], datePatterns || []);
+      var replacements = _.union([], props, specialPatterns, permalinks.patterns || [], datePatterns);
 
 
-      // Construct the permalink string.
-      var permalink = frep.strWithArr(structure, replacements);
+      /**
+       * PRESETS
+       * Pre-formatted permalink structures. If a preset is defined,
+       * append it to the user-defined structure.
+       */
+      if(permalinks.preset && String(permalinks.preset).length !== 0) {
+        var presets = {
+          pretty: path.join((structure || ''), _.slugify(page.basename), 'index.html')
+        };
+        structure = String(_.values(_.pick(presets, permalinks.preset)));
+      }
+      config.grunt.verbose.writeln(chalk.bold('permalinks.structure'), chalk.yellow(structure));
 
 
-      // Append the permalink to the dest path defined in the target.
+      /**
+       * CREATE PERMALINKS
+       * Construct the permalink string.
+       */
+      var permalink = frep.strWithArr(structure || page.dest, replacements);
+
+
+      /**
+       * WRITE PERMALINKS
+       * Append the permalink to the dest path defined in the target.
+       */
       page.dest = path.join(page.dirname, permalink);
+
+      next();
     });
-  }
-  callback();
+  } callback();
 };
-
-
-module.exports = permalinks;

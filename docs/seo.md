@@ -26,9 +26,9 @@ Here are some great permalink structures, pick the one you like or feel free to 
 :category/:postname
 ```
 
-Since the `:postname` variable isn't actually built in, you'll need to add it as a custom replacement pattern. But you could use `:filename`, `:pagename`, `:basename` and so one. The important takeaway here is that _the name counts_. Emphasize it.
+Since the `:postname` variable isn't actually built in, you'll need to add it as a custom replacement pattern. But you could use `:filename`, `:pagename`, `:basename` and so on. The important thing to remember is that _the name counts_. Emphasize it.
 
-And if you do decide to use a custom variable, like `:postname` or `:title`, just add it like this:
+If you decide to use a custom variable, such as `:postname` or `:title`, just add it like this:
 
 ```js
 options: {
