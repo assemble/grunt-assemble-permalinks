@@ -3,10 +3,38 @@
 You don't have to use slashes (`/`) only in your permalinks, you can use `-` or `_` wherever you need them as well. For example, this is perfectly valid:
 
 ```
-pattern: ':YYYY_:MM-:DD/:slug:category:foo/:bar/index.html'
+:YYYY_:MM-:DD/:slug:category:foo/:bar/index.html
 ```
 
 **Warning**, this should be obvious, but make sure not to use a `.` in the middle of your paths, especially if you use Windows.
+
+
+## Pretty links
+
+Pretty links involve saving an "index.html" to each directory, with the tile, file name or slug as the basename of the directory:
+
+```js
+assemble: {
+  blog: {
+    options: {
+      permalinks: {
+        structure: ':category/:slug/:index.html'
+      }
+    },
+    files: [
+      {expand: true, cwd: 'templates/', src: ['*.hbs'], dest: 'blog/', ext: '.html'}
+    ]
+  }
+}
+```
+
+This would result in a directory structure that looks something like this:
+
+```
+/programming/my-node-js-post/index.html
+/programming/my-javascript-post/index.html
+/programming/my-assemble-post/index.html
+```
 
 
 ## Dynamically build slugs
@@ -29,7 +57,7 @@ With this config:
 blog: {
   options: {
     permalinks: {
-      pattern: ':year/:month/:day/:slug/:title.html'
+      structure: ':year/:month/:day/:slug/:title.html'
     }
   },
   files: {

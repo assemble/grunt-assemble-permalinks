@@ -20,7 +20,7 @@ var frep   = require('frep');
  * @param  {Function} callback
  * @return {String}   The permalink string
  */
-module.exports = function(config, callback) {
+var permalinks = function(config, callback) {
 
   'use strict';
 
@@ -33,7 +33,7 @@ module.exports = function(config, callback) {
 
     // Get the permalink pattern to use from the
     // Assemble options (options.permalinks.pattern)
-    var pattern = permalinks.pattern;
+    var structure = permalinks.structure;
 
     pages.map(function(page) {
 
@@ -110,8 +110,7 @@ module.exports = function(config, callback) {
 
       // Best guesses at some useful patterns
       var specialPatterns = [
-        {pattern: ':category',  replacement: _.slugify(_.first(yfm.categories))},
-        {pattern: ':name',      replacement: path.basename(page.src, path.extname(page.src))}
+        {pattern: ':category',  replacement: _.slugify(_.first(yfm.categories))}
       ];
 
 
@@ -134,7 +133,7 @@ module.exports = function(config, callback) {
 
 
       // Construct the permalink string.
-      var permalink = frep.strWithArr(pattern, replacements);
+      var permalink = frep.strWithArr(structure, replacements);
 
 
       // Append the permalink to the dest path defined in the target.
@@ -145,3 +144,4 @@ module.exports = function(config, callback) {
 };
 
 
+module.exports = permalinks;

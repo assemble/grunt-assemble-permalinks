@@ -1,5 +1,6 @@
-## Permalink Patterns
-> Replacement patterns for dynamically constructing permalinks, and thus directory structures.
+## Permalink structure
+
+> Replacement patterns for dynamically constructing permalinks, as well as the corresponding directory structures.
 
 Permalinks are **appended to the dest directory**. So given this config:
 
@@ -8,7 +9,7 @@ assemble: {
   blog: {
     options: {
       permalinks: {
-        pattern: ':year/:month/:day/:basename:ext'
+        structure: ':year/:month/:day/:basename:ext'
       }
     },
     files: {
@@ -16,23 +17,24 @@ assemble: {
     }
   }
 }
-
 // the generated directory structure and resulting path would look something like:
 //=> 'blog/archives/2011/01/01/an-inspiring-post.html'
 ```
 
-## How patterns work
+## How replacement patterns work
 
-This plugin comes with a number of built-in replacement patterns that will automatically parse and convert the patterns into the appropriate string. Assemble provides a number of generic variables for accessing page data, such as `basename`, `ext`, `filename` and so on. This plugin simply dynamically builds the replacement patterns from those generic variables, so barring a few exceptions (`_page`, `data`, `filePair`, `page`, `pageName`), you should be able to use any _applicable_ variable that is on the page context in your replacement patterns.
+This plugin comes with a number of built-in replacement patterns that will automatically parse and convert the built-in variables into the appropriate string. Since Assemble provides a number of generic variables for accessing page data, such as `basename`, `ext`, `filename` etc., this plugin simply dynamically builds the replacement patterns from those generic variables.
 
-Such as:
+Barring a few exceptions (`_page`, `data`, `filePair`, `page`, `pageName`), you should be able to use any _applicable_ variable that is on the page context in your replacement patterns.
 
-* `:ext`: The extension of the file, for example `.html`
-* `:extname`: Alias for `:ext`.
-* `:basename`: A slugified version of the title of the file. So `My Very first Post` becomes `my-very-first-post`.
-* `:filename`: A slugified version of the name of the dest file. So `My Very first Post` becomes `my-very-first-post.html`.
-* `:pagename`: Alias for `:filename`.
-* `:category`: A slugified version of the very first category for a page.
+For example, assuming we have a file, `./templates/overview.hbs`:
+
+* `:ext`: would result in the `dest` extension: `.html`
+* `:extname`: alias for `:ext`.
+* `:basename`: would result in `overview`
+* `:filename`: would result in the dest file name, `overview.html`
+* `:pagename`: alias for `:filename`.
+* `:category`: Slugified version of _the very first category_ for a page.
 
 
 ### Custom Patterns
@@ -44,7 +46,7 @@ Adding patterns is easy, just add a `replacements: []` property to the `permalin
 ```js
 options: {
   permalinks: {
-    pattern: ':year/:month/:day/:author/:slug:ext',
+    structure: ':year/:month/:day/:author/:slug:ext',
     replacements: []
   }
 }
@@ -56,7 +58,7 @@ Since `:authors` is not a built-in variable, we need to add a replacement patter
 ```js
 options: {
   permalinks: {
-    pattern: ':year/:month/:day/:author/:slug:ext',
+    structure: ':year/:month/:day/:author/:slug:ext',
     replacements: [
       {
         pattern: ':author',
@@ -78,10 +80,32 @@ slug:
 ---
 ```
 
-
 ## [Moment.js](http://momentjs.com/) date patterns
 
 > This plugin uses the incredibly feature rich and flexible [moment.js](http://momentjs.com/) for parsing dates. If you have a feature request, please don't hesitate to create an issue or make a pull request.
+
+For the date variables to work, a `date` property must exist on the page object.
+
+```yaml
+---
+date: 2014-01-29 3:45 PM
+---
+```
+
+Or
+
+```js
+pages: [
+  {
+    data: {
+      title: 'All about permalinks, the novel.',
+      description: 'This rivoting sequel to War & Peace will have you sleeping in no time.'
+      date: '2014-01-29 3:45 PM'
+    },
+    content: ""
+  }
+]
+```
 
 ### Common date patterns
 

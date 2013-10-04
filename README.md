@@ -2,6 +2,9 @@
 
 > Permalinks plugin for Assemble, enables powerful and configurable URI patterns, uses [Moment.js](http://momentjs.com/) for parsing dates, and lots more.
 
+## Contributing
+We welcome all kinds of contributions! The most basic way to show your support is to star the project, and if you'd like to get involed please see the [Contributing to permalinks](https://github.com/helpers/permalinks/blob/master/CONTRIBUTING.md) guide for information on contributing to this project.
+
 ## Quickstart
 
 From the same directory as your project's [Gruntfile][Getting Started] and [package.json][], install this plugin with the following command:
@@ -21,7 +24,7 @@ module.exports = function(grunt) {
       options: {
         plugins: ['permalinks'],
         permalinks: {
-          pattern: ':year/:month/:day/foo:/index.html'
+          structure: ':year/:month/:day/foo:/index.html'
         }
       },
       ...
@@ -39,66 +42,10 @@ If everything was installed and configured correctly, you should be ready to go!
 [package.json]: https://npmjs.org/doc/json.html
 
 
-## Options
-### dateFormats
-Type: `Array`
-Default: `["YYYY-MM-DD"]`
-
-Array of custom date formats for [Moment.js](http://momentjs.com/) to use for parsing dates.
-
-
-```js
-options: {
-  permalinks: {
-    dateFormats: ["YYYY-MM-DD", "MM-DD-YYYY", "YYYY-MM-DDTHH:mm:ss.SSS"]
-  }
-  ...
-}
-...
-```
-
-
-### lang
-Type: `String`
-Default: `en`
-
-Set the "global" language for [Moment.js](http://momentjs.com/) to use for converting dates:
-
-```js
-options: {
-  permalinks: {
-    pattern: ':year/:month/:day/:basename:ext',
-    lang: 'fr'
-  }
-  files: {
-    'blog/': ['templates/blog/*.hbs']
-  }
-}
-...
-//=> blog/2013/mars/13/my-post.html
-```
-
-### exclusions
-Type: `Array`
-Default: `['_page', 'data', 'filePair', 'page', 'pageName']`
-
-Properties to omit from the context for processing replacement patterns. I wanted to use this for omitting the default properties, but I decided to expose this as an option in case it comes in useful to someone else.
-
-```js
-options: {
-  permalinks: {
-    exclusions: ["foo", "bar"],
-  }
-  ...
-}
-...
-```
-
-
-
 ## Patterns
-### Permalink Patterns
-> Replacement patterns for dynamically constructing permalinks, and thus directory structures.
+### Permalink structure
+
+> Replacement patterns for dynamically constructing permalinks, as well as the corresponding directory structures.
 
 Permalinks are **appended to the dest directory**. So given this config:
 
@@ -107,7 +54,7 @@ assemble: {
   blog: {
     options: {
       permalinks: {
-        pattern: ':year/:month/:day/:basename:ext'
+        structure: ':year/:month/:day/:basename:ext'
       }
     },
     files: {
@@ -115,23 +62,24 @@ assemble: {
     }
   }
 }
-
 // the generated directory structure and resulting path would look something like:
 //=> 'blog/archives/2011/01/01/an-inspiring-post.html'
 ```
 
-### How patterns work
+### How replacement patterns work
 
-This plugin comes with a number of built-in replacement patterns that will automatically parse and convert the patterns into the appropriate string. Assemble provides a number of generic variables for accessing page data, such as `basename`, `ext`, `filename` and so on. This plugin simply dynamically builds the replacement patterns from those generic variables, so barring a few exceptions (`_page`, `data`, `filePair`, `page`, `pageName`), you should be able to use any _applicable_ variable that is on the page context in your replacement patterns.
+This plugin comes with a number of built-in replacement patterns that will automatically parse and convert the built-in variables into the appropriate string. Since Assemble provides a number of generic variables for accessing page data, such as `basename`, `ext`, `filename` etc., this plugin simply dynamically builds the replacement patterns from those generic variables.
 
-Such as:
+Barring a few exceptions (`_page`, `data`, `filePair`, `page`, `pageName`), you should be able to use any _applicable_ variable that is on the page context in your replacement patterns.
 
-* `:ext`: The extension of the file, for example `.html`
-* `:extname`: Alias for `:ext`.
-* `:basename`: A slugified version of the title of the file. So `My Very first Post` becomes `my-very-first-post`.
-* `:filename`: A slugified version of the name of the dest file. So `My Very first Post` becomes `my-very-first-post.html`.
-* `:pagename`: Alias for `:filename`.
-* `:category`: A slugified version of the very first category for a page.
+For example, assuming we have a file, `./templates/overview.hbs`:
+
+* `:ext`: would result in the `dest` extension: `.html`
+* `:extname`: alias for `:ext`.
+* `:basename`: would result in `overview`
+* `:filename`: would result in the dest file name, `overview.html`
+* `:pagename`: alias for `:filename`.
+* `:category`: Slugified version of _the very first category_ for a page.
 
 
 #### Custom Patterns
@@ -143,7 +91,7 @@ Adding patterns is easy, just add a `replacements: []` property to the `permalin
 ```js
 options: {
   permalinks: {
-    pattern: ':year/:month/:day/:author/:slug:ext',
+    structure: ':year/:month/:day/:author/:slug:ext',
     replacements: []
   }
 }
@@ -155,7 +103,7 @@ Since `:authors` is not a built-in variable, we need to add a replacement patter
 ```js
 options: {
   permalinks: {
-    pattern: ':year/:month/:day/:author/:slug:ext',
+    structure: ':year/:month/:day/:author/:slug:ext',
     replacements: [
       {
         pattern: ':author',
@@ -177,10 +125,32 @@ slug:
 ---
 ```
 
-
 ### [Moment.js](http://momentjs.com/) date patterns
 
 > This plugin uses the incredibly feature rich and flexible [moment.js](http://momentjs.com/) for parsing dates. If you have a feature request, please don't hesitate to create an issue or make a pull request.
+
+For the date variables to work, a `date` property must exist on the page object.
+
+```yaml
+---
+date: 2014-01-29 3:45 PM
+---
+```
+
+Or
+
+```js
+pages: [
+  {
+    data: {
+      title: 'All about permalinks, the novel.',
+      description: 'This rivoting sequel to War & Peace will have you sleeping in no time.'
+      date: '2014-01-29 3:45 PM'
+    },
+    content: ""
+  }
+]
+```
 
 #### Common date patterns
 
@@ -251,16 +221,101 @@ date: 2014-01-29 3:45 PM
 
 
 
+## Options
+### dateFormats
+Type: `Array`
+Default: `["YYYY-MM-DD"]`
+
+Array of custom date formats for [Moment.js](http://momentjs.com/) to use for parsing dates.
+
+
+```js
+options: {
+  permalinks: {
+    dateFormats: ["YYYY-MM-DD", "MM-DD-YYYY", "YYYY-MM-DDTHH:mm:ss.SSS"]
+  }
+  ...
+}
+...
+```
+
+
+### lang
+Type: `String`
+Default: `en`
+
+Set the "global" language for [Moment.js](http://momentjs.com/) to use for converting dates:
+
+```js
+options: {
+  permalinks: {
+    pattern: ':year/:month/:day/:basename:ext',
+    lang: 'fr'
+  }
+  files: {
+    'blog/': ['templates/blog/*.hbs']
+  }
+}
+...
+//=> blog/2013/mars/13/my-post.html
+```
+
+### exclusions
+Type: `Array`
+Default: `['_page', 'data', 'filePair', 'page', 'pageName']`
+
+Properties to omit from the context for processing replacement patterns. I wanted to use this for omitting the default properties, but I decided to expose this as an option in case it comes in useful to someone else.
+
+```js
+options: {
+  permalinks: {
+    exclusions: ["foo", "bar"],
+  }
+  ...
+}
+...
+```
+
+
+
 ## Usage Examples
 ### Path separators
 
 You don't have to use slashes (`/`) only in your permalinks, you can use `-` or `_` wherever you need them as well. For example, this is perfectly valid:
 
 ```
-pattern: ':YYYY_:MM-:DD/:slug:category:foo/:bar/index.html'
+:YYYY_:MM-:DD/:slug:category:foo/:bar/index.html
 ```
 
 **Warning**, this should be obvious, but make sure not to use a `.` in the middle of your paths, especially if you use Windows.
+
+
+### Pretty links
+
+Pretty links involve saving an "index.html" to each directory, with the tile, file name or slug as the basename of the directory:
+
+```js
+assemble: {
+  blog: {
+    options: {
+      permalinks: {
+        structure: ':category/:slug/:index.html'
+      }
+    },
+    files: [
+      {expand: true, cwd: 'templates/', src: ['*.hbs'], dest: 'blog/', ext: '.html'}
+    ]
+  }
+}
+```
+
+This would result in a directory structure that looks something like this:
+
+```
+/programming/my-node-js-post/index.html
+/programming/my-javascript-post/index.html
+/programming/my-assemble-post/index.html
+```
 
 
 ### Dynamically build slugs
@@ -283,7 +338,7 @@ With this config:
 blog: {
   options: {
     permalinks: {
-      pattern: ':year/:month/:day/:slug/:title.html'
+      structure: ':year/:month/:day/:slug/:title.html'
     }
   },
   files: {
@@ -328,8 +383,55 @@ blog/:year-:month-:day/:basename:ext
 
 
 
-## Contributing
-Please see the [Contributing to permalinks](https://github.com/helpers/permalinks/blob/master/CONTRIBUTING.md) guide for information on contributing to this project.
+## SEO
+### Recommendations
+Permalinks are important for SEO. but you should spend some time thinking about the strategy you want to use before you decide on a URL structure.
+
+
+#### Avoid date-based permalinks
+Yep, that's what I said. There are plenty of valid use cases for using date-based URL's. This plugin offers a number of date-based patterns, and we leverage [Moment.js][moment] a lot. Still,  I recommend that you avoid using a date-based permalink structure for your blog or documentation, because there is a good chance it will do more harm than good over the long term.
+
+Date-based URL's tend to _decrease click through rates_ on older articles. Think about it, who prefers reading out of date content? So use a URL strategy that doesn't go out of its way to emphasize the date, and you'l keep your posts feeling like fresh content.
+
+
+#### Numeric permalinks
+Numeric or `:id` based permalinks are better than date-based, but they don't really offer much usability or SEO benefit.
+
+
+#### Idiomatic permalinks
+The best structure is one that:
+
+* provides the _highest degree of semantic relevance_ to the content, and
+* is _useful to both search engines and humans_
+
+
+Here are some great permalink structures, pick the one you like or feel free to use something else, I just recommend you keep it simple:
+
+```js
+:postname
+:category/:postname
+```
+
+Since the `:postname` variable isn't actually built in, you'll need to add it as a custom replacement pattern. But you could use `:filename`, `:pagename`, `:basename` and so one. The important takeaway here is that _the name counts_. Emphasize it.
+
+And if you do decide to use a custom variable, like `:postname` or `:title`, just add it like this:
+
+```js
+options: {
+  permalinks: {
+    structure: ':postname:ext',
+    replacements: [
+      {
+        pattern: ':postname',
+        replacement: '<%= pkg.author.name %>'
+      }
+    ]
+  }
+}
+...
+```
+
+
 
 ## Author
 
@@ -342,4 +444,4 @@ Released under the MIT license
 
 ***
 
-_This file was generated on Thu Oct 03 2013 16:46:13._
+_This file was generated on Thursday, October 3, 2013._
