@@ -5,20 +5,23 @@ username: jonschlinkert
 
 > {%= description %}
 
+## Contributing
+We welcome all kinds of contributions! The most basic way to show your support is to star the project, and if you'd like to get involed please see the [Contributing to {%= name %}]({%= homepage %}/blob/master/CONTRIBUTING.md) guide for information on contributing to this project.
+
 ## Quickstart
 {%= _.doc("quickstart.md") %}
-
-## Options
-{%= _.doc("options.md") %}
 
 ## Patterns
 {%= _.doc("patterns.md") %}
 
+## Options
+{%= _.doc("options.md") %}
+
 ## Usage Examples
 {%= _.doc("examples.md") %}
 
-## Contributing
-Please see the [Contributing to {%= name %}]({%= homepage %}/blob/master/CONTRIBUTING.md) guide for information on contributing to this project.
+## SEO
+{%= _.doc("seo.md") %}
 
 ## Author
 
@@ -31,4 +34,4 @@ Please see the [Contributing to {%= name %}]({%= homepage %}/blob/master/CONTRIB
 
 ***
 
-_This file was generated on {%= grunt.template.today() %}._
+_This file was generated on {%= grunt.template.date("fullDate") %}._

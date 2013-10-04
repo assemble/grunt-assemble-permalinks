@@ -16,7 +16,7 @@ module.exports = function(grunt) {
       options: {
         plugins: ['permalinks'],
         permalinks: {
-          pattern: ':year/:month/:day/foo:/index.html'
+          structure: ':year/:month/:day/foo:/index.html'
         }
       },
       ...
