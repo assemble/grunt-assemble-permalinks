@@ -164,7 +164,7 @@ module.exports = function(config, callback) {
         };
         structure = String(_.values(_.pick(presets, permalinks.preset)));
       }
-      config.grunt.log.writeln(chalk.bold('permalinks.structure'), structure);
+      config.grunt.verbose.writeln(chalk.bold('permalinks.structure'), structure);
 
 
       /**
