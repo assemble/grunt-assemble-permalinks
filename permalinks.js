@@ -25,17 +25,24 @@ module.exports = function(config, callback) {
 
   'use strict';
 
-  var permalinks = config.context.permalinks;
-  var pages      = config.context.pages;
+  var context    = config.context;
   var grunt      = config.grunt;
+
+  var permalinks = context.permalinks;
+  var pages      = context.pages;
+  var page       = context.page;
+
   var async      = grunt.util.async;
   var _          = grunt.util._;
 
-
-  // Skip over the plugin if it isn't defined in the optiosn.
+  // Skip over the plugin if it isn't defined in the options.
   if(!_.isUndefined(permalinks)) {
 
-    async.forEachSeries(pages, function(page, next) {
+    pages.forEach(function(file) {
+
+      if (page.src !== file.src) {
+        return;
+      }
 
       // Get the permalink pattern to use from options.permalinks.structure.
       // If one isn't defined, don't change anything.
@@ -142,14 +149,14 @@ module.exports = function(config, callback) {
         props.push({pattern: ':' + key, replacement: _.slugify(yfm[key])});
       });
 
-      // All the replacement patterns contructed from dates, the page obj, and page.data obj.
+      // All the replacement patterns contructed from dates, the page obj,
+      // and page.data obj.
       var replacements = _.union([], props, specialPatterns, permalinks.patterns || [], datePatterns);
-
 
       /**
        * PRESETS
-       * Pre-formatted permalink structures. If a preset is defined,
-       * append it to the user-defined structure.
+       * Pre-formatted permalink structures. If a preset is defined, append
+       * it to the user-defined structure.
        */
       if(permalinks.preset && String(permalinks.preset).length !== 0) {
         var presets = {
@@ -157,7 +164,7 @@ module.exports = function(config, callback) {
         };
         structure = String(_.values(_.pick(presets, permalinks.preset)));
       }
-      config.grunt.verbose.writeln(chalk.bold('permalinks.structure'), chalk.yellow(structure));
+      config.grunt.log.writeln(chalk.bold('permalinks.structure'), structure);
 
 
       /**
@@ -171,9 +178,8 @@ module.exports = function(config, callback) {
        * WRITE PERMALINKS
        * Append the permalink to the dest path defined in the target.
        */
-      page.dest = path.join(page.dirname, permalink);
-
-      next();
+      file.dest = path.join(page.dirname, permalink);
     });
+
   } callback();
 };
