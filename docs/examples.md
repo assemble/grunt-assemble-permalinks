@@ -1,3 +1,25 @@
+## Using presets
+
+To simplify  might do something like:
+
+```js
+options: {
+  permalinks: {
+    preset: 'pretty',
+    structure: ':archives/:categories',
+  },
+  files: {
+    './blog/': ['./templates/blog/*.hbs']
+  }
+}
+```
+
+Which, following the `dest + structure + preset` pattern, would result in:
+
+```js
+./blog/archives/categories/foo/index.html
+```
+
 ## Path separators
 
 You don't have to use slashes (`/`) only in your permalinks, you can use `-` or `_` wherever you need them as well. For example, this is perfectly valid:
@@ -35,7 +57,6 @@ This would result in a directory structure that looks something like this:
 /programming/my-javascript-post/index.html
 /programming/my-assemble-post/index.html
 ```
-
 
 ## Dynamically build slugs
 
