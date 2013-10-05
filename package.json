@@ -1,7 +1,7 @@
 {
   "name": "permalinks",
   "description": "Permalinks plugin for Assemble, enables powerful and configurable URI patterns, uses [Moment.js](http://momentjs.com/) for parsing dates, and lots more.",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "homepage": "https://github.com/helpers/permalinks",
   "author": {
     "name": "Jon Schlinkert",
