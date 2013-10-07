@@ -10,7 +10,7 @@ We welcome all kinds of contributions! The most basic way to show your support i
 From the same directory as your project's [Gruntfile][Getting Started] and [package.json][], install this plugin with the following command:
 
 ```bash
-npm install permalinks --save-dev
+npm install permalinks --save
 ```
 
 Once that's done, just add `permalinks`, the name of this module, to the `plugins` option in the Assemble task:
