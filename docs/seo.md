@@ -36,7 +36,7 @@ options: {
     structure: ':postname:ext',
     replacements: [
       {
-        pattern: ':postname',
+        structure: ':postname',
         replacement: '<%= pkg.author.name %>'
       }
     ]
@@ -44,3 +44,5 @@ options: {
 }
 ...
 ```
+
+[moment]: http://momentjs.com/ "Moment.js Permalinks"
