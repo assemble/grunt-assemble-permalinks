@@ -12,6 +12,7 @@ module.exports = function(grunt) {
 
   // Project configuration.
   grunt.initConfig({
+
     jshint: {
       options: {
         curly: true,
@@ -28,6 +29,7 @@ module.exports = function(grunt) {
       },
       all: ['Gruntfile.js', 'tasks/*.js', '<%= nodeunit.tests %>']
     },
+
 
     // Unit tests.
     nodeunit: {

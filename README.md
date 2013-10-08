@@ -3,7 +3,7 @@
 > Permalinks plugin for Assemble, enables powerful and configurable URI patterns, uses [Moment.js](http://momentjs.com/) for parsing dates, and lots more.
 
 ## Contributing
-We welcome all kinds of contributions! The most basic way to show your support is to star the project, and if you'd like to get involed please see the [Contributing to permalinks](https://github.com/helpers/permalinks/blob/master/CONTRIBUTING.md) guide for information on contributing to this project.
+We welcome all kinds of contributions! The most basic way to show your support is to star the project, and if you'd like to get involed please see the [Contributing to permalinks](https://github.com/assemble/permalinks/blob/master/CONTRIBUTING.md) guide for information on contributing to this project.
 
 ## Quickstart
 
@@ -106,7 +106,7 @@ options: {
     structure: ':year/:month/:day/:author/:slug:ext',
     replacements: [
       {
-        pattern: ':author',
+        structure: ':author',
         replacement: '<%= pkg.author.name %>'
       }
     ]
@@ -489,7 +489,7 @@ options: {
     structure: ':postname:ext',
     replacements: [
       {
-        pattern: ':postname',
+        structure: ':postname',
         replacement: '<%= pkg.author.name %>'
       }
     ]
@@ -498,6 +498,7 @@ options: {
 ...
 ```
 
+[moment]: http://momentjs.com/ "Moment.js Permalinks"
 
 
 ## Author
@@ -513,4 +514,7 @@ Released under the MIT license
 
 ***
 
-_This file was generated on Saturday, October 5, 2013._
+_This file was generated on Monday, October 7, 2013._
+
+
+[moment]: http://momentjs.com/ "Moment.js Permalinks"
