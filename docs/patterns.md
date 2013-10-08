@@ -61,7 +61,7 @@ options: {
     structure: ':year/:month/:day/:author/:slug:ext',
     replacements: [
       {
-        pattern: ':author',
+        structure: ':author',
         replacement: '<%= pkg.author.name %>'
       }
     ]

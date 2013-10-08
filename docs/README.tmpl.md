@@ -37,3 +37,6 @@ We welcome all kinds of contributions! The most basic way to show your support i
 ***
 
 _This file was generated on {%= grunt.template.date("fullDate") %}._
+
+
+[moment]: http://momentjs.com/ "Moment.js Permalinks"
