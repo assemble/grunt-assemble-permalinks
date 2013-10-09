@@ -2,7 +2,7 @@
 From the same directory as your project's [Gruntfile][Getting Started] and [package.json][], install this plugin with the following command:
 
 ```bash
-npm install {%= name %} --save
+npm install {%= name %} --save-dev
 ```
 
 Once that's done, just add `permalinks`, the name of this module, to the `plugins` option in the Assemble task:
