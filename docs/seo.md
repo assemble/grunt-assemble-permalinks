@@ -22,26 +22,29 @@ The best structure is one that:
 Here are some great permalink structures, pick the one you like or feel free to use something else, I just recommend you keep it simple:
 
 ```js
-:postname
-:category/:postname
+:author
+:category/:author
 ```
 
-Since the `:postname` variable isn't actually built in, you'll need to add it as a custom replacement pattern. But you could use `:filename`, `:pagename`, `:basename` and so on. The important thing to remember is that _the name counts_. Emphasize it.
+Since the `:author` variable isn't actually built in, you'll need to add it as a custom replacement pattern. But you could use `:filename`, `:pagename`, `:basename` and so on. The important thing to remember is that _the name counts_. Emphasize it.
 
-If you decide to use a custom variable, such as `:postname` or `:title`, just add it like this:
+If you decide to use a custom variable, such as `:author` or `:title`, just add it like this:
 
 ```js
-options: {
-  permalinks: {
-    structure: ':postname:ext',
-    replacements: [
-      {
-        structure: ':postname',
-        replacement: '<%= pkg.author.name %>'
-      }
-    ]
+var _ = grunt.util._;
+
+  ...
+  options: {
+    permalinks: {
+      structure: ':author:ext',
+      replacements: [
+        {
+          structure: ':author',
+          replacement: '<%= _.slugify(pkg.author.name) %>'
+        }
+      ]
+    }
   }
-}
 ...
 ```
 

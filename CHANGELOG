@@ -1,0 +1,17 @@
+v0.1.5:
+  date: 2013-10-09
+  changes:
+    - Adds logic to ignore permalink structures for files named "index". Fixes [issue 20](https://github.com/assemble/permalinks/issues/20).
+    - Updates replacement patterns to use RegExp and word boundaries to minimize potential for moment.js to greedily modify non-date patterns.
+v0.1.2:
+  date: 2013-10-04
+  changes:
+    - Adds "presets" per [issue 6](https://github.com/assemble/permalinks/issues/6).
+v0.1.1:
+  date: 2013-10-03
+  changes:
+    - Renames "pattern" to "structure".
+v0.1.0:
+  date: 2013-10-03
+  changes:
+    - First commmit.
