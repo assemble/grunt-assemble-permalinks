@@ -23,6 +23,11 @@ options: {
 // => './blog/2014/01/01/baz.html'
 ```
 
+### 'index' pages
+
+Note that permalink structures will be ignored for files with the basename `index`. See [Issue #20](https://github.com/assemble/permalinks/issues/20) for more info.
+
+
 ## preset
 Type: `String`
 Default: `undefined`
@@ -59,7 +64,6 @@ options: {
   }
 }
 ```
-
 
 ## lang
 Type: `String`

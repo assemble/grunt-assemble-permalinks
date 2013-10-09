@@ -10,7 +10,7 @@ We welcome all kinds of contributions! The most basic way to show your support i
 From the same directory as your project's [Gruntfile][Getting Started] and [package.json][], install this plugin with the following command:
 
 ```bash
-npm install permalinks --save
+npm install permalinks --save-dev
 ```
 
 Once that's done, just add `permalinks`, the name of this module, to the `plugins` option in the Assemble task:
@@ -82,32 +82,32 @@ For example, assuming we have a file, `./templates/overview.hbs`:
 * `:category`: Slugified version of _the very first category_ for a page.
 
 
-#### Custom Patterns
+#### Custom replacement patterns
 
 If you have some patterns you'd like to implement, if you think they're common enough that they should be built into this plugin, please submit a pull request.
 
-Adding patterns is easy, just add a `replacements: []` property to the `permalinks` option, then add any number of patterns to the array. For example, let's say we want to add the `:author` variable to our permalinks:
+Adding patterns is easy, just add a `patterns: []` property to the `permalinks` option, then add any number of patterns to the array. For example, let's say we want to add the `:project` variable to our permalinks:
 
 ```js
 options: {
   permalinks: {
-    structure: ':year/:month/:day/:author/:slug:ext',
-    replacements: []
+    structure: ':year/:month/:day/:project/:slug:ext',
+    patterns: []
   }
 }
 ...
 ```
 
-Since `:authors` is not a built-in variable, we need to add a replacement pattern so that any permalinks that include this variable will actually work:
+Since `:project` is not a built-in variable, we need to add a replacement pattern so that any permalinks that include this variable will actually work:
 
 ```js
 options: {
   permalinks: {
-    structure: ':year/:month/:day/:author/:slug:ext',
-    replacements: [
+    structure: ':year/:month/:day/:project/:slug:ext',
+    patterns: [
       {
-        structure: ':author',
-        replacement: '<%= pkg.author.name %>'
+        pattern: ':project',
+        replacement: '<%= pkg.name %>'
       }
     ]
   }
@@ -247,6 +247,11 @@ options: {
 // => './blog/2014/01/01/baz.html'
 ```
 
+#### 'index' pages
+
+Note that permalink structures will be ignored for files with the basename `index`. See [Issue #20](https://github.com/assemble/permalinks/issues/20) for more info.
+
+
 ### preset
 Type: `String`
 Default: `undefined`
@@ -283,7 +288,6 @@ options: {
   }
 }
 ```
-
 
 ### lang
 Type: `String`
@@ -475,26 +479,29 @@ The best structure is one that:
 Here are some great permalink structures, pick the one you like or feel free to use something else, I just recommend you keep it simple:
 
 ```js
-:postname
-:category/:postname
+:author
+:category/:author
 ```
 
-Since the `:postname` variable isn't actually built in, you'll need to add it as a custom replacement pattern. But you could use `:filename`, `:pagename`, `:basename` and so on. The important thing to remember is that _the name counts_. Emphasize it.
+Since the `:author` variable isn't actually built in, you'll need to add it as a custom replacement pattern. But you could use `:filename`, `:pagename`, `:basename` and so on. The important thing to remember is that _the name counts_. Emphasize it.
 
-If you decide to use a custom variable, such as `:postname` or `:title`, just add it like this:
+If you decide to use a custom variable, such as `:author` or `:title`, just add it like this:
 
 ```js
-options: {
-  permalinks: {
-    structure: ':postname:ext',
-    replacements: [
-      {
-        structure: ':postname',
-        replacement: '<%= pkg.author.name %>'
-      }
-    ]
+var _ = grunt.util._;
+
+  ...
+  options: {
+    permalinks: {
+      structure: ':author:ext',
+      replacements: [
+        {
+          structure: ':author',
+          replacement: '<%= _.slugify(pkg.author.name) %>'
+        }
+      ]
+    }
   }
-}
 ...
 ```
 
@@ -508,13 +515,20 @@ options: {
 + [github.com/jonschlinkert](https://github.com/jonschlinkert)
 + [twitter.com/jonschlinkert](http://twitter.com/jonschlinkert)
 
+## Release History
+
+ * 2013-10-09   v0.1.5   Adds logic to ignore permalink structures for files named "index". Fixes [issue 20](https://github.com/assemble/permalinks/issues/20). Updates replacement patterns to use RegExp and word boundaries to minimize potential for moment.js to greedily modify non-date patterns.
+ * 2013-10-04   v0.1.2   Adds "presets" per [issue 6](https://github.com/assemble/permalinks/issues/6).
+ * 2013-10-03   v0.1.1   Renames "pattern" to "structure".
+ * 2013-10-03   v0.1.0   First commmit.
+
 ## License
 Copyright (c) 2013 Jon Schlinkert, contributors.
 Released under the MIT license
 
 ***
 
-_This file was generated on Tuesday, October 8, 2013._
+_This file was generated on Wednesday, October 9, 2013._
 
 
 [moment]: http://momentjs.com/ "Moment.js Permalinks"

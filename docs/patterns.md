@@ -37,32 +37,32 @@ For example, assuming we have a file, `./templates/overview.hbs`:
 * `:category`: Slugified version of _the very first category_ for a page.
 
 
-### Custom Patterns
+### Custom replacement patterns
 
 If you have some patterns you'd like to implement, if you think they're common enough that they should be built into this plugin, please submit a pull request.
 
-Adding patterns is easy, just add a `replacements: []` property to the `permalinks` option, then add any number of patterns to the array. For example, let's say we want to add the `:author` variable to our permalinks:
+Adding patterns is easy, just add a `patterns: []` property to the `permalinks` option, then add any number of patterns to the array. For example, let's say we want to add the `:project` variable to our permalinks:
 
 ```js
 options: {
   permalinks: {
-    structure: ':year/:month/:day/:author/:slug:ext',
-    replacements: []
+    structure: ':year/:month/:day/:project/:slug:ext',
+    patterns: []
   }
 }
 ...
 ```
 
-Since `:authors` is not a built-in variable, we need to add a replacement pattern so that any permalinks that include this variable will actually work:
+Since `:project` is not a built-in variable, we need to add a replacement pattern so that any permalinks that include this variable will actually work:
 
 ```js
 options: {
   permalinks: {
-    structure: ':year/:month/:day/:author/:slug:ext',
-    replacements: [
+    structure: ':year/:month/:day/:project/:slug:ext',
+    patterns: [
       {
-        structure: ':author',
-        replacement: '<%= pkg.author.name %>'
+        pattern: ':project',
+        replacement: '<%= pkg.name %>'
       }
     ]
   }
