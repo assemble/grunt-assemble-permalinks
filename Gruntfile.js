@@ -71,6 +71,17 @@ module.exports = function(grunt) {
           {expand: true, cwd: 'test/fixtures/pages', src: ['**/*.hbs'], dest: 'test/actual/structure', ext: '.html'}
         ]
       },
+      // Should use a long date format for the path
+      dates: {
+        options: {
+          permalinks: {
+            structure: ':YYYY/:MM/:DD/:basename/index:ext'
+          }
+        },
+        files: [
+          {expand: true, cwd: 'test/fixtures/pages', src: ['**/*.hbs'], dest: 'test/actual/dates', ext: '.html'}
+        ]
+      },
       // Should modify dest path using a built-in property from context
       builtin_property_from_context: {
         options: {
