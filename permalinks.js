@@ -24,15 +24,21 @@ module.exports = function(config, callback) {
 
   'use strict';
 
-  var context    = config.context;
-  var grunt      = config.grunt;
+  var context        = config.context;
+  var grunt          = config.grunt;
+  
+  var permalinks     = context.permalinks;
+  var pages          = context.pages;
+  var page           = context.page;
+  var originalAssets = context.originalAssets;
+  
+  var async          = grunt.util.async;
+  var _              = grunt.util._;
 
-  var permalinks = context.permalinks;
-  var pages      = context.pages;
-  var page       = context.page;
 
-  var async      = grunt.util.async;
-  var _          = grunt.util._;
+  var normalizePath = function(str) {
+    return str.replace(/\\/g, '/');
+  };
 
 
   // Skip over the plugin if it isn't defined in the options.
@@ -40,10 +46,13 @@ module.exports = function(config, callback) {
 
     pages.forEach(function(file) {
 
-      if (page.src !== file.src || file.basename === 'index') {
-        return;
+      if (file.basename === 'index') {
+        file.assets = normalizePath(path.relative(path.join(file.dirname, '../'), originalAssets));
       }
 
+      if (page.src !== file.src) {
+        return;
+      }
 
       // Get the permalink pattern to use from options.permalinks.structure.
       // If one isn't defined, don't change anything.
@@ -73,7 +82,8 @@ module.exports = function(config, callback) {
 
       /**
        * REPLACEMENT PATTERNS
-       * Replacement variables for permalink structure.
+       * Replacement variables for permalink structure. 
+       * Fromat the date from the YAML front matter of a page.
        */
       var format = function(date) {
         return moment(yfm.date).format(date);
@@ -191,7 +201,11 @@ module.exports = function(config, callback) {
       if(_.isUndefined(permalinks.structure) && _.isUndefined(permalinks.preset)) {
         file.dest = file.dest;
       } else {
-        file.dest = path.join(page.dirname, permalink).replace(/\\/g, '/');
+        if (file.basename === 'index') {
+          file.dest = file.dest;
+        } else {
+          file.dest = normalizePath(path.join(page.dirname, permalink));
+        }
       }
       grunt.verbose.ok('Generated permalink to:'.yellow, file.dest);
     });
