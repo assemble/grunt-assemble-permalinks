@@ -83,6 +83,17 @@ module.exports = function(grunt) {
           {expand: true, cwd: 'test/fixtures/pages', src: ['**/*.hbs'], dest: 'test/actual/built_in_property', ext: '.html'}
         ]
       },
+      // Should not add basename to index
+      index_pages: {
+        options: {
+          permalinks: {
+            structure: ':basename/index:ext'
+          }
+        },
+        files: [
+          {expand: true, cwd: 'test/fixtures/pages', src: ['**/*.hbs'], dest: 'test/actual/index_pages', ext: '.html'}
+        ]
+      },
       // Should modify dest path using a custom property from YAML front matter
       yfm_custom_property: {
         options: {
