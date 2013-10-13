@@ -1,6 +1,6 @@
 # permalinks [![NPM version](https://badge.fury.io/js/permalinks.png)](http://badge.fury.io/js/permalinks) 
 
-> Permalinks plugin for Assemble, enables powerful and configurable URI patterns, uses [Moment.js](http://momentjs.com/) for parsing dates, and lots more.
+> Permalinks plugin for Assemble, the static site generator for Grunt.js, Yeoman and Node.js. This plugin enables powerful and configurable URI patterns, [Moment.js](http://momentjs.com/) for parsing dates, much more.
 
 ## Contributing
 We welcome all kinds of contributions! The most basic way to show your support is to star the project, and if you'd like to get involed please see the [Contributing to permalinks](https://github.com/assemble/permalinks/blob/master/CONTRIBUTING.md) guide for information on contributing to this project.
@@ -528,7 +528,7 @@ Released under the MIT license
 
 ***
 
-_This file was generated on Wednesday, October 9, 2013._
+_This file was generated on Saturday, October 12, 2013._
 
 
 [moment]: http://momentjs.com/ "Moment.js Permalinks"
