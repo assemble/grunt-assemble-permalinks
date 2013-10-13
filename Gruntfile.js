@@ -37,7 +37,7 @@ module.exports = function(grunt) {
     assemble: {
       options: {
         plugins: ['./permalinks.js'],
-        assets: 'test/actual/assets',
+        assets: 'assets',
         layout: 'test/fixtures/default.hbs'
       },
       // Should not modify dest path.
@@ -71,6 +71,17 @@ module.exports = function(grunt) {
           {expand: true, cwd: 'test/fixtures/pages', src: ['**/*.hbs'], dest: 'test/actual/structure', ext: '.html'}
         ]
       },
+      // Should use a long date format for the path
+      dates: {
+        options: {
+          permalinks: {
+            structure: ':YYYY/:MM/:DD/:basename/index:ext'
+          }
+        },
+        files: [
+          {expand: true, cwd: 'test/fixtures/pages', src: ['**/*.hbs'], dest: 'test/actual/dates', ext: '.html'}
+        ]
+      },
       // Should modify dest path using a built-in property from context
       builtin_property_from_context: {
         options: {
@@ -96,6 +107,18 @@ module.exports = function(grunt) {
       },
       // Should modify dest path using a custom property from YAML front matter
       yfm_custom_property: {
+        options: {
+          permalinks: {
+            // 'slug' is a custom property in YAML front matter
+            structure: ':slug/index:ext'
+          }
+        },
+        files: [
+          {expand: true, cwd: 'test/fixtures/pages', src: ['**/*.hbs'], dest: 'test/actual/yfm_custom_property', ext: '.html'}
+        ]
+      },
+      // Should modify dest path using a custom property from YAML front matter
+      assets_path: {
         options: {
           permalinks: {
             // 'slug' is a custom property in YAML front matter
