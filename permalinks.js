@@ -62,7 +62,7 @@ module.exports = function(config, callback) {
       var props = [];
 
       // Convenience variable for YAML front matter.
-      var yfm  = page.data;
+      var yfm  = file.data;
 
 
       /**
@@ -83,7 +83,7 @@ module.exports = function(config, callback) {
       /**
        * REPLACEMENT PATTERNS
        * Replacement variables for permalink structure. 
-       * Fromat the date from the YAML front matter of a page.
+       * Format the date from the YAML front matter of a page.
        */
       var format = function(date) {
         return moment(yfm.date).format(date);
@@ -188,10 +188,11 @@ module.exports = function(config, callback) {
        */
       var permalink = frep.strWithArr(structure || page.dest, replacements);
 
-      grunt.verbose.writeln('>> basename:'.yellow, file.basename);
-      grunt.verbose.writeln('>> permalink:'.yellow, permalink);
-      grunt.verbose.writeln('>> permalinks.preset:'.yellow, permalinks.preset);
-      grunt.verbose.writeln('>> permalinks.structure:'.yellow, structure);
+
+      grunt.verbose.ok('file.basename:'.yellow, file.basename);
+      grunt.verbose.ok('permalink:'.yellow, permalink);
+      grunt.verbose.ok('permalinks.preset:'.yellow, permalinks.preset);
+      grunt.verbose.ok('permalinks.structure:'.yellow, structure);
 
 
       /**
