@@ -40,19 +40,48 @@ module.exports = function(config, callback) {
     return str.replace(/\\/g, '/');
   };
 
+  var calculateAssetsPath = function(dest, assets) {
+
+
+    var newAssets = assets;
+    var destDirname = path.dirname(dest);
+
+    newAssets = normalizePath(path.relative(path.resolve(destDirname), path.resolve(newAssets)));
+
+    if(!newAssets || newAssets.length === 0) {
+      if(_.str.endsWith(path.normalize(newAssets), path.sep)) {
+        newAssets = './';
+      } else {
+        newAssets = '.';
+      }
+    }
+
+    if(_.str.endsWith(path.normalize(originalAssets), path.sep) &&
+      !_.str.endsWith(path.normalize(newAssets), path.sep))
+    {
+
+      newAssets += '/';
+
+    } else if (!_.str.endsWith(path.normalize(originalAssets), path.sep) &&
+                _.str.endsWith(path.normalize(newAssets), path.sep)) {
+
+      newAssets = newAssets.substring(0, newAssets.length - 2);
+
+    }
+
+    return newAssets;
+  };
+
 
   // Skip over the plugin if it isn't defined in the options.
   if(!_.isUndefined(permalinks)) {
 
     pages.forEach(function(file) {
 
-      if (file.basename === 'index') {
-        file.assets = normalizePath(path.relative(path.join(file.dirname, '../'), originalAssets));
-      }
-
       if (page.src !== file.src) {
         return;
       }
+
 
       // Get the permalink pattern to use from options.permalinks.structure.
       // If one isn't defined, don't change anything.
@@ -200,15 +229,24 @@ module.exports = function(config, callback) {
        */
       if(_.isUndefined(permalinks.structure) && _.isUndefined(permalinks.preset)) {
         file.dest = file.dest;
+        page.dest = page.dest;
       } else {
         if (file.basename === 'index') {
           file.dest = file.dest;
+          page.dest = page.dest;
         } else {
-          file.dest = normalizePath(path.join(page.dirname, permalink));
+          file.dest = normalizePath(path.join(file.dirname, permalink));
+          page.dest = normalizePath(path.join(page.dirname, permalink));
         }
       }
+
+      file.assets = calculateAssetsPath(file.dest, originalAssets);
+      page.assets = calculateAssetsPath(page.dest, originalAssets);
+      config.context.assets = page.assets;
       grunt.verbose.ok('Generated permalink to:'.yellow, file.dest);
     });
 
   } callback();
 };
+
+

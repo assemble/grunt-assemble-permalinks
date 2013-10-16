@@ -528,7 +528,7 @@ Released under the MIT license
 
 ***
 
-_This file was generated on Sunday, October 13, 2013._
+_This file was generated on Tuesday, October 15, 2013._
 
 
 [moment]: http://momentjs.com/ "Moment.js Permalinks"
