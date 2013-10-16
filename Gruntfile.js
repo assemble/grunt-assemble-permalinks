@@ -37,7 +37,7 @@ module.exports = function(grunt) {
     assemble: {
       options: {
         plugins: ['./permalinks.js'],
-        assets: 'assets',
+        assets: 'test/assets',
         layout: 'test/fixtures/default.hbs'
       },
       // Should not modify dest path.
