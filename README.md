@@ -329,9 +329,50 @@ options: {
 
 
 ## Usage Examples
+### Pretty URLs
+
+Pretty links involve saving an `index.html` to each directory, with the tile, file name, slug, or some other variable as the `:basename` of the directory. For example:
+
+```js
+assemble: {
+  blog: {
+    options: {
+      permalinks: {
+        structure: ':basename/:index.html'
+      }
+    },
+    files: [
+      {expand: true, cwd: 'templates/', src: ['*.hbs'], dest: 'blog/', ext: '.html'}
+    ]
+  }
+}
+```
+
+which results in something like:
+
+```
+dest + /my-node-js-post/index.html
+dest + /my-javascript-post/index.html
+dest + /my-assemble-post/index.html
+```
+
+
 ### Using presets
 
-To simplify  might do something like:
+Presets allow you to achieve certain permalinks structures without having to explicitly define each URL segment. For example, in the previous example we created pretty URLs., Here is how we would do the same with `presets`:
+
+```js
+options: {
+  permalinks: {
+    preset: 'pretty'
+  },
+  files: {
+    './blog/': ['./templates/blog/*.hbs']
+  }
+}
+```
+
+The above example won't necessarily save a whole lot of time, but it's a nice way of ensuring that you're getting pretty links with whatever permalinks structure you define. To some, this might be particularly useful when "stacked" with more complex permalink structures, e.g.:
 
 ```js
 options: {
@@ -345,11 +386,16 @@ options: {
 }
 ```
 
-Which, following the `dest + structure + preset` pattern, would result in:
+which expands to: `./blog/:archives/:categories/:basename:/index:ext`, and would result in:
 
 ```js
 ./blog/archives/categories/foo/index.html
 ```
+
+### Dest extension
+
+In most cases your generated HTML will have the `.html` extension, then using `:index.html` is probably fine. But if you happen to switch back and forthing between projects that alternate between `.htm` and `.html`, you can use `:index:ext` instead.
+
 
 ### Path separators
 
@@ -360,34 +406,6 @@ You don't have to use slashes (`/`) only in your permalinks, you can use `-` or 
 ```
 
 **Warning**, this should be obvious, but make sure not to use a `.` in the middle of your paths, especially if you use Windows.
-
-
-### Pretty links
-
-Pretty links involve saving an "index.html" to each directory, with the tile, file name or slug as the basename of the directory:
-
-```js
-assemble: {
-  blog: {
-    options: {
-      permalinks: {
-        structure: ':category/:slug/:index.html'
-      }
-    },
-    files: [
-      {expand: true, cwd: 'templates/', src: ['*.hbs'], dest: 'blog/', ext: '.html'}
-    ]
-  }
-}
-```
-
-This would result in a directory structure that looks something like this:
-
-```
-/programming/my-node-js-post/index.html
-/programming/my-javascript-post/index.html
-/programming/my-assemble-post/index.html
-```
 
 ### Dynamically build slugs
 
@@ -475,22 +493,21 @@ The best structure is one that:
 * provides the _highest degree of semantic relevance_ to the content, and
 * is _useful to both search engines and humans_
 
-
-Here are some great permalink structures, pick the one you like or feel free to use something else, I just recommend you keep it simple:
+Here are some example permalink structures, pick the one you like or feel free to use something else:
 
 ```js
 :author
 :category/:author
 ```
 
-Since the `:author` variable isn't actually built in, you'll need to add it as a custom replacement pattern. But you could use `:filename`, `:pagename`, `:basename` and so on. The important thing to remember is that _the name counts_. Emphasize it.
+Since the `:author` variable isn't actually built in, you'll need to add it as a custom replacement pattern. But you could use `:filename`, `:pagename`, `:basename` and so on. The important thing to remember is that _the name counts_.
 
-If you decide to use a custom variable, such as `:author` or `:title`, just add it like this:
+If you need to use a custom variable, such as `:author` or `:title`, just add it like this:
 
 ```js
 var _ = grunt.util._;
 
-  ...
+assemble: {
   options: {
     permalinks: {
       structure: ':author:ext',
@@ -501,7 +518,8 @@ var _ = grunt.util._;
         }
       ]
     }
-  }
+  },
+  files: {},
 ...
 ```
 
@@ -528,7 +546,7 @@ Released under the MIT license
 
 ***
 
-_This file was generated on Tuesday, October 15, 2013._
+_This file was generated on Wednesday, October 16, 2013._
 
 
 [moment]: http://momentjs.com/ "Moment.js Permalinks"

@@ -26,12 +26,12 @@ module.exports = function(config, callback) {
 
   var context        = config.context;
   var grunt          = config.grunt;
-  
+
   var permalinks     = context.permalinks;
   var pages          = context.pages;
   var page           = context.page;
   var originalAssets = context.originalAssets;
-  
+
   var async          = grunt.util.async;
   var _              = grunt.util._;
 
@@ -41,34 +41,26 @@ module.exports = function(config, callback) {
   };
 
   var calculateAssetsPath = function(dest, assets) {
-
-
     var newAssets = assets;
     var destDirname = path.dirname(dest);
+
+    var assetsWithSlash     = _.str.endsWith(path.normalize(newAssets), path.sep);
+    var origAssetsWithSlash = _.str.endsWith(path.normalize(originalAssets), path.sep);
 
     newAssets = normalizePath(path.relative(path.resolve(destDirname), path.resolve(newAssets)));
 
     if(!newAssets || newAssets.length === 0) {
-      if(_.str.endsWith(path.normalize(newAssets), path.sep)) {
+      if(assetsWithSlash) {
         newAssets = './';
       } else {
         newAssets = '.';
       }
     }
-
-    if(_.str.endsWith(path.normalize(originalAssets), path.sep) &&
-      !_.str.endsWith(path.normalize(newAssets), path.sep))
-    {
-
+    if(origAssetsWithSlash && !assetsWithSlash) {
       newAssets += '/';
-
-    } else if (!_.str.endsWith(path.normalize(originalAssets), path.sep) &&
-                _.str.endsWith(path.normalize(newAssets), path.sep)) {
-
+    } else if (!origAssetsWithSlash && assetsWithSlash) {
       newAssets = newAssets.substring(0, newAssets.length - 2);
-
     }
-
     return newAssets;
   };
 
@@ -77,11 +69,9 @@ module.exports = function(config, callback) {
   if(!_.isUndefined(permalinks)) {
 
     pages.forEach(function(file) {
-
       if (page.src !== file.src) {
         return;
       }
-
 
       // Get the permalink pattern to use from options.permalinks.structure.
       // If one isn't defined, don't change anything.
@@ -111,7 +101,7 @@ module.exports = function(config, callback) {
 
       /**
        * REPLACEMENT PATTERNS
-       * Replacement variables for permalink structure. 
+       * Replacement variables for permalink structure.
        * Format the date from the YAML front matter of a page.
        */
       var format = function(date) {
