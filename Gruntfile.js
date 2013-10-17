@@ -51,14 +51,36 @@ module.exports = function(grunt) {
         ]
       },
       // Should modify dest path using preset "pretty"
-      preset: {
+      preset_pretty: {
         options: {
           permalinks: {
             preset: 'pretty'
           }
         },
         files: [
-          {expand: true, cwd: 'test/fixtures/pages', src: ['**/*.hbs'], dest: 'test/actual/preset', ext: '.html'}
+          {expand: true, cwd: 'test/fixtures/pages', src: ['**/*.hbs'], dest: 'test/actual/preset_pretty', ext: '.html'}
+        ]
+      },
+      // Should modify dest path using preset "dayname"
+      preset_dayname: {
+        options: {
+          permalinks: {
+            preset: 'dayname'
+          }
+        },
+        files: [
+          {expand: true, cwd: 'test/fixtures/pages', src: ['**/*.hbs'], dest: 'test/actual/preset_dayname', ext: '.html'}
+        ]
+      },
+      // Should modify dest path using preset "monthname"
+      preset_monthname: {
+        options: {
+          permalinks: {
+            preset: 'monthname'
+          }
+        },
+        files: [
+          {expand: true, cwd: 'test/fixtures/pages', src: ['**/*.hbs'], dest: 'test/actual/preset_monthname', ext: '.html'}
         ]
       },
       // Should modify dest path using permalinks structure
