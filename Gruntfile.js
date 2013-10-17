@@ -36,6 +36,7 @@ module.exports = function(grunt) {
 
     assemble: {
       options: {
+        helpers: ['helper-prettify'],
         plugins: ['./permalinks.js'],
         assets: 'test/assets',
         layout: 'test/fixtures/default.hbs'
@@ -103,6 +104,29 @@ module.exports = function(grunt) {
         },
         files: [
           {expand: true, cwd: 'test/fixtures/pages', src: ['**/*.hbs'], dest: 'test/actual/index_pages', ext: '.html'}
+        ]
+      },
+      // Should properly calculate dest path for collections
+      collections_pretty: {
+        options: {
+          permalinks: {
+            preset: 'pretty'
+          }
+        },
+        files: [
+          {expand: true, cwd: 'test/fixtures/pages', src: ['**/*.hbs'], dest: 'test/actual/collections_pretty', ext: '.html'}
+        ]
+      },
+      // Should properly calculate dest path for collections
+      collections_complex: {
+        options: {
+          permalinks: {
+            preset: 'pretty',
+            structure: ':YYYY/:MM/:DD'
+          }
+        },
+        files: [
+          {expand: true, cwd: 'test/fixtures/pages', src: ['**/*.hbs'], dest: 'test/actual/collections_complex', ext: '.html'}
         ]
       },
       // Should modify dest path using a custom property from YAML front matter
