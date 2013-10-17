@@ -24,7 +24,7 @@ h6 { font-size: 12px; }
 #validate:before {
   font-size: 30px;
   display: inline-block;
-  color: #3cad26;
+  color: #468847;
   content: "\2713 {{assets}} path works! ";
 }
 
