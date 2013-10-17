@@ -1,9 +1,9 @@
 /*
  * Assemble Plugin: Permalinks
  * https://github.com/assemble/permalinks
- *
  * Assemble is the 100% JavaScript static site generator for Node.js, Grunt.js, and Yeoman.
- * Copyright (c) 2013 Jon Schlinkert, contributors.
+ *
+ * Copyright (c) 2013 Jon Schlinkert, Brian Woodward, contributors.
  * Licensed under the MIT license.
  */
 
@@ -14,8 +14,13 @@ var path  = require('path');
 var moment = require('moment');
 var frep   = require('frep');
 
+// Local utils
+var Utils  = require('./lib/utils');
+
+
 
 /**
+ * Permalinks Plugin
  * @param  {Object}   config
  * @param  {Function} callback
  * @return {String}   The permalink string
@@ -35,34 +40,6 @@ module.exports = function(config, callback) {
   var async          = grunt.util.async;
   var _              = grunt.util._;
 
-
-  var normalizePath = function(str) {
-    return str.replace(/\\/g, '/');
-  };
-
-  var calculateAssetsPath = function(dest, assets) {
-    var newAssets = assets;
-    var destDirname = path.dirname(dest);
-
-    var assetsWithSlash     = _.str.endsWith(path.normalize(newAssets), path.sep);
-    var origAssetsWithSlash = _.str.endsWith(path.normalize(originalAssets), path.sep);
-
-    newAssets = normalizePath(path.relative(path.resolve(destDirname), path.resolve(newAssets)));
-
-    if(!newAssets || newAssets.length === 0) {
-      if(assetsWithSlash) {
-        newAssets = './';
-      } else {
-        newAssets = '.';
-      }
-    }
-    if(origAssetsWithSlash && !assetsWithSlash) {
-      newAssets += '/';
-    } else if (!origAssetsWithSlash && assetsWithSlash) {
-      newAssets = newAssets.substring(0, newAssets.length - 2);
-    }
-    return newAssets;
-  };
 
 
   // Skip over the plugin if it isn't defined in the options.
@@ -219,20 +196,23 @@ module.exports = function(config, callback) {
        * Append the permalink to the dest path defined in the target.
        */
       if(_.isUndefined(permalinks.structure) && _.isUndefined(permalinks.preset)) {
-        file.dest = file.dest;
         page.dest = page.dest;
+        file.dest = file.dest;
       } else {
         if (file.basename === 'index') {
-          file.dest = file.dest;
           page.dest = page.dest;
+          file.dest = file.dest;
         } else {
-          file.dest = normalizePath(path.join(file.dirname, permalink));
-          page.dest = normalizePath(path.join(page.dirname, permalink));
+          file.dest = Utils.normalizePath(path.join(file.dirname, permalink));
+          page.dest = Utils.normalizePath(path.join(page.dirname, permalink));
         }
       }
+      grunt.log.ok('page'.yellow, page);
+      grunt.log.ok('page.dest'.yellow, page.dest);
+      grunt.log.ok('file.dest'.yellow, file.dest);
 
-      file.assets = calculateAssetsPath(file.dest, originalAssets);
-      page.assets = calculateAssetsPath(page.dest, originalAssets);
+      file.assets = Utils.calculateAssetsPath(file.dest, originalAssets);
+      page.assets = Utils.calculateAssetsPath(page.dest, originalAssets);
       config.context.assets = page.assets;
       grunt.verbose.ok('Generated permalink to:'.yellow, file.dest);
     });
