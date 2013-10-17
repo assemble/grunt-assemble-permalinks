@@ -1,6 +1,47 @@
+## Pretty URLs
+
+Pretty links involve saving an `index.html` to each directory, with the tile, file name, slug, or some other variable as the `:basename` of the directory. For example:
+
+```js
+assemble: {
+  blog: {
+    options: {
+      permalinks: {
+        structure: ':basename/:index.html'
+      }
+    },
+    files: [
+      {expand: true, cwd: 'templates/', src: ['*.hbs'], dest: 'blog/', ext: '.html'}
+    ]
+  }
+}
+```
+
+which results in something like:
+
+```
+dest + /my-node-js-post/index.html
+dest + /my-javascript-post/index.html
+dest + /my-assemble-post/index.html
+```
+
+
 ## Using presets
 
-To simplify  might do something like:
+Presets allow you to achieve certain permalinks structures without having to explicitly define each URL segment. For example, in the previous example we created pretty URLs., Here is how we would do the same with `presets`:
+
+```js
+options: {
+  permalinks: {
+    preset: 'pretty'
+  },
+  files: {
+    './blog/': ['./templates/blog/*.hbs']
+  }
+}
+```
+
+The above example won't necessarily save a whole lot of time, but it's a nice way of ensuring that you're getting pretty links with whatever permalinks structure you define. To some, this might be particularly useful when "stacked" with more complex permalink structures, e.g.:
 
 ```js
 options: {
@@ -14,11 +55,16 @@ options: {
 }
 ```
 
-Which, following the `dest + structure + preset` pattern, would result in:
+which expands to: `./blog/:archives/:categories/:basename:/index:ext`, and would result in:
 
 ```js
 ./blog/archives/categories/foo/index.html
 ```
+
+## Dest extension
+
+In most cases your generated HTML will have the `.html` extension, then using `:index.html` is probably fine. But if you happen to switch back and forthing between projects that alternate between `.htm` and `.html`, you can use `:index:ext` instead.
+
 
 ## Path separators
 
@@ -29,34 +75,6 @@ You don't have to use slashes (`/`) only in your permalinks, you can use `-` or 
 ```
 
 **Warning**, this should be obvious, but make sure not to use a `.` in the middle of your paths, especially if you use Windows.
-
-
-## Pretty links
-
-Pretty links involve saving an "index.html" to each directory, with the tile, file name or slug as the basename of the directory:
-
-```js
-assemble: {
-  blog: {
-    options: {
-      permalinks: {
-        structure: ':category/:slug/:index.html'
-      }
-    },
-    files: [
-      {expand: true, cwd: 'templates/', src: ['*.hbs'], dest: 'blog/', ext: '.html'}
-    ]
-  }
-}
-```
-
-This would result in a directory structure that looks something like this:
-
-```
-/programming/my-node-js-post/index.html
-/programming/my-javascript-post/index.html
-/programming/my-assemble-post/index.html
-```
 
 ## Dynamically build slugs
 
