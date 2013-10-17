@@ -6,71 +6,82 @@
     <link rel="stylesheet" href="../../../assets/styles.css">
   </head>
   <body>
-    <section id="tags">
-      <h1 class="tag">one</h1> 
-      <ul class="pages">
-        <li class="dest">test/actual/collections_complex/foo.html</li>
-        <li class="this dest">test/actual/collections_complex/foo.html</li>
-        <li class="page dest"></li>
-        <li class="dest">test/actual/collections_complex/index.html</li>
-        <li class="this dest">test/actual/collections_complex/index.html</li>
-        <li class="page dest"></li>
-      </ul>
-      <h1 class="tag">three</h1> 
-      <ul class="pages">
-        <li class="dest">test/actual/collections_complex/articles/index.html</li>
-        <li class="this dest">test/actual/collections_complex/articles/index.html</li>
-        <li class="page dest"></li>
-        <li class="dest">test/actual/collections_complex/index.html</li>
-        <li class="this dest">test/actual/collections_complex/index.html</li>
-        <li class="page dest"></li>
-      </ul>
-      <h1 class="tag">two</h1> 
-      <ul class="pages">
-        <li class="dest">test/actual/collections_complex/articles/2013/10/02/bar/index.html</li>
-        <li class="this dest">test/actual/collections_complex/articles/2013/10/02/bar/index.html</li>
-        <li class="page dest"></li>
-      </ul>
-    </section>
-    <section>
-      <ul class="pages">
-        <li class="dest">test/actual/collections_complex/articles/2013/10/02/bar/index.html</li>
-        <li class="this dest">test/actual/collections_complex/articles/2013/10/02/bar/index.html</li>
-        <li class="page dest"></li>
-        <li class="dest">test/actual/collections_complex/articles/2013/10/02/baz/index.html</li>
-        <li class="this dest">test/actual/collections_complex/articles/2013/10/02/baz/index.html</li>
-        <li class="page dest"></li>
-        <li class="dest">test/actual/collections_complex/articles/index.html</li>
-        <li class="this dest">test/actual/collections_complex/articles/index.html</li>
-        <li class="page dest"></li>
-        <li class="dest">test/actual/collections_complex/foo.html</li>
-        <li class="this dest">test/actual/collections_complex/foo.html</li>
-        <li class="page dest"></li>
-        <li class="dest">test/actual/collections_complex/index.html</li>
-        <li class="this dest">test/actual/collections_complex/index.html</li>
-        <li class="page dest"></li>
-      </ul>
-    </section>
-    <section>
-      <ul class="pages">
-        <li class="../dest"></li>
-        <li class="../this dest"></li>
-        <li class="../page dest">test/actual/collections_complex/articles/index.html</li>
-        <li class="../dest"></li>
-        <li class="../this dest"></li>
-        <li class="../page dest">test/actual/collections_complex/articles/index.html</li>
-        <li class="../dest"></li>
-        <li class="../this dest"></li>
-        <li class="../page dest">test/actual/collections_complex/articles/index.html</li>
-        <li class="../dest"></li>
-        <li class="../this dest"></li>
-        <li class="../page dest">test/actual/collections_complex/articles/index.html</li>
-        <li class="../dest"></li>
-        <li class="../this dest"></li>
-        <li class="../page dest">test/actual/collections_complex/articles/index.html</li>
-      </ul>
-    </section>
-    <h1>Some Category</h1> 
-    <p>Index page nested in a directory.</p>
+    <div class="container">
+      <section id="validate"></section>
+
+      <!-- Tags Collection -->
+      <section id="tags">
+        <h1 class="tag">one</h1> 
+        <ul class="pages">
+          <li class="dest">test/actual/collections_complex/foo.html</li>
+          <li class="this dest">test/actual/collections_complex/foo.html</li>
+          <li class="page dest"></li>
+          <li class="dest">test/actual/collections_complex/index.html</li>
+          <li class="this dest">test/actual/collections_complex/index.html</li>
+          <li class="page dest"></li>
+        </ul>
+        <h1 class="tag">three</h1> 
+        <ul class="pages">
+          <li class="dest">test/actual/collections_complex/articles/index.html</li>
+          <li class="this dest">test/actual/collections_complex/articles/index.html</li>
+          <li class="page dest"></li>
+          <li class="dest">test/actual/collections_complex/index.html</li>
+          <li class="this dest">test/actual/collections_complex/index.html</li>
+          <li class="page dest"></li>
+        </ul>
+        <h1 class="tag">two</h1> 
+        <ul class="pages">
+          <li class="dest">test/actual/collections_complex/articles/2013/10/02/bar/index.html</li>
+          <li class="this dest">test/actual/collections_complex/articles/2013/10/02/bar/index.html</li>
+          <li class="page dest"></li>
+        </ul>
+      </section>
+
+      <!-- Pages Collection -->
+      <section>
+        <ul class="pages">
+          <li class="dest">test/actual/collections_complex/articles/2013/10/02/bar/index.html</li>
+          <li class="this dest">test/actual/collections_complex/articles/2013/10/02/bar/index.html</li>
+          <li class="page dest"></li>
+          <li class="dest">test/actual/collections_complex/articles/2013/10/02/baz/index.html</li>
+          <li class="this dest">test/actual/collections_complex/articles/2013/10/02/baz/index.html</li>
+          <li class="page dest"></li>
+          <li class="dest">test/actual/collections_complex/articles/index.html</li>
+          <li class="this dest">test/actual/collections_complex/articles/index.html</li>
+          <li class="page dest"></li>
+          <li class="dest">test/actual/collections_complex/foo.html</li>
+          <li class="this dest">test/actual/collections_complex/foo.html</li>
+          <li class="page dest"></li>
+          <li class="dest">test/actual/collections_complex/index.html</li>
+          <li class="this dest">test/actual/collections_complex/index.html</li>
+          <li class="page dest"></li>
+        </ul>
+      </section>
+
+      <!-- Pages Collection -->
+      <section>
+        <ul class="pages">
+          <li class="../dest"></li>
+          <li class="../this dest"></li>
+          <li class="../page dest">test/actual/collections_complex/articles/index.html</li>
+          <li class="../dest"></li>
+          <li class="../this dest"></li>
+          <li class="../page dest">test/actual/collections_complex/articles/index.html</li>
+          <li class="../dest"></li>
+          <li class="../this dest"></li>
+          <li class="../page dest">test/actual/collections_complex/articles/index.html</li>
+          <li class="../dest"></li>
+          <li class="../this dest"></li>
+          <li class="../page dest">test/actual/collections_complex/articles/index.html</li>
+          <li class="../dest"></li>
+          <li class="../this dest"></li>
+          <li class="../page dest">test/actual/collections_complex/articles/index.html</li>
+        </ul>
+      </section>
+
+      <!-- Content -->
+      <h1>Some Category</h1> 
+      <p>Index page nested in a directory.</p>
+    </div>
   </body>
 </html>
