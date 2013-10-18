@@ -41,14 +41,24 @@ module.exports = function(grunt) {
         assets: 'test/assets',
         layout: 'test/fixtures/default.hbs'
       },
-      // Should not modify dest path.
-      no_opts: {
+      // Should not modify dest path. Files array format.
+      no_opts_files: {
         options: {
           permalinks: {}
         },
         files: [
-          {expand: true, cwd: 'test/fixtures/pages', src: ['**/*.hbs'], dest: 'test/actual/no_opts', ext: '.html'}
+          {expand: true, cwd: 'test/fixtures/pages', src: ['**/*.hbs'], dest: 'test/actual/no_opts_files/', ext: '.html'}
         ]
+      },
+      // Should not modify dest path. src-dest format, with flatten option defined.
+      no_opts_flatten: {
+        options: {
+          ext: '.html',
+          flatten: true,
+          permalinks: {}
+        },
+        src: 'test/fixtures/pages/**/*.hbs',
+        dest: 'test/actual/no_opts_flatten/'
       },
       // Should modify dest path using preset "pretty"
       preset_pretty: {
@@ -58,7 +68,7 @@ module.exports = function(grunt) {
           }
         },
         files: [
-          {expand: true, cwd: 'test/fixtures/pages', src: ['**/*.hbs'], dest: 'test/actual/preset_pretty', ext: '.html'}
+          {expand: true, cwd: 'test/fixtures/pages', src: ['**/*.hbs'], dest: 'test/actual/preset_pretty/', ext: '.html'}
         ]
       },
       // Should modify dest path using preset "dayname"
@@ -69,7 +79,7 @@ module.exports = function(grunt) {
           }
         },
         files: [
-          {expand: true, cwd: 'test/fixtures/pages', src: ['**/*.hbs'], dest: 'test/actual/preset_dayname', ext: '.html'}
+          {expand: true, cwd: 'test/fixtures/pages', src: ['**/*.hbs'], dest: 'test/actual/preset_dayname/', ext: '.html'}
         ]
       },
       // Should modify dest path using preset "monthname"
@@ -80,18 +90,29 @@ module.exports = function(grunt) {
           }
         },
         files: [
-          {expand: true, cwd: 'test/fixtures/pages', src: ['**/*.hbs'], dest: 'test/actual/preset_monthname', ext: '.html'}
+          {expand: true, cwd: 'test/fixtures/pages', src: ['**/*.hbs'], dest: 'test/actual/preset_monthname/', ext: '.html'}
         ]
       },
       // Should modify dest path using permalinks structure
-      structure: {
+      structure_date: {
         options: {
           permalinks: {
             structure: ':date/index:ext'
           }
         },
         files: [
-          {expand: true, cwd: 'test/fixtures/pages', src: ['**/*.hbs'], dest: 'test/actual/structure', ext: '.html'}
+          {expand: true, cwd: 'test/fixtures/pages', src: ['**/*.hbs'], dest: 'test/actual/structure_date/', ext: '.html'}
+        ]
+      },
+      // Should modify dest path using permalinks structure
+      structure_basename: {
+        options: {
+          permalinks: {
+            structure: ':basename:ext'
+          }
+        },
+        files: [
+          {expand: true, cwd: 'test/fixtures/pages', src: ['**/*.hbs'], dest: 'test/actual/structure_basename/', ext: '.html'}
         ]
       },
       // Should use a long date format for the path
@@ -102,7 +123,7 @@ module.exports = function(grunt) {
           }
         },
         files: [
-          {expand: true, cwd: 'test/fixtures/pages', src: ['**/*.hbs'], dest: 'test/actual/dates', ext: '.html'}
+          {expand: true, cwd: 'test/fixtures/pages', src: ['**/*.hbs'], dest: 'test/actual/dates/', ext: '.html'}
         ]
       },
       // Should modify dest path using a built-in property from context
@@ -114,7 +135,7 @@ module.exports = function(grunt) {
           }
         },
         files: [
-          {expand: true, cwd: 'test/fixtures/pages', src: ['**/*.hbs'], dest: 'test/actual/built_in_property', ext: '.html'}
+          {expand: true, cwd: 'test/fixtures/pages', src: ['**/*.hbs'], dest: 'test/actual/built_in_property/', ext: '.html'}
         ]
       },
       // Should not add basename to index
@@ -125,7 +146,7 @@ module.exports = function(grunt) {
           }
         },
         files: [
-          {expand: true, cwd: 'test/fixtures/pages', src: ['**/*.hbs'], dest: 'test/actual/index_pages', ext: '.html'}
+          {expand: true, cwd: 'test/fixtures/pages', src: ['**/*.hbs'], dest: 'test/actual/index_pages/', ext: '.html'}
         ]
       },
       // Should properly calculate dest path for collections
@@ -136,7 +157,7 @@ module.exports = function(grunt) {
           }
         },
         files: [
-          {expand: true, cwd: 'test/fixtures/pages', src: ['**/*.hbs'], dest: 'test/actual/collections_pretty', ext: '.html'}
+          {expand: true, cwd: 'test/fixtures/pages', src: ['**/*.hbs'], dest: 'test/actual/collections_pretty/', ext: '.html'}
         ]
       },
       // Should properly calculate dest path for collections
@@ -148,7 +169,7 @@ module.exports = function(grunt) {
           }
         },
         files: [
-          {expand: true, cwd: 'test/fixtures/pages', src: ['**/*.hbs'], dest: 'test/actual/collections_complex', ext: '.html'}
+          {expand: true, cwd: 'test/fixtures/pages', src: ['**/*.hbs'], dest: 'test/actual/collections_complex/', ext: '.html'}
         ]
       },
       // Should modify dest path using a custom property from YAML front matter
@@ -160,7 +181,7 @@ module.exports = function(grunt) {
           }
         },
         files: [
-          {expand: true, cwd: 'test/fixtures/pages', src: ['**/*.hbs'], dest: 'test/actual/yfm_custom_property', ext: '.html'}
+          {expand: true, cwd: 'test/fixtures/pages', src: ['**/*.hbs'], dest: 'test/actual/yfm_custom_property/', ext: '.html'}
         ]
       },
       // Should modify dest path using a custom property from YAML front matter
@@ -172,7 +193,7 @@ module.exports = function(grunt) {
           }
         },
         files: [
-          {expand: true, cwd: 'test/fixtures/pages', src: ['**/*.hbs'], dest: 'test/actual/yfm_custom_property', ext: '.html'}
+          {expand: true, cwd: 'test/fixtures/pages', src: ['**/*.hbs'], dest: 'test/actual/yfm_custom_property/', ext: '.html'}
         ]
       },
       // Should modify dest path using a custom replacement pattern
@@ -196,7 +217,7 @@ module.exports = function(grunt) {
           }
         },
         files: [
-          {expand: true, cwd: 'test/fixtures/pages', src: ['**/*.hbs'], dest: 'test/actual/replacement_pattern', ext: '.html'}
+          {expand: true, cwd: 'test/fixtures/pages', src: ['**/*.hbs'], dest: 'test/actual/replacement_pattern/', ext: '.html'}
         ]
       }
     },

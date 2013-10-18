@@ -29,23 +29,22 @@ module.exports = function(config, callback) {
 
   'use strict';
 
-  var context        = config.context;
+  var options        = config.context;
   var grunt          = config.grunt;
 
-  var permalinks     = context.permalinks;
-  var pages          = context.pages;
-  var page           = context.page;
-  var originalAssets = context.originalAssets;
+  var permalinks     = options.permalinks;
+  var pages          = options.pages;
+  var page           = options.page;
+  var originalAssets = options.originalAssets;
 
   var async          = grunt.util.async;
   var _              = grunt.util._;
 
 
-
   // Skip over the plugin if it isn't defined in the options.
   if(!_.isUndefined(permalinks)) {
 
-    pages.forEach(function(file) {
+    async.forEach(pages, function(file, next) {
       if (page.src !== file.src) {
         return;
       }
@@ -75,16 +74,16 @@ module.exports = function(config, callback) {
        */
       moment.lang(permalinks.lang || 'en');
 
+      var format = function(d) {
+        return moment(yfm.date).format(d);
+      };
+
 
       /**
        * REPLACEMENT PATTERNS
        * Replacement variables for permalink structure.
        * Format the date from the YAML front matter of a page.
        */
-      var format = function(date) {
-        return moment(yfm.date).format(date);
-      };
-
       var datePatterns = [
         // Full date
         {pattern: /:\bdate\b/,      replacement: format(permalinks.dateFormats || "YYYY/MM/DD")},
@@ -139,6 +138,10 @@ module.exports = function(config, callback) {
         {pattern: /:\bp\b/,         replacement: format("p")},
       ];
 
+      // Ensure that basenames aren't janky
+      page.basename = _.slugify(page.basename);
+
+
       // Best guesses at some useful patterns
       var specialPatterns = [
         {pattern: /:\bcategory\b/,  replacement: _.slugify(_.first(yfm.categories))}
@@ -170,10 +173,11 @@ module.exports = function(config, callback) {
 
         // The preset
         var presets = {
-          pretty: path.join((structure || ''), _.slugify(page.basename), 'index.html')
+          pretty:    path.join((structure || ''), ':basename/index:ext'),
+          dayname:   path.join((structure || ''), ':YYYY/:MM/:DD/:basename/index:ext'),
+          monthname: path.join((structure || ''), ':YYYY/:MM/:basename/index:ext')
         };
-
-        // If a preset is specified, use it.
+        // Presets are joined to structures, so if a preset is specified, use it.
         structure = String(_.values(_.pick(presets, permalinks.preset)));
       }
 
@@ -184,11 +188,6 @@ module.exports = function(config, callback) {
        */
       var permalink = frep.strWithArr(structure || page.dest, replacements);
 
-
-      grunt.verbose.ok('file.basename:'.yellow, file.basename);
-      grunt.verbose.ok('permalink:'.yellow, permalink);
-      grunt.verbose.ok('permalinks.preset:'.yellow, permalinks.preset);
-      grunt.verbose.ok('permalinks.structure:'.yellow, structure);
 
 
       /**
@@ -207,14 +206,16 @@ module.exports = function(config, callback) {
           page.dest = Utils.normalizePath(path.join(page.dirname, permalink));
         }
       }
-      grunt.verbose.ok('page'.yellow, page);
-      grunt.verbose.ok('page.dest'.yellow, page.dest);
-      grunt.verbose.ok('file.dest'.yellow, file.dest);
-
       file.assets = Utils.calculateAssetsPath(file.dest, originalAssets);
       page.assets = Utils.calculateAssetsPath(page.dest, originalAssets);
       config.context.assets = page.assets;
+
+      grunt.verbose.ok('page'.yellow, page);
+      grunt.verbose.ok('page.dest'.yellow, page.dest);
+      grunt.verbose.ok('page.assets'.yellow, page.assets);
+
       grunt.verbose.ok('Generated permalink to:'.yellow, file.dest);
+      next();
     });
 
   } callback();

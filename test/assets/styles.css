@@ -1,5 +1,11 @@
 /* Basic reset for tests */
 
+*, *:before, *:after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
 body {
   padding: 60px 0 80px;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -22,12 +28,17 @@ h6 { font-size: 12px; }
 
 
 #validate:before {
-  font-size: 30px;
-  display: inline-block;
-  color: #468847;
-  content: "\2713 {{assets}} path works! ";
+  display: block;
+  content: "\2713  assets path works!";
+  font-size: 15px;
+  font-weight: bold;
+  padding: 15px;
+  margin-bottom: 20px;
+  color: #569C57;
+  background-color: #e0f7d7;
+  border: 1px solid #d1ecc2;
+  border-radius: 4px;
 }
-
 
 .container {
   max-width: 1170px;
@@ -52,9 +63,14 @@ ul {
   list-style-type: none;
 }
 
-li:before {
-  content: " (class=" attr(class) ") ";
-  top: 22px;
-  right: 12px;
-  color: blue;
+li:after {
+  content: "class='" attr(class) "'";
+  font-family: Monaco, Menlo, Consolas, "Courier New", monospace;
+  padding: 2px 4px;
+  font-size: 90%;
+  color: #C7254E;
+  white-space: nowrap;
+  background-color: #F9F2F4;
+  border-radius: 4px;
+  clear: both;
 }
