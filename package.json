@@ -1,7 +1,7 @@
 {
   "name": "permalinks",
   "description": "Permalinks plugin for Assemble, the static site generator for Grunt.js, Yeoman and Node.js. This plugin enables powerful and configurable URI patterns, [Moment.js](http://momentjs.com/) for parsing dates, much more.",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "homepage": "https://github.com/assemble/permalinks",
   "author": {
     "name": "Jon Schlinkert",
