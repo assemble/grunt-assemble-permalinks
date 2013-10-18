@@ -1,3 +1,76 @@
-h1 {
-  color: red;
+/* Basic reset for tests */
+
+*, *:before, *:after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body {
+  padding: 60px 0 80px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #333333;
+  background-color: #ffffff;
+}
+
+h1, h2, h3, h4, h5, h6 { font-weight: 500; line-height: 1.1; }
+h1, h2, h3 { margin-top: 20px; margin-bottom: 10px; }
+h4, h5, h6 { margin-top: 10px; margin-bottom: 10px; }
+h1 { font-size: 36px; }
+h2 { font-size: 30px; }
+h3 { font-size: 24px; }
+h4 { font-size: 18px; }
+h5 { font-size: 14px; }
+h6 { font-size: 12px; }
+
+
+
+#validate:before {
+  display: block;
+  content: "\2713  assets path works!";
+  font-size: 15px;
+  font-weight: bold;
+  padding: 15px;
+  margin-bottom: 20px;
+  color: #569C57;
+  background-color: #e0f7d7;
+  border: 1px solid #d1ecc2;
+  border-radius: 4px;
+}
+
+.container {
+  max-width: 1170px;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.container:before,
+.container:after {
+  display: table;
+  content: " ";
+}
+
+.container:after {
+  clear: both;
+}
+
+
+ul {
+  list-style-type: none;
+}
+
+li:after {
+  content: "class='" attr(class) "'";
+  font-family: Monaco, Menlo, Consolas, "Courier New", monospace;
+  padding: 2px 4px;
+  font-size: 90%;
+  color: #C7254E;
+  white-space: nowrap;
+  background-color: #F9F2F4;
+  border-radius: 4px;
+  clear: both;
 }

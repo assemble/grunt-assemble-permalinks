@@ -32,19 +32,30 @@ Note that permalink structures will be ignored for files with the basename `inde
 Type: `String`
 Default: `undefined`
 
-In a nutshell, a preset is a just a pre-defined permalink `structure`, so instead of having to type out `:foo/:bar/:baz/basename:html`, you can just use `pretty`. Since presets are simply pre-defined `structures`, they are also appended to the `dest`. For example:
+In a nutshell, a preset is simply a pre-defined permalink `structure`, so instead of having to type out `:foo/:bar/:baz/basename:html`, you can just use `pretty`. Presets expand into permalink structures following this pattern:
 
 ```js
 dest + preset
-//=> dest + :basename/index:html
+//=> dest + :bar/index:html
 ```
 
-When a `structure` is also defined, the `preset` will be appended to it.
+Additionally, if a `structure` is also defined, the `preset` will be appended to it.
+
+```js
+dest + structure + preset
+//=> dest + :foo + :bar/index:html
+```
 
 #### available presets
-This is an experimental feature, so currently there is only one preset. I would be happy to add more with feedback:
 
-* `pretty`: alias for `:basename/index:html`. So `foo.hbs` would be transformed to `foo/index.html`, which would render in the browser as: `/foo/`.
+The following presets are currently available:
+
+* `pretty`: expands to `:basename/index:html`.
+* `dayname`: expands to `:YYYY/:MM/:DD/:basename/index:ext`.
+* `monthname`: expands to `:YYYY/:MM/:basename/index:ext`.
+
+If you would like to see another preset, [please submit an issue](https://github.com/assemble/permalinks/issues/new).
+
 
 
 ## dateFormats
@@ -52,7 +63,6 @@ Type: `Array`
 Default: `["YYYY-MM-DD"]`
 
 Array of custom date formats for [Moment.js](http://momentjs.com/) to use for parsing dates.
-
 
 ```js
 options: {
@@ -64,6 +74,7 @@ options: {
   }
 }
 ```
+
 
 ## lang
 Type: `String`
@@ -84,6 +95,7 @@ options: {
 ...
 //=> blog/2013/mars/13/my-post.html
 ```
+
 
 ## exclusions
 Type: `Array`

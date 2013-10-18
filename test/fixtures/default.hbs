@@ -7,9 +7,25 @@
     <link rel="stylesheet" href="{{assets}}/styles.css">
   </head>
   <body>
-    <section id="tags">
-      {{#each tags}}
-        <h1 class="tag">{{tag}}</h1>
+    <div class="container">
+      <section id="validate"></section>
+
+      <!-- Tags Collection -->
+      <section id="tags">
+        {{#each tags}}
+          <h1 class="tag">{{tag}}</h1>
+          <ul class="pages">
+            {{#each pages}}
+              <li class="dest">{{dest}}</li>
+              <li class="this dest">{{this.dest}}</li>
+              <li class="page dest">{{page.dest}}</li>
+            {{/each}}
+          </ul>
+        {{/each}}
+      </section>
+
+      <!-- Pages Collection -->
+      <section>
         <ul class="pages">
           {{#each pages}}
             <li class="dest">{{dest}}</li>
@@ -17,27 +33,22 @@
             <li class="page dest">{{page.dest}}</li>
           {{/each}}
         </ul>
-      {{/each}}
-    </section>
-    <section>
-      <ul class="pages">
-        {{#each pages}}
-          <li class="dest">{{dest}}</li>
-          <li class="this dest">{{this.dest}}</li>
-          <li class="page dest">{{page.dest}}</li>
-        {{/each}}
-      </ul>
-    </section>
-    <section>
-      <ul class="pages">
-        {{#each pages}}
-          <li class="../dest">{{../dest}}</li>
-          <li class="../this dest">{{../this.dest}}</li>
-          <li class="../page dest">{{../page.dest}}</li>
-        {{/each}}
-      </ul>
-    </section>
-    {{> body }}
+      </section>
+
+      <!-- Pages Collection -->
+      <section>
+        <ul class="pages">
+          {{#each pages}}
+            <li class="../dest">{{../dest}}</li>
+            <li class="../this dest">{{../this.dest}}</li>
+            <li class="../page dest">{{../page.dest}}</li>
+          {{/each}}
+        </ul>
+      </section>
+
+      <!-- Content -->
+      {{> body }}
+    </div>
   </body>
 </html>
 {{/prettify}}
