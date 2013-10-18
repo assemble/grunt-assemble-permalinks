@@ -256,6 +256,14 @@ Note that permalink structures will be ignored for files with the basename `inde
 Type: `String`
 Default: `undefined`
 
+The following presets are currently available:
+
+* `pretty`: expands to `:basename/index:html`.
+* `dayname`: expands to `:YYYY/:MM/:DD/:basename/index:ext`.
+* `monthname`: expands to `:YYYY/:MM/:basename/index:ext`.
+
+#### how presets work
+
 In a nutshell, a preset is simply a pre-defined permalink `structure`, so instead of having to type out `:foo/:bar/:baz/basename:html`, you can just use `pretty`. Presets expand into permalink structures following this pattern:
 
 ```js
@@ -270,16 +278,7 @@ dest + structure + preset
 //=> dest + :foo + :bar/index:html
 ```
 
-##### available presets
-
-The following presets are currently available:
-
-* `pretty`: expands to `:basename/index:html`.
-* `dayname`: expands to `:YYYY/:MM/:DD/:basename/index:ext`.
-* `monthname`: expands to `:YYYY/:MM/:basename/index:ext`.
-
-If you would like to see another preset, [please submit an issue](https://github.com/assemble/permalinks/issues/new).
-
+_If you would like to see another preset, [please submit an issue](https://github.com/assemble/permalinks/issues/new)._
 
 
 ### dateFormats
