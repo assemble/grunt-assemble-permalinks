@@ -2,16 +2,102 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <title>Some Category</title>
+    <title>Category Index</title>
     <link rel="stylesheet" href="../../../assets/styles.css">
   </head>
   <body>
     <div class="container">
       <section id="validate"></section>
 
+      <!-- page -->
+      <div class="docs-section">
+        <div class="docs-header" id="content">
+          <h1>Category Index</h1>
+        </div>
+        <h>Related pages</h>
+
+        <!-- page -->
+        <ul class="nav nav-pills nav-stacked">
+          <li> <a href="2013/10/02/bar/index.html">Bar</a> </li>
+        </ul>
+
+        <!-- page -->
+        <ul class="nav nav-pills nav-stacked">
+          <li> <a href="2013/10/02/baz/index.html">Baz</a> </li>
+        </ul>
+
+        <!-- page -->
+        <ul class="nav nav-pills nav-stacked">
+          <li class="active">
+            <a href="index.html">Category Index</a>
+          </li>
+        </ul>
+
+        <!-- page -->
+        <ul class="nav nav-pills nav-stacked">
+          <li> <a href="nested/quux.html">Quux</a> </li>
+        </ul>
+
+        <!-- page -->
+        <ul class="nav nav-pills nav-stacked">
+          <li> <a href="../foo.html">Foo Foo</a> </li>
+        </ul>
+
+        <!-- page -->
+        <ul class="nav nav-pills nav-stacked">
+          <li> <a href="../index.html">Home</a> </li>
+        </ul>
+      </div>
+
+      <!-- page -->
+      <div class="docs-section">
+        <div class="docs-header" id="content">
+          <h1>Category Index</h1>
+        </div>
+        <h>Related pages</h>
+
+        <!-- page -->
+        <ul class="nav nav-pills nav-stacked">
+          <li> <a href="test/actual/preset_dayname/articles/2013/10/02/bar/index.html">Bar</a> </li>
+        </ul>
+
+        <!-- page -->
+        <ul class="nav nav-pills nav-stacked">
+          <li> <a href="test/actual/preset_dayname/articles/2013/10/02/baz/index.html">Baz</a> </li>
+        </ul>
+
+        <!-- page -->
+        <ul class="nav nav-pills nav-stacked">
+          <li class="active">
+            <a href="test/actual/preset_dayname/articles/index.html">Category Index</a>
+          </li>
+        </ul>
+
+        <!-- page -->
+        <ul class="nav nav-pills nav-stacked">
+          <li> <a href="test/actual/preset_dayname/articles/nested/quux.html">Quux</a> </li>
+        </ul>
+
+        <!-- page -->
+        <ul class="nav nav-pills nav-stacked">
+          <li> <a href="test/actual/preset_dayname/foo.html">Foo Foo</a> </li>
+        </ul>
+
+        <!-- page -->
+        <ul class="nav nav-pills nav-stacked">
+          <li> <a href="test/actual/preset_dayname/index.html">Home</a> </li>
+        </ul>
+      </div>
+
       <!-- Tags Collection -->
       <section id="tags">
-        <h1 class="tag">one</h1> 
+        <h1 class="tag">bbb</h1>
+        <ul class="pages">
+          <li class="dest">test/actual/preset_dayname/articles/2013/10/02/bar/index.html</li>
+          <li class="this dest">test/actual/preset_dayname/articles/2013/10/02/bar/index.html</li>
+          <li class="page dest"></li>
+        </ul>
+        <h1 class="tag">one</h1>
         <ul class="pages">
           <li class="dest">test/actual/preset_dayname/foo.html</li>
           <li class="this dest">test/actual/preset_dayname/foo.html</li>
@@ -20,7 +106,7 @@
           <li class="this dest">test/actual/preset_dayname/index.html</li>
           <li class="page dest"></li>
         </ul>
-        <h1 class="tag">three</h1> 
+        <h1 class="tag">three</h1>
         <ul class="pages">
           <li class="dest">test/actual/preset_dayname/articles/index.html</li>
           <li class="this dest">test/actual/preset_dayname/articles/index.html</li>
@@ -29,10 +115,10 @@
           <li class="this dest">test/actual/preset_dayname/index.html</li>
           <li class="page dest"></li>
         </ul>
-        <h1 class="tag">two</h1> 
+        <h1 class="tag">two</h1>
         <ul class="pages">
-          <li class="dest">test/actual/preset_dayname/articles/2013/10/02/bar/index.html</li>
-          <li class="this dest">test/actual/preset_dayname/articles/2013/10/02/bar/index.html</li>
+          <li class="dest">test/actual/preset_dayname/articles/nested/quux.html</li>
+          <li class="this dest">test/actual/preset_dayname/articles/nested/quux.html</li>
           <li class="page dest"></li>
         </ul>
       </section>
@@ -49,6 +135,9 @@
           <li class="dest">test/actual/preset_dayname/articles/index.html</li>
           <li class="this dest">test/actual/preset_dayname/articles/index.html</li>
           <li class="page dest"></li>
+          <li class="dest">test/actual/preset_dayname/articles/nested/quux.html</li>
+          <li class="this dest">test/actual/preset_dayname/articles/nested/quux.html</li>
+          <li class="page dest"></li>
           <li class="dest">test/actual/preset_dayname/foo.html</li>
           <li class="this dest">test/actual/preset_dayname/foo.html</li>
           <li class="page dest"></li>
@@ -61,6 +150,9 @@
       <!-- Pages Collection -->
       <section>
         <ul class="pages">
+          <li class="../dest"></li>
+          <li class="../this dest"></li>
+          <li class="../page dest">test/actual/preset_dayname/articles/index.html</li>
           <li class="../dest"></li>
           <li class="../this dest"></li>
           <li class="../page dest">test/actual/preset_dayname/articles/index.html</li>
@@ -80,7 +172,7 @@
       </section>
 
       <!-- Content -->
-      <h1>Some Category</h1> 
+      <h1>Category Index</h1>
       <p>Index page nested in a directory.</p>
     </div>
   </body>
