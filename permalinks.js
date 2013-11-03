@@ -17,6 +17,9 @@ var frep   = require('frep');
 // Local utils
 var Utils  = require('./lib/utils');
 
+var options = {
+  stage: 'render:pre:pages'
+};
 
 
 /**
@@ -29,14 +32,12 @@ module.exports = function(params, callback) {
 
   'use strict';
 
-  var context        = params.context;
   var assemble       = params.assemble;
   var grunt          = params.grunt;
 
-  var permalinks     = context.permalinks;
-  var pages          = context.pages;
-  var page           = context.page;
-  var originalAssets = context.originalAssets;
+  var permalinks     = assemble.options.permalinks;
+  var pages          = assemble.options.pages;
+  var originalAssets = assemble.options.originalAssets;
 
   var async          = grunt.util.async;
   var _str           = grunt.util._.str;
@@ -49,10 +50,7 @@ module.exports = function(params, callback) {
   // Skip over the plugin if it isn't defined in the options.
   if(!_.isUndefined(permalinks)) {
 
-    async.forEach(pages, function(file, next) {
-      if (page.src !== file.src) {
-        return;
-      }
+    async.forEach(pages, function(page, next) {
 
       // Slugify basenames by default.
       permalinks.slugify = true;
@@ -66,7 +64,7 @@ module.exports = function(params, callback) {
       var props = [];
 
       // Convenience variable for YAML front matter.
-      var yfm  = file.data;
+      var yfm  = page.data;
 
 
       /**
@@ -153,8 +151,8 @@ module.exports = function(params, callback) {
        * Ensure that basenames are suitable to be used as URLs.
        */
       if(permalinks.slugify) {
-        if(!page.slug) {
-          page.slug = _str.slugify(file.basename);
+        if(!yfm.slug) {
+          page.slug = _str.slugify(page.basename);
         }
         page.basename = _str.slugify(page.basename);
       }
@@ -208,35 +206,30 @@ module.exports = function(params, callback) {
        */
       var permalink = frep.strWithArr(structure || page.dest, replacements);
 
-
-
       /**
        * WRITE PERMALINKS
        * Append the permalink to the dest path defined in the target.
        */
       if(_.isUndefined(permalinks.structure) && _.isUndefined(permalinks.preset)) {
         page.dest = page.dest;
-        file.dest = file.dest;
       } else {
-        if (file.basename === 'index') {
+        if (page.basename === 'index') {
           page.dest = page.dest;
-          file.dest = file.dest;
         } else {
-          file.dest = Utils.normalizePath(path.join(file.dirname, permalink));
           page.dest = Utils.normalizePath(path.join(page.dirname, permalink));
         }
       }
-      file.assets = Utils.calculateAssetsPath(file.dest, originalAssets);
       page.assets = Utils.calculateAssetsPath(page.dest, originalAssets);
-      params.context.assets = page.assets;
 
       grunt.verbose.ok('page'.yellow, page);
       grunt.verbose.ok('page.dest'.yellow, page.dest);
       grunt.verbose.ok('page.assets'.yellow, page.assets);
 
-      grunt.verbose.ok('Generated permalink to:'.yellow, file.dest);
+      grunt.verbose.ok('Generated permalink to:'.yellow, page.dest);
       next();
     });
 
   } callback();
 };
+
+module.exports.options = options;
