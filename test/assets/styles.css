@@ -1,4 +1,8 @@
-/* Basic reset for tests */
+/*
+ * Scaffolding
+ *
+ * Basic resets for tests
+ */
 
 *, *:before, *:after {
   -webkit-box-sizing: border-box;
@@ -24,22 +28,70 @@ h3 { font-size: 24px; }
 h4 { font-size: 18px; }
 h5 { font-size: 14px; }
 h6 { font-size: 12px; }
-
-
-
-#validate:before {
-  display: block;
-  content: "\2713  assets path works!";
-  font-size: 15px;
-  font-weight: bold;
-  padding: 15px;
+*,
+*:before,
+*:after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+html {
+  font-size: 62.5%;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+body {
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.428571429;
+  color: #333333;
+  background-color: #ffffff;
+}
+input,
+button,
+select,
+textarea {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+a {
+  color: #428bca;
+  text-decoration: none;
+}
+a:hover,
+a:focus {
+  color: #2a6496;
+  text-decoration: underline;
+}
+a:focus {
+  outline: thin dotted #333;
+  outline: 5px auto -webkit-focus-ring-color;
+  outline-offset: -2px;
+}
+img {
+  vertical-align: middle;
+}
+hr {
+  margin-top: 20px;
   margin-bottom: 20px;
-  color: #569C57;
-  background-color: #e0f7d7;
-  border: 1px solid #d1ecc2;
-  border-radius: 4px;
+  border: 0;
+  border-top: 1px solid #eeeeee;
+}
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
 }
 
+
+/*
+ * Containers
+ */
 .container {
   max-width: 1170px;
   padding-right: 15px;
@@ -59,18 +111,138 @@ h6 { font-size: 12px; }
 }
 
 
+/*
+ * Validation styles
+ */
+#validate:before {
+  display: block;
+  content: "\2713  assets path works!";
+  font-size: 15px;
+  font-weight: bold;
+  padding: 15px;
+  margin-bottom: 20px;
+  color: #569C57;
+  background-color: #e0f7d7;
+  border: 1px solid #d1ecc2;
+  border-radius: 4px;
+}
+
+
+
+/*
+ * Links
+ */
 ul {
+  display: block;
   list-style-type: none;
 }
 
-li:after {
+li:after,
+.nav li > a:after {
   content: "class='" attr(class) "'";
   font-family: Monaco, Menlo, Consolas, "Courier New", monospace;
   padding: 2px 4px;
+  margin-left: 10px;
   font-size: 90%;
   color: #C7254E;
   white-space: nowrap;
   background-color: #F9F2F4;
   border-radius: 4px;
   clear: both;
+}
+
+
+/*
+ * Navigation
+ */
+.nav {
+  margin-bottom: 0;
+  padding-left: 0;
+  list-style: none;
+}
+.nav:before,
+.nav:after {
+  content: " ";
+  display: table;
+}
+.nav:after {
+  clear: both;
+}
+.nav:before,
+.nav:after {
+  content: " ";
+  display: table;
+}
+.nav:after {
+  clear: both;
+}
+.nav > li {
+  position: relative;
+  display: block;
+}
+.nav li:after {
+  display: none;
+}
+.nav > li > a {
+  position: relative;
+  display: block;
+  padding: 10px 15px;
+}
+.nav > li > a:hover,
+.nav > li > a:focus {
+  text-decoration: none;
+  background-color: #eeeeee;
+}
+.nav-tabs {
+  border-bottom: 1px solid #dddddd;
+}
+.nav-tabs > li {
+  float: left;
+  margin-bottom: -1px;
+}
+.nav-tabs > li > a {
+  margin-right: 2px;
+  line-height: 1.428571429;
+  border: 1px solid transparent;
+  border-radius: 4px 4px 0 0;
+}
+.nav-tabs > li > a:hover {
+  border-color: #eeeeee #eeeeee #dddddd;
+}
+.nav-tabs > li.active > a,
+.nav-tabs > li.active > a:hover,
+.nav-tabs > li.active > a:focus {
+  color: #555555;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-bottom-color: transparent;
+  cursor: default;
+}
+.nav-pills > li {
+  float: left;
+}
+.nav-pills > li > a {
+  border-radius: 4px;
+}
+.nav-pills > li + li {
+  margin-left: 2px;
+}
+.nav-pills > li.active > a,
+.nav-pills > li.active > a:hover,
+.nav-pills > li.active > a:focus {
+  color: #ffffff;
+  background-color: #428bca;
+}
+.nav-pills > li.active > a .caret,
+.nav-pills > li.active > a:hover .caret,
+.nav-pills > li.active > a:focus .caret {
+  border-top-color: #ffffff;
+  border-bottom-color: #ffffff;
+}
+.nav-stacked > li {
+  float: none;
+}
+.nav-stacked > li + li {
+  margin-top: 2px;
+  margin-left: 0;
 }

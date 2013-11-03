@@ -21,25 +21,30 @@ var Utils  = require('./lib/utils');
 
 /**
  * Permalinks Plugin
- * @param  {Object}   config
+ * @param  {Object}   params
  * @param  {Function} callback
  * @return {String}   The permalink string
  */
-module.exports = function(config, callback) {
+module.exports = function(params, callback) {
 
   'use strict';
 
-  var options        = config.context;
-  var grunt          = config.grunt;
+  var context        = params.context;
+  var assemble       = params.assemble;
+  var grunt          = params.grunt;
 
-  var permalinks     = options.permalinks;
-  var pages          = options.pages;
-  var page           = options.page;
-  var originalAssets = options.originalAssets;
+  var permalinks     = context.permalinks;
+  var pages          = context.pages;
+  var page           = context.page;
+  var originalAssets = context.originalAssets;
 
   var async          = grunt.util.async;
+  var _str           = grunt.util._.str;
   var _              = grunt.util._;
 
+
+  // console.log(assemble.options.pages);
+  // grunt.file.write('pages.json', JSON.stringify(assemble.options.pages, null, 2));
 
   // Skip over the plugin if it isn't defined in the options.
   if(!_.isUndefined(permalinks)) {
@@ -48,6 +53,10 @@ module.exports = function(config, callback) {
       if (page.src !== file.src) {
         return;
       }
+
+      // Slugify basenames by default.
+      permalinks.slugify = true;
+
 
       // Get the permalink pattern to use from options.permalinks.structure.
       // If one isn't defined, don't change anything.
@@ -62,7 +71,7 @@ module.exports = function(config, callback) {
 
       /**
        * EXCLUSION PATTERNS OPTION
-       * Properties to omit from the config object.
+       * Properties to omit from the params object.
        */
       var exclusions = ['_page', 'data', 'filePair', 'page', 'pageName'];
           exclusions = _.union([], exclusions, permalinks.exclusions || []);
@@ -138,13 +147,22 @@ module.exports = function(config, callback) {
         {pattern: /:\bp\b/,         replacement: format("p")},
       ];
 
-      // Ensure that basenames aren't janky
-      page.basename = _.slugify(page.basename);
+
+      /**
+       * `slugify` option
+       * Ensure that basenames are suitable to be used as URLs.
+       */
+      if(permalinks.slugify) {
+        if(!page.slug) {
+          page.slug = _str.slugify(file.basename);
+        }
+        page.basename = _str.slugify(page.basename);
+      }
 
 
       // Best guesses at some useful patterns
       var specialPatterns = [
-        {pattern: /:\bcategory\b/,  replacement: _.slugify(_.first(yfm.categories))}
+        {pattern: /:\bcategory\b/,  replacement: _str.slugify(_.first(yfm.categories))}
       ];
 
       // Push properties on the `page` object into the "props" array
@@ -156,8 +174,10 @@ module.exports = function(config, callback) {
       // Push properties on the `page.data` object into the "props" array
       // so we can use them to dynamically construct replacement patterns
       _.keys(_.omit(yfm, exclusions)).map(function(key) {
-        props.push({pattern: new RegExp(':\\b' + key + '\\b'), replacement: _.slugify(yfm[key])});
+        props.push({pattern: new RegExp(':\\b' + key + '\\b'), replacement: _str.slugify(yfm[key])});
       });
+
+
 
       // All the replacement patterns contructed from dates, the page obj,
       // and page.data obj.
@@ -208,7 +228,7 @@ module.exports = function(config, callback) {
       }
       file.assets = Utils.calculateAssetsPath(file.dest, originalAssets);
       page.assets = Utils.calculateAssetsPath(page.dest, originalAssets);
-      config.context.assets = page.assets;
+      params.context.assets = page.assets;
 
       grunt.verbose.ok('page'.yellow, page);
       grunt.verbose.ok('page.dest'.yellow, page.dest);
@@ -220,5 +240,3 @@ module.exports = function(config, callback) {
 
   } callback();
 };
-
-
