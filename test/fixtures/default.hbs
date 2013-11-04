@@ -3,83 +3,108 @@
   <head>
     <meta charset="UTF-8">
     <title>{{title}}</title>
+    <link rel="stylesheet" href="http://getbootstrap.com/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{assets}}/styles.css">
   </head>
   <body>
     <div class="container">
       <section id="validate"></section>
 
-      <!-- page -->
-      <div class="docs-section">
-        <div class="docs-header" id="content">
-          <h1>{{ title }}</h1>
+      <hr>
+      <!-- pagination -->
+      {{pagination pagination modifier="pagination-lg"}}
+      <hr>
+      {{pagination pagination modifier="pagination-lg justified"}}
+      <hr>
+      <!-- pagination -->
+      {{paginate pagination}}
+      <hr>
+
+      <div class="row">
+        <div class="col-md-3">
+          <div class="bs-sidebar hidden-print" role="complementary">
+            <ul class="nav bs-sidenav">
+              <!-- navigation -->
+              {{navigation pagination}}
+              <hr>
+              <!-- pagination -->
+              {{pager pagination}}
+              <hr>
+            </ul>
+          </div>
         </div>
-        <h>Related pages</h>
-        {{#each pages}}
-          <!-- page -->
-          <ul class="nav nav-pills nav-stacked">
-            <li{{#is ../page.dest this.dest}} class="active"{{/is}}>
-              <a href="{{relative ../page.dest this.dest}}">{{{data.title}}}</a>
-            </li>
-          </ul>
-        {{/each}}
+        <div class="col-md-9" role="main">
+          <!-- Content -->
+          {{> body }}
+        </div>
       </div>
 
-      <!-- page -->
+
+      <!-- Pages -->
       <div class="docs-section">
         <div class="docs-header" id="content">
-          <h1>{{ title }}</h1>
+          <h1>\{{relative}}</h1>
+          <h4>Page title: {{ title }}</h4>
         </div>
-        <h>Related pages</h>
+        <ul class="nav nav-pills nav-stacked">
         {{#each pages}}
-          <!-- page -->
-          <ul class="nav nav-pills nav-stacked">
-            <li{{#is ../page.dest this.dest}} class="active"{{/is}}>
-              <a href="{{rel .}}">{{{data.title}}}</a>
-            </li>
-          </ul>
+          <li{{#is ../page.dest this.dest}} class="active"{{/is}}>
+            <a href="{{relative ../page.dest this.dest}}">{{{data.title}}}</a>
+          </li>
         {{/each}}
+        </ul>
       </div>
+      <hr>
+
+
+      <!-- Pages -->
+      <div class="docs-section">
+        <div class="docs-header" id="content">
+          <h1>\{{rel}}</h1>
+          <h4>Page title: {{ title }}</h4>
+        </div>
+        <ul class="nav nav-pills nav-stacked">
+        {{#each pages}}
+          <li{{#is ../page.dest this.dest}} class="active"{{/is}}>
+            <a href="{{rel ../page.dest}}">{{{data.title}}}</a>
+          </li>
+        {{/each}}
+        </ul>
+      </div>
+      <hr>
+
 
       <!-- Tags Collection -->
-      <section id="tags">
+      <div class="docs-section">
+        <div class="docs-header" id="content">
+          <h1>Tags</h1>
+        </div>
         {{#each tags}}
-          <h1 class="tag">{{tag}}</h1>
-          <ul class="pages">
-            {{#each pages}}
-              <li class="dest">{{dest}}</li>
-              <li class="this dest">{{this.dest}}</li>
-              <li class="page dest">{{page.dest}}</li>
-            {{/each}}
-          </ul>
+          <h4 class="tag">{{tag}}</h4>
+          <string>Related Pages</string>
+          {{#each pages}}
+            <a class="tag label label-info" href="{{relative ../../page.dest this.dest}}">{{{data.title}}}</a>
+          {{/each}}
         {{/each}}
-      </section>
+      </div>
+      <hr>
 
 
-      <!-- Pages Collection -->
-      <section>
-        <ul class="pages">
+      <!-- Categories Collection -->
+      <div class="docs-section">
+        <div class="docs-header" id="content">
+          <h1>Categories</h1>
+        </div>
+        {{#each categories}}
+          <h4 class="category">{{category}}</h4>
+          <string>Related Pages</string>
           {{#each pages}}
-            <li class="dest">{{dest}}</li>
-            <li class="this dest">{{this.dest}}</li>
-            <li class="page dest">{{page.dest}}</li>
+            <a class="category label label-info" href="{{relative ../../page.dest this.dest}}">{{{data.title}}}</a>
           {{/each}}
-        </ul>
-      </section>
+        {{/each}}
+      </div>
+      <hr>
 
-      <!-- Pages Collection -->
-      <section>
-        <ul class="pages">
-          {{#each pages}}
-            <li class="../dest">{{../dest}}</li>
-            <li class="../this dest">{{../this.dest}}</li>
-            <li class="../page dest">{{../page.dest}}</li>
-          {{/each}}
-        </ul>
-      </section>
-
-      <!-- Content -->
-      {{> body }}
     </div>
   </body>
 </html>

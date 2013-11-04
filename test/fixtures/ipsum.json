@@ -1,0 +1,20 @@
+{
+  "words": {
+    "count": 5,
+    "units": "words"
+  },
+  "sentence": {
+    "count": 3,
+    "units": "sentences",
+    "sentenceLowerBound": 10,
+    "sentenceUpperBound": 15,
+    "format": "html"
+  },
+  "paragraph": {
+    "count": 3,
+    "units": "paragraphs",
+    "sentenceLowerBound": 10,
+    "sentenceUpperBound": 20,
+    "format": "html"
+  }
+}

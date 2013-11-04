@@ -37,22 +37,23 @@ module.exports = function(grunt) {
 
     assemble: {
       options: {
-        helpers: ['test/fixtures/helpers/*.js'],
         plugins: ['./permalinks.js'],
-        assets: 'test/assets',
+        helpers: ['test/fixtures/helpers/*.js'],
         layout: 'test/fixtures/default.hbs',
+        data: 'test/fixtures/ipsum.json',
+        assets: 'test/assets',
         postprocess: prettify
       },
       // Should not modify dest path. Files array format.
-      // no_opts_files: {
-      //   options: {
-      //     permalinks: {}
-      //   },
-      //   files: [
-      //     {expand: true, cwd: 'test/fixtures/pages', src: ['**/*.hbs'], dest: 'test/actual/no_opts_files/', ext: '.html'}
-      //   ]
-      // },
-      // Should not modify dest path. src-dest format, with flatten option defined.
+      no_opts_files: {
+        options: {
+          permalinks: {}
+        },
+        files: [
+          {expand: true, cwd: 'test/fixtures/pages', src: ['**/*.hbs'], dest: 'test/actual/no_opts_files/', ext: '.html'}
+        ]
+      },
+      // Should not modify dest path.
       // Note that when multiple files exist with the same basename, flattening will
       // eliminate all but on of those files. This is an expected result, not a bug.
       no_opts_flatten: {

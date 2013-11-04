@@ -44,8 +44,6 @@ module.exports = function(params, callback) {
   var _              = grunt.util._;
 
 
-  // console.log(assemble.options.pages);
-  // grunt.file.write('pages.json', JSON.stringify(assemble.options.pages, null, 2));
 
   // Skip over the plugin if it isn't defined in the options.
   if(!_.isUndefined(permalinks)) {

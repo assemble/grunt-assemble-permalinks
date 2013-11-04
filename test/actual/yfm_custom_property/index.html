@@ -3,177 +3,235 @@
   <head>
     <meta charset="UTF-8">
     <title>Home</title>
+    <link rel="stylesheet" href="http://getbootstrap.com/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../../assets/styles.css">
   </head>
   <body>
     <div class="container">
       <section id="validate"></section>
+      <hr>
 
-      <!-- page -->
+      <!-- pagination -->
+      <ul class="pagination pagination-lg">
+        <li class="prev">
+          <a href="articles/this-is-a-custom-prop/index.html">&laquo;</a>
+        </li>
+        <li class="prev">
+          <a href="custompath/index.html">&lsaquo;</a>
+        </li>
+        <li> <a href="articles/this-is-a-custom-prop/index.html">1</a> </li>
+        <li> <a href="articles/custom-prop/index.html">2</a> </li>
+        <li> <a href="articles/index.html">3</a> </li>
+        <li> <a href="articles/nested/quux/index.html">4</a> </li>
+        <li> <a href="custompath/index.html">5</a> </li>
+        <li class="active">
+          <a href="index.html">6</a>
+        </li>
+        <li class="next disabled">
+          <a href="index.html">&rsaquo;</a>
+        </li>
+        <li class="next disabled">
+          <a href="index.html">&raquo;</a>
+        </li>
+      </ul>
+      <hr>
+      <ul class="pagination pagination-lg justified">
+        <li class="prev">
+          <a href="articles/this-is-a-custom-prop/index.html">&laquo;</a>
+        </li>
+        <li class="prev">
+          <a href="custompath/index.html">&lsaquo;</a>
+        </li>
+        <li> <a href="articles/this-is-a-custom-prop/index.html">1</a> </li>
+        <li> <a href="articles/custom-prop/index.html">2</a> </li>
+        <li> <a href="articles/index.html">3</a> </li>
+        <li> <a href="articles/nested/quux/index.html">4</a> </li>
+        <li> <a href="custompath/index.html">5</a> </li>
+        <li class="active">
+          <a href="index.html">6</a>
+        </li>
+        <li class="next disabled">
+          <a href="index.html">&rsaquo;</a>
+        </li>
+        <li class="next disabled">
+          <a href="index.html">&raquo;</a>
+        </li>
+      </ul>
+      <hr>
+
+      <!-- pagination -->
+      <ul class="pager ">
+        <li class="previous">
+          <a href="custompath/index.html">&larr; Prev</a>
+        </li>
+        <li> <a href="articles/this-is-a-custom-prop/index.html">1</a> </li>
+        <li> <a href="articles/custom-prop/index.html">2</a> </li>
+        <li> <a href="articles/index.html">3</a> </li>
+        <li> <a href="articles/nested/quux/index.html">4</a> </li>
+        <li> <a href="custompath/index.html">5</a> </li>
+        <li class="active">
+          <a href="index.html">6</a>
+        </li>
+        <li class="next disabled">
+          <a href="index.html">Next &rarr;</a>
+        </li>
+      </ul>
+      <hr>
+      <div class="row">
+        <div class="col-md-3">
+          <div class="bs-sidebar hidden-print" role="complementary">
+            <ul class="nav bs-sidenav">
+
+              <!-- navigation -->
+              <div class="list-group">
+                <a href="articles/this-is-a-custom-prop/index.html" class="list-group-item">
+                  bar
+                </a>
+                <a href="articles/custom-prop/index.html" class="list-group-item">
+                  baz
+                </a>
+                <a href="articles/index.html" class="list-group-item">
+                  index
+                </a>
+                <a href="articles/nested/quux/index.html" class="list-group-item">
+                  quux
+                </a>
+                <a href="custompath/index.html" class="list-group-item">
+                  foo
+                </a>
+                <a href="index.html" class="list-group-item active">
+                  index
+                </a>
+              </div>
+              <hr>
+
+              <!-- pagination -->
+              <ul class="nav nav-pills nav-stacked">
+                <li class="prev">
+                  <a href="articles/this-is-a-custom-prop/index.html">First</a>
+                </li>
+                <li class="prev">
+                  <a href="custompath/index.html">&larr; Previous</a>
+                </li>
+                <li> <a href="articles/this-is-a-custom-prop/index.html">1</a> </li>
+                <li> <a href="articles/custom-prop/index.html">2</a> </li>
+                <li> <a href="articles/index.html">3</a> </li>
+                <li> <a href="articles/nested/quux/index.html">4</a> </li>
+                <li> <a href="custompath/index.html">5</a> </li>
+                <li class="active">
+                  <a href="index.html">6</a>
+                </li>
+                <li class="next disabled">
+                  <a href="index.html">Next &rarr;</a>
+                </li>
+                <li class="next disabled">
+                  <a href="index.html">Last</a>
+                </li>
+              </ul>
+              <hr>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-9" role="main">
+
+          <!-- Content -->
+          <h1>Home</h1>
+          <p>This is the home page!</p>
+          Minim deserunt adipisicing adipisicing veniam duis aliquip officia non qui. Laboris ullamco fugiat commodo sit consequat minim culpa sint commodo sunt non amet. Ut aliquip adipisicing Lorem occaecat occaecat irure occaecat do velit aliqua anim deserunt
+          et deserunt.
+          <hr>
+          <blockquote class="callout callout-success">
+            <p>qui pariatur mollit in sit</p>
+          </blockquote>
+          <hr>
+          <p>Velit anim pariatur sit dolore voluptate id ullamco ipsum ut dolor fugiat incididunt aute quis elit sit fugiat. Quis ea laboris sit culpa anim commodo in tempor occaecat irure tempor cillum voluptate anim. Commodo sunt proident quis culpa ad
+            qui non qui dolore ullamco sunt do sint. Quis in pariatur officia amet laboris et dolor aute adipisicing. Velit pariatur duis sit dolor pariatur excepteur proident nisi magna ullamco.</p>
+          <p>Esse Lorem laborum quis tempor deserunt quis voluptate proident minim labore incididunt. Anim reprehenderit est laborum sunt proident mollit aute duis deserunt pariatur. Minim non est irure quis labore nisi sunt minim velit laboris aute veniam
+            aute anim pariatur. Sit anim qui cupidatat sit voluptate laborum ipsum id cillum eu do. Laboris minim enim ex ad ipsum pariatur adipisicing voluptate ea qui proident cupidatat laboris do aliqua voluptate ullamco. Eu commodo magna id proident
+            ea esse pariatur Lorem fugiat enim officia dolor ea sit consectetur. Cillum laborum sit eiusmod qui voluptate velit eiusmod non aute excepteur labore dolor ad duis enim laboris aute elit aliquip.</p>
+          <p>Ullamco anim esse anim anim sint anim enim qui eu qui est labore fugiat irure. Incididunt deserunt sint et laborum Lorem deserunt nostrud sit ipsum et quis ea occaecat ullamco adipisicing id reprehenderit. Minim quis consequat et reprehenderit
+            tempor aute anim ex cillum officia eiusmod nulla dolore aliqua consectetur ea occaecat in. Do elit Lorem duis excepteur ipsum cupidatat elit consectetur aliqua non duis sint laboris.</p>
+          <hr>Nisi ipsum officia eiusmod ullamco minim ullamco voluptate aute labore ad. Sint magna et velit nisi sunt id quis sint laboris amet in ex adipisicing ea. Consectetur irure aliqua eiusmod excepteur est dolor proident voluptate proident exercitation
+          nulla aliqua esse.
+        </div>
+      </div>
+
+      <!-- Pages -->
       <div class="docs-section">
         <div class="docs-header" id="content">
-          <h1>Home</h1>
+          <h1>{{relative}}</h1>
+          <h4>Page title: Home</h4>
         </div>
-        <h>Related pages</h>
-
-        <!-- page -->
         <ul class="nav nav-pills nav-stacked">
           <li> <a href="articles/this-is-a-custom-prop/index.html">Bar</a> </li>
-        </ul>
-
-        <!-- page -->
-        <ul class="nav nav-pills nav-stacked">
           <li> <a href="articles/custom-prop/index.html">Baz</a> </li>
-        </ul>
-
-        <!-- page -->
-        <ul class="nav nav-pills nav-stacked">
           <li> <a href="articles/index.html">Category Index</a> </li>
-        </ul>
-
-        <!-- page -->
-        <ul class="nav nav-pills nav-stacked">
           <li> <a href="articles/nested/quux/index.html">Quux</a> </li>
-        </ul>
-
-        <!-- page -->
-        <ul class="nav nav-pills nav-stacked">
           <li> <a href="custompath/index.html">Foo Foo</a> </li>
-        </ul>
-
-        <!-- page -->
-        <ul class="nav nav-pills nav-stacked">
           <li class="active">
             <a href="index.html">Home</a>
           </li>
         </ul>
       </div>
+      <hr>
 
-      <!-- page -->
+      <!-- Pages -->
       <div class="docs-section">
         <div class="docs-header" id="content">
-          <h1>Home</h1>
+          <h1>{{rel}}</h1>
+          <h4>Page title: Home</h4>
         </div>
-        <h>Related pages</h>
-
-        <!-- page -->
         <ul class="nav nav-pills nav-stacked">
-          <li> <a href="test/actual/yfm_custom_property/articles/this-is-a-custom-prop/index.html">Bar</a> </li>
-        </ul>
-
-        <!-- page -->
-        <ul class="nav nav-pills nav-stacked">
-          <li> <a href="test/actual/yfm_custom_property/articles/custom-prop/index.html">Baz</a> </li>
-        </ul>
-
-        <!-- page -->
-        <ul class="nav nav-pills nav-stacked">
-          <li> <a href="test/actual/yfm_custom_property/articles/index.html">Category Index</a> </li>
-        </ul>
-
-        <!-- page -->
-        <ul class="nav nav-pills nav-stacked">
-          <li> <a href="test/actual/yfm_custom_property/articles/nested/quux/index.html">Quux</a> </li>
-        </ul>
-
-        <!-- page -->
-        <ul class="nav nav-pills nav-stacked">
-          <li> <a href="test/actual/yfm_custom_property/custompath/index.html">Foo Foo</a> </li>
-        </ul>
-
-        <!-- page -->
-        <ul class="nav nav-pills nav-stacked">
+          <li> <a href="articles/this-is-a-custom-prop/index.html">Bar</a> </li>
+          <li> <a href="articles/custom-prop/index.html">Baz</a> </li>
+          <li> <a href="articles/index.html">Category Index</a> </li>
+          <li> <a href="articles/nested/quux/index.html">Quux</a> </li>
+          <li> <a href="custompath/index.html">Foo Foo</a> </li>
           <li class="active">
-            <a href="test/actual/yfm_custom_property/index.html">Home</a>
+            <a href="index.html">Home</a>
           </li>
         </ul>
       </div>
+      <hr>
 
       <!-- Tags Collection -->
-      <section id="tags">
-        <h1 class="tag">bbb</h1>
-        <ul class="pages">
-          <li class="dest">test/actual/yfm_custom_property/articles/this-is-a-custom-prop/index.html</li>
-          <li class="this dest">test/actual/yfm_custom_property/articles/this-is-a-custom-prop/index.html</li>
-          <li class="page dest"></li>
-        </ul>
-        <h1 class="tag">one</h1>
-        <ul class="pages">
-          <li class="dest">test/actual/yfm_custom_property/custompath/index.html</li>
-          <li class="this dest">test/actual/yfm_custom_property/custompath/index.html</li>
-          <li class="page dest"></li>
-          <li class="dest">test/actual/yfm_custom_property/index.html</li>
-          <li class="this dest">test/actual/yfm_custom_property/index.html</li>
-          <li class="page dest"></li>
-        </ul>
-        <h1 class="tag">three</h1>
-        <ul class="pages">
-          <li class="dest">test/actual/yfm_custom_property/articles/index.html</li>
-          <li class="this dest">test/actual/yfm_custom_property/articles/index.html</li>
-          <li class="page dest"></li>
-          <li class="dest">test/actual/yfm_custom_property/index.html</li>
-          <li class="this dest">test/actual/yfm_custom_property/index.html</li>
-          <li class="page dest"></li>
-        </ul>
-        <h1 class="tag">two</h1>
-        <ul class="pages">
-          <li class="dest">test/actual/yfm_custom_property/articles/nested/quux/index.html</li>
-          <li class="this dest">test/actual/yfm_custom_property/articles/nested/quux/index.html</li>
-          <li class="page dest"></li>
-        </ul>
-      </section>
+      <div class="docs-section">
+        <div class="docs-header" id="content">
+          <h1>Tags</h1>
+        </div>
+        <h4 class="tag">bbb</h4>
+        <string>Related Pages</string>
+        <a class="tag label label-info" href="articles/this-is-a-custom-prop/index.html">Bar</a>
+        <h4 class="tag">one</h4>
+        <string>Related Pages</string>
+        <a class="tag label label-info" href="custompath/index.html">Foo Foo</a>
+        <a class="tag label label-info" href="index.html">Home</a>
+        <h4 class="tag">three</h4>
+        <string>Related Pages</string>
+        <a class="tag label label-info" href="articles/index.html">Category Index</a>
+        <a class="tag label label-info" href="index.html">Home</a>
+        <h4 class="tag">two</h4>
+        <string>Related Pages</string>
+        <a class="tag label label-info" href="articles/nested/quux/index.html">Quux</a>
+      </div>
+      <hr>
 
-      <!-- Pages Collection -->
-      <section>
-        <ul class="pages">
-          <li class="dest">test/actual/yfm_custom_property/articles/this-is-a-custom-prop/index.html</li>
-          <li class="this dest">test/actual/yfm_custom_property/articles/this-is-a-custom-prop/index.html</li>
-          <li class="page dest"></li>
-          <li class="dest">test/actual/yfm_custom_property/articles/custom-prop/index.html</li>
-          <li class="this dest">test/actual/yfm_custom_property/articles/custom-prop/index.html</li>
-          <li class="page dest"></li>
-          <li class="dest">test/actual/yfm_custom_property/articles/index.html</li>
-          <li class="this dest">test/actual/yfm_custom_property/articles/index.html</li>
-          <li class="page dest"></li>
-          <li class="dest">test/actual/yfm_custom_property/articles/nested/quux/index.html</li>
-          <li class="this dest">test/actual/yfm_custom_property/articles/nested/quux/index.html</li>
-          <li class="page dest"></li>
-          <li class="dest">test/actual/yfm_custom_property/custompath/index.html</li>
-          <li class="this dest">test/actual/yfm_custom_property/custompath/index.html</li>
-          <li class="page dest"></li>
-          <li class="dest">test/actual/yfm_custom_property/index.html</li>
-          <li class="this dest">test/actual/yfm_custom_property/index.html</li>
-          <li class="page dest"></li>
-        </ul>
-      </section>
-
-      <!-- Pages Collection -->
-      <section>
-        <ul class="pages">
-          <li class="../dest"></li>
-          <li class="../this dest"></li>
-          <li class="../page dest">test/actual/yfm_custom_property/index.html</li>
-          <li class="../dest"></li>
-          <li class="../this dest"></li>
-          <li class="../page dest">test/actual/yfm_custom_property/index.html</li>
-          <li class="../dest"></li>
-          <li class="../this dest"></li>
-          <li class="../page dest">test/actual/yfm_custom_property/index.html</li>
-          <li class="../dest"></li>
-          <li class="../this dest"></li>
-          <li class="../page dest">test/actual/yfm_custom_property/index.html</li>
-          <li class="../dest"></li>
-          <li class="../this dest"></li>
-          <li class="../page dest">test/actual/yfm_custom_property/index.html</li>
-          <li class="../dest"></li>
-          <li class="../this dest"></li>
-          <li class="../page dest">test/actual/yfm_custom_property/index.html</li>
-        </ul>
-      </section>
-
-      <!-- Content -->
-      <h1>Home</h1>
-      <p>This is the home page!</p>
+      <!-- Categories Collection -->
+      <div class="docs-section">
+        <div class="docs-header" id="content">
+          <h1>Categories</h1>
+        </div>
+        <h4 class="category">nested</h4>
+        <string>Related Pages</string>
+        <a class="category label label-info" href="articles/nested/quux/index.html">Quux</a>
+        <h4 class="category">yyy</h4>
+        <string>Related Pages</string>
+        <a class="category label label-info" href="articles/custom-prop/index.html">Baz</a>
+        <h4 class="category">zzz</h4>
+        <string>Related Pages</string>
+        <a class="category label label-info" href="articles/custom-prop/index.html">Baz</a>
+      </div>
+      <hr>
     </div>
   </body>
 </html>
