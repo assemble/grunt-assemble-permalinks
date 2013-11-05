@@ -74,6 +74,19 @@ body {
   padding: 10px 15px;
 }
 
+.pager > .active > a,
+.pager > .active > span,
+.pager > .active > a:hover,
+.pager > .active > span:hover,
+.pager > .active > a:focus,
+.pager > .active > span:focus {
+  z-index: 2;
+  color: #ffffff;
+  background-color: #428bca;
+  border-color: #428bca;
+  cursor: default;
+}
+
 /* Blockquotes */
 .callout {
   margin: 20px 0;

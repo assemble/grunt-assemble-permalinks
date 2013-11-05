@@ -1,28 +1,34 @@
 /**
- * Handlebars Helpers: {{rel}}
+ * Handlebars Helper: {{not}}
  * Copyright (c) 2013 Jon Schlinkert
  * Licensed under the MIT License (MIT).
  */
+
 'use strict';
 
+
 // Node.js
-var path   = require('path');
-var fs     = require('fs');
+var path = require('path');
+var fs   = require('fs');
+
+// node_modules
 
 
 // Export helpers
 module.exports.register = function (Handlebars, options, params) {
+  var _ = params.grunt.util._;
 
   /**
-   * {{rel}}
+   * {{not}}
    */
-  exports.rel = function(context) {
-    var newDest      = this.dest;
-    var destDirname  = path.dirname(context);
-    var relativePath = path.relative(path.resolve(destDirname), path.resolve(newDest));
-
-    return relativePath.replace(/\\/g, '/');
+  exports.not = function (value, test, options) {
+    if (value !== test) {
+      return options.fn(this);
+    } else {
+      return options.inverse(this);
+    }
   };
+
 
   for (var helper in exports) {
     if (exports.hasOwnProperty(helper)) {
@@ -30,3 +36,6 @@ module.exports.register = function (Handlebars, options, params) {
     }
   }
 };
+
+
+

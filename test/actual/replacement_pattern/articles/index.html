@@ -12,6 +12,7 @@
       <hr>
 
       <!-- pagination -->
+      <h4>pagination</h4>
       <ul class="pagination pagination-lg">
         <li class="prev">
           <a href="permalinks/jon-schlinkert/bar/index.html">&laquo;</a>
@@ -35,6 +36,7 @@
         </li>
       </ul>
       <hr>
+      <h4>pagination-justified</h4>
       <ul class="pagination pagination-lg justified">
         <li class="prev">
           <a href="permalinks/jon-schlinkert/bar/index.html">&laquo;</a>
@@ -59,10 +61,11 @@
       </ul>
       <hr>
 
-      <!-- pagination -->
-      <ul class="pager ">
+      <!-- paginate -->
+      <h4>paginate</h4>
+      <ul class="pager">
         <li class="previous">
-          <a href="permalinks/jon-schlinkert/baz/index.html">&larr; Prev</a>
+          <a href="permalinks/jon-schlinkert/bar/index.html">&larr; Prev</a>
         </li>
         <li> <a href="permalinks/jon-schlinkert/bar/index.html">1</a> </li>
         <li> <a href="permalinks/jon-schlinkert/baz/index.html">2</a> </li>
@@ -73,165 +76,197 @@
         <li> <a href="../permalinks/jon-schlinkert/foo/index.html">5</a> </li>
         <li> <a href="../index.html">6</a> </li>
         <li class="next">
-          <a href="nested/permalinks/jon-schlinkert/quux/index.html">Next &rarr;</a>
+          <a href="../index.html">Next &rarr;</a>
         </li>
       </ul>
       <hr>
       <div class="row">
         <div class="col-md-3">
           <div class="bs-sidebar hidden-print" role="complementary">
-            <ul class="nav bs-sidenav">
 
-              <!-- navigation -->
-              <div class="list-group">
-                <a href="permalinks/jon-schlinkert/bar/index.html" class="list-group-item">
-                  bar
-                </a>
-                <a href="permalinks/jon-schlinkert/baz/index.html" class="list-group-item">
-                  baz
-                </a>
-                <a href="index.html" class="list-group-item active">
-                  index
-                </a>
-                <a href="nested/permalinks/jon-schlinkert/quux/index.html" class="list-group-item">
-                  quux
-                </a>
-                <a href="../permalinks/jon-schlinkert/foo/index.html" class="list-group-item">
-                  foo
-                </a>
-                <a href="../index.html" class="list-group-item">
-                  index
-                </a>
-              </div>
-              <hr>
+            <!-- navigation -->
+            <div class="list-group">
+              <a href="permalinks/jon-schlinkert/bar/index.html" class="list-group-item">
+                bar
+              </a>
+              <a href="permalinks/jon-schlinkert/baz/index.html" class="list-group-item">
+                baz
+              </a>
+              <a href="index.html" class="list-group-item active">
+                index
+              </a>
+              <a href="nested/permalinks/jon-schlinkert/quux/index.html" class="list-group-item">
+                quux
+              </a>
+              <a href="../permalinks/jon-schlinkert/foo/index.html" class="list-group-item">
+                foo
+              </a>
+              <a href="../index.html" class="list-group-item">
+                index
+              </a>
+            </div>
+            <hr>
 
-              <!-- pagination -->
-              <ul class="nav nav-pills nav-stacked">
-                <li class="prev">
-                  <a href="permalinks/jon-schlinkert/bar/index.html">First</a>
-                </li>
-                <li class="prev">
-                  <a href="permalinks/jon-schlinkert/baz/index.html">&larr; Previous</a>
-                </li>
-                <li> <a href="permalinks/jon-schlinkert/bar/index.html">1</a> </li>
-                <li> <a href="permalinks/jon-schlinkert/baz/index.html">2</a> </li>
-                <li class="active">
-                  <a href="index.html">3</a>
-                </li>
-                <li> <a href="nested/permalinks/jon-schlinkert/quux/index.html">4</a> </li>
-                <li> <a href="../permalinks/jon-schlinkert/foo/index.html">5</a> </li>
-                <li> <a href="../index.html">6</a> </li>
-                <li class="next">
-                  <a href="nested/permalinks/jon-schlinkert/quux/index.html">Next &rarr;</a>
-                </li>
-                <li class="next">
-                  <a href="../index.html">Last</a>
-                </li>
-              </ul>
-              <hr>
+            <!-- pagination -->
+            <ul class="nav nav-pills nav-stacked">
+              <li class="prev">
+                <a href="permalinks/jon-schlinkert/bar/index.html">First</a>
+              </li>
+              <li class="prev">
+                <a href="permalinks/jon-schlinkert/baz/index.html">&larr; Previous</a>
+              </li>
+              <li> <a href="permalinks/jon-schlinkert/bar/index.html">1</a> </li>
+              <li> <a href="permalinks/jon-schlinkert/baz/index.html">2</a> </li>
+              <li class="active">
+                <a href="index.html">3</a>
+              </li>
+              <li> <a href="nested/permalinks/jon-schlinkert/quux/index.html">4</a> </li>
+              <li> <a href="../permalinks/jon-schlinkert/foo/index.html">5</a> </li>
+              <li> <a href="../index.html">6</a> </li>
+              <li class="next">
+                <a href="nested/permalinks/jon-schlinkert/quux/index.html">Next &rarr;</a>
+              </li>
+              <li class="next">
+                <a href="../index.html">Last</a>
+              </li>
+            </ul>
+            <hr>
+
+            <!-- Summaries -->
+            <h4>Sanity Check</h4>
+            <ul class="list-group">
+              <li class="list-group-item">
+                <span class="badge">3</span>
+                Total Categories
+              </li>
+              <li class="list-group-item">
+                <span class="badge">4</span>
+                Total Tags
+              </li>
             </ul>
           </div>
         </div>
         <div class="col-md-9" role="main">
+          <div class="row">
+            <div class="col-md-4">
+
+              <!-- Pages -->
+              <div class="docs-section">
+                <div class="docs-header" id="content">
+                  <h4>{{relative}} helper</h4>
+                  <strong>Page title: Category Index</strong>
+                </div>
+                <ul class="nav nav-pills nav-stacked">
+                  <li> <a href="permalinks/jon-schlinkert/bar/index.html">Bar</a> </li>
+                  <li> <a href="permalinks/jon-schlinkert/baz/index.html">Baz</a> </li>
+                  <li class="active">
+                    <a href="index.html">Category Index</a>
+                  </li>
+                  <li> <a href="nested/permalinks/jon-schlinkert/quux/index.html">Quux</a> </li>
+                  <li> <a href="../permalinks/jon-schlinkert/foo/index.html">Foo Foo</a> </li>
+                  <li> <a href="../index.html">Home</a> </li>
+                </ul>
+              </div>
+              <hr>
+
+              <!-- Pages -->
+              <div class="docs-section">
+                <div class="docs-header" id="content">
+                  <h4>{{rel}} helper</h4>
+                  <strong>Page title: Category Index</strong>
+                </div>
+                <ul class="nav nav-pills nav-stacked">
+                  <li> <a href="permalinks/jon-schlinkert/bar/index.html">Bar</a> </li>
+                  <li> <a href="permalinks/jon-schlinkert/baz/index.html">Baz</a> </li>
+                  <li class="active">
+                    <a href="index.html">Category Index</a>
+                  </li>
+                  <li> <a href="nested/permalinks/jon-schlinkert/quux/index.html">Quux</a> </li>
+                  <li> <a href="../permalinks/jon-schlinkert/foo/index.html">Foo Foo</a> </li>
+                  <li> <a href="../index.html">Home</a> </li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-md-4">
+
+              <!-- Tags Collection -->
+              <div class="panel panel-default">
+                <div class="panel-heading">Tags</div>
+                <div class="panel-body">
+                  <div>Related pages for: <span class="label label-warning">bbb</span>
+                  </div>
+                  <ul>
+                    <li> <a href="permalinks/jon-schlinkert/bar/index.html">Bar</a> </li>
+                  </ul>
+                  <div>Related pages for: <span class="label label-warning">one</span>
+                  </div>
+                  <ul>
+                    <li> <a href="../permalinks/jon-schlinkert/foo/index.html">Foo Foo</a> </li>
+                    <li> <a href="../index.html">Home</a> </li>
+                  </ul>
+                  <div>Related pages for: <span class="label label-warning">three</span>
+                  </div>
+                  <ul>
+                    <li class="active">
+                      <a href="index.html">Category Index</a>
+                    </li>
+                    <li> <a href="../index.html">Home</a> </li>
+                  </ul>
+                  <div>Related pages for: <span class="label label-warning">two</span>
+                  </div>
+                  <ul>
+                    <li> <a href="nested/permalinks/jon-schlinkert/quux/index.html">Quux</a> </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+
+              <!-- Categories Collection -->
+              <div class="panel panel-default">
+                <div class="panel-heading">Categories</div>
+                <div class="panel-body">
+                  <div>Related pages for: <span class="label label-warning">nested</span>
+                  </div>
+                  <ul>
+                    <li> <a href="nested/permalinks/jon-schlinkert/quux/index.html">Quux</a> </li>
+                  </ul>
+                  <div>Related pages for: <span class="label label-warning">yyy</span>
+                  </div>
+                  <ul>
+                    <li> <a href="permalinks/jon-schlinkert/baz/index.html">Baz</a> </li>
+                  </ul>
+                  <div>Related pages for: <span class="label label-warning">zzz</span>
+                  </div>
+                  <ul>
+                    <li> <a href="permalinks/jon-schlinkert/baz/index.html">Baz</a> </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
 
           <!-- Content -->
           <h1>Category Index</h1>
           <p>Index page nested in a directory.</p>
-          Id pariatur dolor irure minim minim excepteur deserunt magna ipsum non do eu adipisicing. Incididunt irure irure do veniam deserunt veniam amet culpa enim eu ad adipisicing irure. Nulla aliquip ex qui nulla occaecat pariatur Lorem est ullamco qui.
+          Lorem est labore id ut minim sint minim amet in anim consectetur ex. Quis consequat tempor sunt magna nostrud sit officia commodo fugiat excepteur fugiat. Voluptate incididunt qui irure aliqua ad in consequat esse elit occaecat culpa.
           <hr>
           <blockquote class="callout callout-danger">
-            <p>magna laborum ipsum laboris est</p>
+            <p>voluptate aute amet in veniam</p>
           </blockquote>
           <hr>
-          <p>Culpa veniam fugiat commodo sint velit id eiusmod fugiat ea occaecat incididunt duis commodo fugiat nisi in tempor. Incididunt amet anim sit et nostrud sunt nostrud minim esse minim anim. Velit mollit pariatur exercitation irure consectetur
-            excepteur aliquip cupidatat consequat veniam fugiat nisi officia in. Occaecat veniam proident deserunt non elit cillum mollit amet consequat eu nisi ullamco anim. Labore ipsum sunt est cillum quis consectetur dolore id aliqua non aute ex ex
-            pariatur. Excepteur qui irure aliqua officia excepteur sint incididunt reprehenderit laborum ullamco.</p>
-          <p>Do irure elit duis eu elit enim nisi nulla consectetur aliquip mollit mollit nulla nostrud ipsum nulla. Cillum officia deserunt tempor ut laborum laborum laborum magna sit sit aliqua eu officia do eu deserunt ex incididunt. Adipisicing nulla
-            et consequat consectetur minim est aute proident elit sunt aliquip duis occaecat laborum. Tempor reprehenderit labore veniam pariatur cillum consectetur incididunt amet elit aliqua culpa officia dolor consectetur qui. Fugiat reprehenderit
-            sit ut do mollit nostrud est anim nostrud magna incididunt.</p>
-          <p>Lorem minim dolore incididunt sunt voluptate aute cupidatat irure aute aute ipsum dolor pariatur ipsum quis in ullamco cupidatat. Enim veniam velit dolor pariatur Lorem nostrud consectetur irure Lorem minim ullamco nostrud exercitation sunt
-            nisi irure. Laboris ipsum incididunt incididunt aliqua commodo elit adipisicing reprehenderit ad adipisicing eu eu fugiat voluptate ex culpa mollit consequat. Et culpa incididunt ut aute est ea ut incididunt aliquip. Reprehenderit eu nostrud
-            et ipsum duis nostrud do elit laborum in ad aute sunt nisi.</p>
-          <hr>Esse excepteur irure irure eu laboris aute ipsum ullamco elit adipisicing. Ex ullamco deserunt exercitation fugiat in ea et magna irure in sunt esse esse quis. Irure sunt veniam aute ad velit et duis ex id minim id adipisicing sit sit.
+          <p>Labore tempor commodo consequat do esse magna velit officia ad mollit reprehenderit elit do excepteur ea ad excepteur. Voluptate aliqua sunt laboris deserunt aliquip nisi anim aliqua elit deserunt qui pariatur cillum sunt nisi labore minim ipsum.
+            Est sit qui id dolor enim laborum in reprehenderit proident sunt eu.</p>
+          <p>Nisi labore sunt nulla ipsum non aute ea consequat nulla ipsum proident culpa est adipisicing do quis sint. Ad eiusmod enim esse ipsum sint est non eiusmod amet dolore. Exercitation sint exercitation consequat magna aliquip consectetur sint
+            occaecat mollit. Anim non id tempor laboris ex tempor ipsum minim sunt laborum exercitation ea. Aliquip reprehenderit excepteur voluptate occaecat aliquip amet elit minim Lorem mollit pariatur elit sit irure voluptate consectetur eu est commodo.
+            Laborum tempor sit proident eu laboris cillum culpa deserunt eiusmod proident exercitation ex cupidatat. Est dolor est et incididunt et qui in exercitation excepteur anim irure voluptate.</p>
+          <p>Commodo veniam aliquip id enim incididunt reprehenderit aliquip mollit excepteur fugiat sunt ipsum cillum ea elit. Commodo minim elit magna consequat excepteur Lorem deserunt irure consectetur nulla do pariatur. Tempor occaecat laborum quis
+            sit in cillum excepteur reprehenderit magna occaecat fugiat nisi aliqua amet dolore.</p>
+          <hr>Labore ad occaecat ullamco aliqua ex minim esse velit dolor reprehenderit aliqua. Quis minim occaecat aliquip consectetur excepteur nulla fugiat est qui cupidatat voluptate ea exercitation. Qui qui elit aliqua proident esse aliqua fugiat tempor
+          sint et est.
+          <hr>
         </div>
       </div>
-
-      <!-- Pages -->
-      <div class="docs-section">
-        <div class="docs-header" id="content">
-          <h1>{{relative}}</h1>
-          <h4>Page title: Category Index</h4>
-        </div>
-        <ul class="nav nav-pills nav-stacked">
-          <li> <a href="permalinks/jon-schlinkert/bar/index.html">Bar</a> </li>
-          <li> <a href="permalinks/jon-schlinkert/baz/index.html">Baz</a> </li>
-          <li class="active">
-            <a href="index.html">Category Index</a>
-          </li>
-          <li> <a href="nested/permalinks/jon-schlinkert/quux/index.html">Quux</a> </li>
-          <li> <a href="../permalinks/jon-schlinkert/foo/index.html">Foo Foo</a> </li>
-          <li> <a href="../index.html">Home</a> </li>
-        </ul>
-      </div>
-      <hr>
-
-      <!-- Pages -->
-      <div class="docs-section">
-        <div class="docs-header" id="content">
-          <h1>{{rel}}</h1>
-          <h4>Page title: Category Index</h4>
-        </div>
-        <ul class="nav nav-pills nav-stacked">
-          <li> <a href="permalinks/jon-schlinkert/bar/index.html">Bar</a> </li>
-          <li> <a href="permalinks/jon-schlinkert/baz/index.html">Baz</a> </li>
-          <li class="active">
-            <a href="index.html">Category Index</a>
-          </li>
-          <li> <a href="nested/permalinks/jon-schlinkert/quux/index.html">Quux</a> </li>
-          <li> <a href="../permalinks/jon-schlinkert/foo/index.html">Foo Foo</a> </li>
-          <li> <a href="../index.html">Home</a> </li>
-        </ul>
-      </div>
-      <hr>
-
-      <!-- Tags Collection -->
-      <div class="docs-section">
-        <div class="docs-header" id="content">
-          <h1>Tags</h1>
-        </div>
-        <h4 class="tag">bbb</h4>
-        <string>Related Pages</string>
-        <a class="tag label label-info" href="permalinks/jon-schlinkert/bar/index.html">Bar</a>
-        <h4 class="tag">one</h4>
-        <string>Related Pages</string>
-        <a class="tag label label-info" href="../permalinks/jon-schlinkert/foo/index.html">Foo Foo</a>
-        <a class="tag label label-info" href="../index.html">Home</a>
-        <h4 class="tag">three</h4>
-        <string>Related Pages</string>
-        <a class="tag label label-info" href="index.html">Category Index</a>
-        <a class="tag label label-info" href="../index.html">Home</a>
-        <h4 class="tag">two</h4>
-        <string>Related Pages</string>
-        <a class="tag label label-info" href="nested/permalinks/jon-schlinkert/quux/index.html">Quux</a>
-      </div>
-      <hr>
-
-      <!-- Categories Collection -->
-      <div class="docs-section">
-        <div class="docs-header" id="content">
-          <h1>Categories</h1>
-        </div>
-        <h4 class="category">nested</h4>
-        <string>Related Pages</string>
-        <a class="category label label-info" href="nested/permalinks/jon-schlinkert/quux/index.html">Quux</a>
-        <h4 class="category">yyy</h4>
-        <string>Related Pages</string>
-        <a class="category label label-info" href="permalinks/jon-schlinkert/baz/index.html">Baz</a>
-        <h4 class="category">zzz</h4>
-        <string>Related Pages</string>
-        <a class="category label label-info" href="permalinks/jon-schlinkert/baz/index.html">Baz</a>
-      </div>
-      <hr>
     </div>
   </body>
 </html>

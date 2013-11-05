@@ -12,6 +12,7 @@
       <hr>
 
       <!-- pagination -->
+      <h4>pagination</h4>
       <ul class="pagination pagination-lg">
         <li class="prev">
           <a href="bar.html">&laquo;</a>
@@ -35,6 +36,7 @@
         </li>
       </ul>
       <hr>
+      <h4>pagination-justified</h4>
       <ul class="pagination pagination-lg justified">
         <li class="prev">
           <a href="bar.html">&laquo;</a>
@@ -59,8 +61,9 @@
       </ul>
       <hr>
 
-      <!-- pagination -->
-      <ul class="pager ">
+      <!-- paginate -->
+      <h4>paginate</h4>
+      <ul class="pager">
         <li class="previous">
           <a href="bar.html">&larr; Prev</a>
         </li>
@@ -73,164 +76,200 @@
         <li> <a href="../foo.html">5</a> </li>
         <li> <a href="../index.html">6</a> </li>
         <li class="next">
-          <a href="index.html">Next &rarr;</a>
+          <a href="../index.html">Next &rarr;</a>
         </li>
       </ul>
       <hr>
       <div class="row">
         <div class="col-md-3">
           <div class="bs-sidebar hidden-print" role="complementary">
-            <ul class="nav bs-sidenav">
 
-              <!-- navigation -->
-              <div class="list-group">
-                <a href="bar.html" class="list-group-item">
-                  bar
-                </a>
-                <a href="baz.html" class="list-group-item active">
-                  baz
-                </a>
-                <a href="index.html" class="list-group-item">
-                  index
-                </a>
-                <a href="nested/quux.html" class="list-group-item">
-                  quux
-                </a>
-                <a href="../foo.html" class="list-group-item">
-                  foo
-                </a>
-                <a href="../index.html" class="list-group-item">
-                  index
-                </a>
-              </div>
-              <hr>
+            <!-- navigation -->
+            <div class="list-group">
+              <a href="bar.html" class="list-group-item">
+                bar
+              </a>
+              <a href="baz.html" class="list-group-item active">
+                baz
+              </a>
+              <a href="index.html" class="list-group-item">
+                index
+              </a>
+              <a href="nested/quux.html" class="list-group-item">
+                quux
+              </a>
+              <a href="../foo.html" class="list-group-item">
+                foo
+              </a>
+              <a href="../index.html" class="list-group-item">
+                index
+              </a>
+            </div>
+            <hr>
 
-              <!-- pagination -->
-              <ul class="nav nav-pills nav-stacked">
-                <li class="prev">
-                  <a href="bar.html">First</a>
-                </li>
-                <li class="prev">
-                  <a href="bar.html">&larr; Previous</a>
-                </li>
-                <li> <a href="bar.html">1</a> </li>
-                <li class="active">
-                  <a href="baz.html">2</a>
-                </li>
-                <li> <a href="index.html">3</a> </li>
-                <li> <a href="nested/quux.html">4</a> </li>
-                <li> <a href="../foo.html">5</a> </li>
-                <li> <a href="../index.html">6</a> </li>
-                <li class="next">
-                  <a href="index.html">Next &rarr;</a>
-                </li>
-                <li class="next">
-                  <a href="../index.html">Last</a>
-                </li>
-              </ul>
-              <hr>
+            <!-- pagination -->
+            <ul class="nav nav-pills nav-stacked">
+              <li class="prev">
+                <a href="bar.html">First</a>
+              </li>
+              <li class="prev">
+                <a href="bar.html">&larr; Previous</a>
+              </li>
+              <li> <a href="bar.html">1</a> </li>
+              <li class="active">
+                <a href="baz.html">2</a>
+              </li>
+              <li> <a href="index.html">3</a> </li>
+              <li> <a href="nested/quux.html">4</a> </li>
+              <li> <a href="../foo.html">5</a> </li>
+              <li> <a href="../index.html">6</a> </li>
+              <li class="next">
+                <a href="index.html">Next &rarr;</a>
+              </li>
+              <li class="next">
+                <a href="../index.html">Last</a>
+              </li>
+            </ul>
+            <hr>
+
+            <!-- Summaries -->
+            <h4>Sanity Check</h4>
+            <ul class="list-group">
+              <li class="list-group-item">
+                <span class="badge">3</span>
+                Total Categories
+              </li>
+              <li class="list-group-item">
+                <span class="badge">4</span>
+                Total Tags
+              </li>
             </ul>
           </div>
         </div>
         <div class="col-md-9" role="main">
+          <div class="row">
+            <div class="col-md-4">
+
+              <!-- Pages -->
+              <div class="docs-section">
+                <div class="docs-header" id="content">
+                  <h4>{{relative}} helper</h4>
+                  <strong>Page title: Baz</strong>
+                </div>
+                <ul class="nav nav-pills nav-stacked">
+                  <li> <a href="bar.html">Bar</a> </li>
+                  <li class="active">
+                    <a href="baz.html">Baz</a>
+                  </li>
+                  <li> <a href="index.html">Category Index</a> </li>
+                  <li> <a href="nested/quux.html">Quux</a> </li>
+                  <li> <a href="../foo.html">Foo Foo</a> </li>
+                  <li> <a href="../index.html">Home</a> </li>
+                </ul>
+              </div>
+              <hr>
+
+              <!-- Pages -->
+              <div class="docs-section">
+                <div class="docs-header" id="content">
+                  <h4>{{rel}} helper</h4>
+                  <strong>Page title: Baz</strong>
+                </div>
+                <ul class="nav nav-pills nav-stacked">
+                  <li> <a href="bar.html">Bar</a> </li>
+                  <li class="active">
+                    <a href="baz.html">Baz</a>
+                  </li>
+                  <li> <a href="index.html">Category Index</a> </li>
+                  <li> <a href="nested/quux.html">Quux</a> </li>
+                  <li> <a href="../foo.html">Foo Foo</a> </li>
+                  <li> <a href="../index.html">Home</a> </li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-md-4">
+
+              <!-- Tags Collection -->
+              <div class="panel panel-default">
+                <div class="panel-heading">Tags</div>
+                <div class="panel-body">
+                  <div>Related pages for: <span class="label label-warning">bbb</span>
+                  </div>
+                  <ul>
+                    <li> <a href="bar.html">Bar</a> </li>
+                  </ul>
+                  <div>Related pages for: <span class="label label-warning">one</span>
+                  </div>
+                  <ul>
+                    <li> <a href="../foo.html">Foo Foo</a> </li>
+                    <li> <a href="../index.html">Home</a> </li>
+                  </ul>
+                  <div>Related pages for: <span class="label label-warning">three</span>
+                  </div>
+                  <ul>
+                    <li> <a href="index.html">Category Index</a> </li>
+                    <li> <a href="../index.html">Home</a> </li>
+                  </ul>
+                  <div>Related pages for: <span class="label label-warning">two</span>
+                  </div>
+                  <ul>
+                    <li> <a href="nested/quux.html">Quux</a> </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+
+              <!-- Categories Collection -->
+              <div class="panel panel-default">
+                <div class="panel-heading">Categories</div>
+                <div class="panel-body">
+                  <div>Related pages for: <span class="label label-warning">nested</span>
+                  </div>
+                  <ul>
+                    <li> <a href="nested/quux.html">Quux</a> </li>
+                  </ul>
+                  <div>Related pages for: <span class="label label-warning">yyy</span>
+                  </div>
+                  <ul>
+                    <li class="active">
+                      <a href="baz.html">Baz</a>
+                    </li>
+                  </ul>
+                  <div>Related pages for: <span class="label label-warning">zzz</span>
+                  </div>
+                  <ul>
+                    <li class="active">
+                      <a href="baz.html">Baz</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
 
           <!-- Content -->
           <h1>Baz</h1>
           <p>Suprising discovery! Contrary to popular belief, ice in the arctic tundra was found to be below freezing temperatures.</p>
-          Et nostrud consequat exercitation quis laboris magna veniam elit excepteur duis commodo et sint laboris. Esse minim aliquip qui in proident ullamco officia ullamco consequat excepteur dolor consectetur culpa. Consequat voluptate exercitation laborum deserunt
-          sunt incididunt incididunt adipisicing esse.
+          Deserunt sit aliquip dolor qui voluptate aliqua excepteur quis proident id duis. Nostrud adipisicing mollit nisi consequat duis ipsum aliqua laborum ut dolor velit est. Culpa sit laboris incididunt incididunt ad nisi exercitation labore occaecat nisi
+          exercitation.
           <hr>
           <blockquote class="callout callout-success">
-            <p>voluptate dolore enim anim aliqua</p>
+            <p>magna velit laborum do amet</p>
           </blockquote>
           <hr>
-          <p>Aliqua enim qui irure deserunt ipsum enim consequat mollit ullamco do nisi anim magna qui nulla qui dolor cillum. Do laborum tempor amet sunt officia dolore magna consectetur do proident laboris anim pariatur esse cillum aute aliquip. Officia
-            aliquip commodo laboris culpa exercitation nostrud qui sit laboris ut ullamco pariatur. Tempor anim mollit dolore occaecat magna in reprehenderit laboris quis.</p>
-          <p>Anim adipisicing sit proident mollit sint id ullamco dolor do consectetur. Esse ipsum in sunt magna labore officia nulla irure irure non nulla aliquip fugiat deserunt proident. Veniam tempor quis ipsum ut incididunt sit irure in ex consectetur
-            aliquip.</p>
-          <p>Officia fugiat ex reprehenderit excepteur nisi adipisicing aute ex et Lorem do cillum tempor laborum minim nisi eu esse. Incididunt nisi minim quis pariatur incididunt magna officia sunt Lorem ipsum esse magna eu sit in proident. Non ex velit
-            nostrud officia eu eiusmod deserunt non pariatur. Eu voluptate sit enim do enim ad aute occaecat enim ullamco tempor excepteur minim aute fugiat ex est. Anim amet cillum veniam amet aute anim laboris et ut nisi nulla in et do sit ut commodo.
-            Commodo tempor enim officia cupidatat mollit deserunt cupidatat ut deserunt et sit excepteur enim aliqua aliquip irure consectetur. Et eu elit veniam non ad nostrud esse labore id consectetur in irure.</p>
-          <hr>Velit laborum et fugiat consequat ex eu ex do et esse voluptate labore. Ex elit aliquip labore ea officia est proident est nostrud amet commodo est id. Cillum sit consequat nisi aliqua est aute voluptate veniam laboris minim.
+          <p>Proident deserunt adipisicing nulla proident ullamco duis ipsum enim magna. Anim occaecat eu occaecat ex est incididunt sunt do et dolor enim cillum laborum. Ad aliquip dolor sunt est nisi magna cupidatat aliqua pariatur nisi qui laboris eu
+            irure aliquip. Cillum consequat aliquip magna laborum aute incididunt laboris esse ad ea. Ea adipisicing velit irure nisi laboris exercitation laboris anim Lorem laborum occaecat consectetur veniam officia est ut eu deserunt.</p>
+          <p>Cupidatat amet do adipisicing consequat amet sunt esse enim ullamco irure nisi consequat. Velit amet irure nulla minim eiusmod laborum ad magna nisi culpa nostrud commodo ex anim sit. Elit mollit est sunt ullamco culpa culpa nisi veniam Lorem
+            deserunt occaecat dolore velit esse. Cillum eu Lorem culpa aute aute in non deserunt do non incididunt id non dolor ea voluptate aliquip.</p>
+          <p>In sit Lorem tempor duis adipisicing aliqua laborum quis irure cupidatat pariatur quis sunt. Aliquip et eiusmod anim aute nostrud do mollit incididunt excepteur duis incididunt. Fugiat consequat sit adipisicing deserunt fugiat magna officia
+            incididunt aliqua consequat quis excepteur. Dolore do elit sunt ullamco veniam id reprehenderit nostrud amet enim. Exercitation enim sunt laboris mollit aliquip incididunt fugiat ea officia eu esse ad incididunt irure ullamco laboris cillum
+            nostrud labore. Mollit amet aute sit labore culpa tempor non laboris id in incididunt proident reprehenderit excepteur aliqua labore aliqua culpa non.</p>
+          <hr>Ut nostrud in incididunt officia voluptate voluptate ullamco reprehenderit aliquip ut cillum. Reprehenderit eiusmod ad cillum Lorem sit Lorem dolore sit ex non et aliqua non et. Dolor est culpa ea veniam excepteur labore cillum veniam reprehenderit
+          pariatur laborum proident irure.
+          <hr>
         </div>
       </div>
-
-      <!-- Pages -->
-      <div class="docs-section">
-        <div class="docs-header" id="content">
-          <h1>{{relative}}</h1>
-          <h4>Page title: Baz</h4>
-        </div>
-        <ul class="nav nav-pills nav-stacked">
-          <li> <a href="bar.html">Bar</a> </li>
-          <li class="active">
-            <a href="baz.html">Baz</a>
-          </li>
-          <li> <a href="index.html">Category Index</a> </li>
-          <li> <a href="nested/quux.html">Quux</a> </li>
-          <li> <a href="../foo.html">Foo Foo</a> </li>
-          <li> <a href="../index.html">Home</a> </li>
-        </ul>
-      </div>
-      <hr>
-
-      <!-- Pages -->
-      <div class="docs-section">
-        <div class="docs-header" id="content">
-          <h1>{{rel}}</h1>
-          <h4>Page title: Baz</h4>
-        </div>
-        <ul class="nav nav-pills nav-stacked">
-          <li> <a href="bar.html">Bar</a> </li>
-          <li class="active">
-            <a href="baz.html">Baz</a>
-          </li>
-          <li> <a href="index.html">Category Index</a> </li>
-          <li> <a href="nested/quux.html">Quux</a> </li>
-          <li> <a href="../foo.html">Foo Foo</a> </li>
-          <li> <a href="../index.html">Home</a> </li>
-        </ul>
-      </div>
-      <hr>
-
-      <!-- Tags Collection -->
-      <div class="docs-section">
-        <div class="docs-header" id="content">
-          <h1>Tags</h1>
-        </div>
-        <h4 class="tag">bbb</h4>
-        <string>Related Pages</string>
-        <a class="tag label label-info" href="bar.html">Bar</a>
-        <h4 class="tag">one</h4>
-        <string>Related Pages</string>
-        <a class="tag label label-info" href="../foo.html">Foo Foo</a>
-        <a class="tag label label-info" href="../index.html">Home</a>
-        <h4 class="tag">three</h4>
-        <string>Related Pages</string>
-        <a class="tag label label-info" href="index.html">Category Index</a>
-        <a class="tag label label-info" href="../index.html">Home</a>
-        <h4 class="tag">two</h4>
-        <string>Related Pages</string>
-        <a class="tag label label-info" href="nested/quux.html">Quux</a>
-      </div>
-      <hr>
-
-      <!-- Categories Collection -->
-      <div class="docs-section">
-        <div class="docs-header" id="content">
-          <h1>Categories</h1>
-        </div>
-        <h4 class="category">nested</h4>
-        <string>Related Pages</string>
-        <a class="category label label-info" href="nested/quux.html">Quux</a>
-        <h4 class="category">yyy</h4>
-        <string>Related Pages</string>
-        <a class="category label label-info" href="baz.html">Baz</a>
-        <h4 class="category">zzz</h4>
-        <string>Related Pages</string>
-        <a class="category label label-info" href="baz.html">Baz</a>
-      </div>
-      <hr>
     </div>
   </body>
 </html>

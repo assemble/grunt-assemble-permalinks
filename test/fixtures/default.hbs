@@ -12,99 +12,128 @@
 
       <hr>
       <!-- pagination -->
+      <h4>pagination</h4>
       {{pagination pagination modifier="pagination-lg"}}
       <hr>
+      <h4>pagination-justified</h4>
       {{pagination pagination modifier="pagination-lg justified"}}
       <hr>
-      <!-- pagination -->
+      <!-- paginate -->
+      <h4>paginate</h4>
       {{paginate pagination}}
       <hr>
+
 
       <div class="row">
         <div class="col-md-3">
           <div class="bs-sidebar hidden-print" role="complementary">
-            <ul class="nav bs-sidenav">
-              <!-- navigation -->
-              {{navigation pagination}}
-              <hr>
-              <!-- pagination -->
-              {{pager pagination}}
-              <hr>
+            <!-- navigation -->
+            {{navigation pagination}}
+            <hr>
+
+
+            <!-- pagination -->
+            {{pager pagination}}
+            <hr>
+
+
+            <!-- Summaries -->
+            <h4>Sanity Check</h4>
+            <ul class="list-group">
+              <li class="list-group-item">
+                <span class="badge">{{length categories}}</span>
+                Total Categories
+              </li>
+              <li class="list-group-item">
+                <span class="badge">{{length tags}}</span>
+                Total Tags
+              </li>
             </ul>
+
           </div>
         </div>
         <div class="col-md-9" role="main">
+          <div class="row">
+            <div class="col-md-4">
+
+              <!-- Pages -->
+              <div class="docs-section">
+                <div class="docs-header" id="content">
+                  <h4>\{{relative}} helper</h4>
+                  <strong>Page title: {{ title }}</strong>
+                </div>
+                <ul class="nav nav-pills nav-stacked">
+                {{#each pages}}
+                  <li{{#is ../page.dest this.dest}} class="active"{{/is}}>
+                    <a href="{{relative ../page.dest this.dest}}">{{{data.title}}}</a>
+                  </li>
+                {{/each}}
+                </ul>
+              </div>
+              <hr>
+
+
+              <!-- Pages -->
+              <div class="docs-section">
+                <div class="docs-header" id="content">
+                  <h4>\{{rel}} helper</h4>
+                  <strong>Page title: {{ title }}</strong>
+                </div>
+                <ul class="nav nav-pills nav-stacked">
+                {{#each pages}}
+                  <li{{#is ../page.dest this.dest}} class="active"{{/is}}>
+                    <a href="{{rel ../page.dest}}">{{{data.title}}}</a>
+                  </li>
+                {{/each}}
+                </ul>
+              </div>
+            </div>
+            <div class="col-md-4">
+
+              <!-- Tags Collection -->
+              <div class="panel panel-default">
+                <div class="panel-heading">Tags</div>
+                <div class="panel-body">
+                {{#each tags}}
+                  <div>Related pages for: <span class="label label-warning">{{tag}}</span></div>
+                  <ul>
+                  {{#each pages}}
+                    <li{{#is ../../page.dest this.dest}} class="active"{{/is}}>
+                      <a href="{{rel ../../page.dest}}">{{{data.title}}}</a>
+                    </li>
+                  {{/each}}
+                  </ul>
+                {{/each}}
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+
+              <!-- Categories Collection -->
+              <div class="panel panel-default">
+                <div class="panel-heading">Categories</div>
+                <div class="panel-body">
+                {{#each categories}}
+                  <div>Related pages for: <span class="label label-warning">{{category}}</span></div>
+                  <ul>
+                  {{#each pages}}
+                    <li{{#is ../../page.dest this.dest}} class="active"{{/is}}>
+                      <a href="{{rel ../../page.dest}}">{{{data.title}}}</a>
+                    </li>
+                  {{/each}}
+                  </ul>
+                {{/each}}
+                </div>
+              </div>
+            </div>
+          </div>
+
           <!-- Content -->
           {{> body }}
+
+          <hr>
         </div>
       </div>
-
-
-      <!-- Pages -->
-      <div class="docs-section">
-        <div class="docs-header" id="content">
-          <h1>\{{relative}}</h1>
-          <h4>Page title: {{ title }}</h4>
-        </div>
-        <ul class="nav nav-pills nav-stacked">
-        {{#each pages}}
-          <li{{#is ../page.dest this.dest}} class="active"{{/is}}>
-            <a href="{{relative ../page.dest this.dest}}">{{{data.title}}}</a>
-          </li>
-        {{/each}}
-        </ul>
-      </div>
-      <hr>
-
-
-      <!-- Pages -->
-      <div class="docs-section">
-        <div class="docs-header" id="content">
-          <h1>\{{rel}}</h1>
-          <h4>Page title: {{ title }}</h4>
-        </div>
-        <ul class="nav nav-pills nav-stacked">
-        {{#each pages}}
-          <li{{#is ../page.dest this.dest}} class="active"{{/is}}>
-            <a href="{{rel ../page.dest}}">{{{data.title}}}</a>
-          </li>
-        {{/each}}
-        </ul>
-      </div>
-      <hr>
-
-
-      <!-- Tags Collection -->
-      <div class="docs-section">
-        <div class="docs-header" id="content">
-          <h1>Tags</h1>
-        </div>
-        {{#each tags}}
-          <h4 class="tag">{{tag}}</h4>
-          <string>Related Pages</string>
-          {{#each pages}}
-            <a class="tag label label-info" href="{{relative ../../page.dest this.dest}}">{{{data.title}}}</a>
-          {{/each}}
-        {{/each}}
-      </div>
-      <hr>
-
-
-      <!-- Categories Collection -->
-      <div class="docs-section">
-        <div class="docs-header" id="content">
-          <h1>Categories</h1>
-        </div>
-        {{#each categories}}
-          <h4 class="category">{{category}}</h4>
-          <string>Related Pages</string>
-          {{#each pages}}
-            <a class="category label label-info" href="{{relative ../../page.dest this.dest}}">{{{data.title}}}</a>
-          {{/each}}
-        {{/each}}
-      </div>
-      <hr>
-
     </div>
   </body>
 </html>
