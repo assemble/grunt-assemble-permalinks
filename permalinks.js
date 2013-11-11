@@ -217,7 +217,7 @@ module.exports = function(params, callback) {
           page.dest = Utils.normalizePath(path.join(page.dirname, permalink));
         }
       }
-      page.assets = Utils.calculateAssetsPath(page.dest, originalAssets);
+      page.assets = Utils.calculatePath(page.dest, originalAssets, originalAssets);
 
       grunt.verbose.ok('page'.yellow, page);
       grunt.verbose.ok('page.dest'.yellow, page.dest);

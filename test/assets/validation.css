@@ -7,6 +7,15 @@
 body {
   padding: 60px 0 80px;
 }
+
+.unselectable {
+  -webkit-touch-callout: none;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+}
+
 .justified {
   width: 100%;
 }
@@ -85,6 +94,25 @@ body {
   background-color: #428bca;
   border-color: #428bca;
   cursor: default;
+}
+
+.pager .disabled > a,
+.pager .disabled > a:hover,
+.pager .disabled > a:focus,
+.pager .disabled > span,
+.pagination > .disabled > span,
+.pagination > .disabled > span:hover,
+.pagination > .disabled > span:focus,
+.pagination > .disabled > a,
+.pagination > .disabled > a:hover,
+.pagination > .disabled > a:focus,
+.nav > li.disabled > a,
+.nav > li.disabled > a:hover,
+.nav > li.disabled > a:focus,
+.nav > li.disabled:hover > a {
+  color: #aaa;
+  cursor: default;
+  background-color: #f8f8f8;
 }
 
 /* Blockquotes */

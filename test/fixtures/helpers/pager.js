@@ -25,10 +25,8 @@ module.exports.register = function (Handlebars, options, params) {
    * @return {String}         The pager, HTML.
    */
   exports.pager = function(context, options) {
-
     options = options || {};
     options.hash = options.hash || {};
-
     context = _.extend({modifier: ''}, context, opts.data, this, options.hash);
 
     var template = [
@@ -36,10 +34,10 @@ module.exports.register = function (Handlebars, options, params) {
       '',
       '  {{#is pagination.currentPage 1}}',
       '    <li class="prev disabled">',
-      '      <a href="{{relative page.dest prev.dest}}">First</a>',
+      '      <a unselectable="on" class="unselectable">First</a>',
       '    </li>',
       '    <li class="prev disabled">',
-      '      <a href="{{relative page.dest prev.dest}}">&larr; Previous</a>',
+      '      <a unselectable="on" class="unselectable">&larr; Previous</a>',
       '    </li>',
       '  {{/is}}',
       '',
@@ -69,10 +67,10 @@ module.exports.register = function (Handlebars, options, params) {
       '',
       '  {{#is pagination.currentPage pagination.totalPages}}',
       '    <li class="next disabled">',
-      '      <a href="{{relative page.dest next.dest}}">Next &rarr;</a>',
+      '      <a unselectable="on" class="unselectable">Next &rarr;</a>',
       '    </li>',
       '    <li class="next disabled">',
-      '      <a href="{{relative page.dest next.dest}}">Last</a>',
+      '      <a unselectable="on" class="unselectable">Last</a>',
       '    </li>',
       '  {{/is}}',
       '',
