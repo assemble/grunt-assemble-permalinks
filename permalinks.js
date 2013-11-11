@@ -17,37 +17,42 @@ var frep   = require('frep');
 // Local utils
 var Utils  = require('./lib/utils');
 
+var options = {
+  stage: 'render:pre:pages'
+};
 
 
 /**
  * Permalinks Plugin
- * @param  {Object}   config
+ * @param  {Object}   params
  * @param  {Function} callback
  * @return {String}   The permalink string
  */
-module.exports = function(config, callback) {
+module.exports = function(params, callback) {
 
   'use strict';
 
-  var options        = config.context;
-  var grunt          = config.grunt;
+  var assemble       = params.assemble;
+  var grunt          = params.grunt;
 
-  var permalinks     = options.permalinks;
-  var pages          = options.pages;
-  var page           = options.page;
-  var originalAssets = options.originalAssets;
+  var permalinks     = assemble.options.permalinks;
+  var pages          = assemble.options.pages;
+  var originalAssets = assemble.options.originalAssets;
 
   var async          = grunt.util.async;
+  var _str           = grunt.util._.str;
   var _              = grunt.util._;
+
 
 
   // Skip over the plugin if it isn't defined in the options.
   if(!_.isUndefined(permalinks)) {
 
-    async.forEach(pages, function(file, next) {
-      if (page.src !== file.src) {
-        return;
-      }
+    async.forEach(pages, function(page, next) {
+
+      // Slugify basenames by default.
+      permalinks.slugify = true;
+
 
       // Get the permalink pattern to use from options.permalinks.structure.
       // If one isn't defined, don't change anything.
@@ -57,12 +62,12 @@ module.exports = function(config, callback) {
       var props = [];
 
       // Convenience variable for YAML front matter.
-      var yfm  = file.data;
+      var yfm  = page.data;
 
 
       /**
        * EXCLUSION PATTERNS OPTION
-       * Properties to omit from the config object.
+       * Properties to omit from the params object.
        */
       var exclusions = ['_page', 'data', 'filePair', 'page', 'pageName'];
           exclusions = _.union([], exclusions, permalinks.exclusions || []);
@@ -138,13 +143,22 @@ module.exports = function(config, callback) {
         {pattern: /:\bp\b/,         replacement: format("p")},
       ];
 
-      // Ensure that basenames aren't janky
-      page.basename = _.slugify(page.basename);
+
+      /**
+       * `slugify` option
+       * Ensure that basenames are suitable to be used as URLs.
+       */
+      if(permalinks.slugify) {
+        if(!yfm.slug) {
+          page.slug = _str.slugify(page.basename);
+        }
+        page.basename = _str.slugify(page.basename);
+      }
 
 
       // Best guesses at some useful patterns
       var specialPatterns = [
-        {pattern: /:\bcategory\b/,  replacement: _.slugify(_.first(yfm.categories))}
+        {pattern: /:\bcategory\b/,  replacement: _str.slugify(_.first(yfm.categories))}
       ];
 
       // Push properties on the `page` object into the "props" array
@@ -156,8 +170,10 @@ module.exports = function(config, callback) {
       // Push properties on the `page.data` object into the "props" array
       // so we can use them to dynamically construct replacement patterns
       _.keys(_.omit(yfm, exclusions)).map(function(key) {
-        props.push({pattern: new RegExp(':\\b' + key + '\\b'), replacement: _.slugify(yfm[key])});
+        props.push({pattern: new RegExp(':\\b' + key + '\\b'), replacement: _str.slugify(yfm[key])});
       });
+
+
 
       // All the replacement patterns contructed from dates, the page obj,
       // and page.data obj.
@@ -188,37 +204,30 @@ module.exports = function(config, callback) {
        */
       var permalink = frep.strWithArr(structure || page.dest, replacements);
 
-
-
       /**
        * WRITE PERMALINKS
        * Append the permalink to the dest path defined in the target.
        */
       if(_.isUndefined(permalinks.structure) && _.isUndefined(permalinks.preset)) {
         page.dest = page.dest;
-        file.dest = file.dest;
       } else {
-        if (file.basename === 'index') {
+        if (page.basename === 'index') {
           page.dest = page.dest;
-          file.dest = file.dest;
         } else {
-          file.dest = Utils.normalizePath(path.join(file.dirname, permalink));
           page.dest = Utils.normalizePath(path.join(page.dirname, permalink));
         }
       }
-      file.assets = Utils.calculateAssetsPath(file.dest, originalAssets);
-      page.assets = Utils.calculateAssetsPath(page.dest, originalAssets);
-      config.context.assets = page.assets;
+      page.assets = Utils.calculatePath(page.dest, originalAssets, originalAssets);
 
       grunt.verbose.ok('page'.yellow, page);
       grunt.verbose.ok('page.dest'.yellow, page.dest);
       grunt.verbose.ok('page.assets'.yellow, page.assets);
 
-      grunt.verbose.ok('Generated permalink to:'.yellow, file.dest);
+      grunt.verbose.ok('Generated permalink to:'.yellow, page.dest);
       next();
     });
 
   } callback();
 };
 
-
+module.exports.options = options;

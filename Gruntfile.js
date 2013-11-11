@@ -10,6 +10,7 @@
 
 module.exports = function(grunt) {
 
+  var prettify = require('pretty');
   var _ = grunt.util._;
 
   // Project configuration.
@@ -36,10 +37,12 @@ module.exports = function(grunt) {
 
     assemble: {
       options: {
-        helpers: ['helper-prettify'],
         plugins: ['./permalinks.js'],
+        helpers: ['test/fixtures/helpers/*.js'],
+        layout: 'test/fixtures/default.hbs',
+        data: 'test/fixtures/ipsum.json',
         assets: 'test/assets',
-        layout: 'test/fixtures/default.hbs'
+        postprocess: prettify
       },
       // Should not modify dest path. Files array format.
       no_opts_files: {
@@ -50,7 +53,9 @@ module.exports = function(grunt) {
           {expand: true, cwd: 'test/fixtures/pages', src: ['**/*.hbs'], dest: 'test/actual/no_opts_files/', ext: '.html'}
         ]
       },
-      // Should not modify dest path. src-dest format, with flatten option defined.
+      // Should not modify dest path.
+      // Note that when multiple files exist with the same basename, flattening will
+      // eliminate all but on of those files. This is an expected result, not a bug.
       no_opts_flatten: {
         options: {
           ext: '.html',
