@@ -33,7 +33,7 @@
     "grunt": "~0.4.1",
     "grunt-contrib-clean": "~0.5.0",
     "grunt-contrib-jshint": "~0.6.4",
-    "grunt-readme": "~0.1.7",
+    "grunt-readme": "~0.3.0",
     "handlebars-helper-eachitems": "~0.1.2",
     "handlebars-helper-paginate": "~0.1.3",
     "pretty": "~0.1.1"
@@ -43,11 +43,11 @@
   },
   "keywords": [
     "assemble",
-    "handlebars-helper-eachitems",
-    "handlebars-helper-paginate",
     "assemblecollection",
     "assembleplugin",
     "blog",
+    "handlebars-helper-eachitems",
+    "handlebars-helper-paginate",
     "moment",
     "moment.js",
     "parse url",

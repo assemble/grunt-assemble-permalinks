@@ -24,7 +24,7 @@ dest + /my-node-js-post/index.html
 dest + /my-javascript-post/index.html
 dest + /my-assemble-post/index.html
 ```
-
+Also see the [Gruntfile](./Gruntfile.js) for example usage.
 
 ## Using presets
 
@@ -60,11 +60,13 @@ which expands to: `./blog/:archives/:categories/:basename:/index:ext`, and would
 ```js
 ./blog/archives/categories/foo/index.html
 ```
+Also see the [Gruntfile](./Gruntfile.js) for example usage.
 
 ## Dest extension
 
 In most cases your generated HTML will have the `.html` extension, then using `:index.html` is probably fine. But if you happen to switch back and forthing between projects that alternate between `.htm` and `.html`, you can use `:index:ext` instead.
 
+Also see the [Gruntfile](./Gruntfile.js) for example usage.
 
 ## Path separators
 
@@ -75,6 +77,8 @@ You don't have to use slashes (`/`) only in your permalinks, you can use `-` or 
 ```
 
 **Warning**, this should be obvious, but make sure not to use a `.` in the middle of your paths, especially if you use Windows.
+
+Also see the [Gruntfile](./Gruntfile.js) for example usage.
 
 ## Dynamically build slugs
 
@@ -110,6 +114,7 @@ Would render to:
 ```
 blog/2014/01/01/business-finance/index.html
 ```
+Also see the [Gruntfile](./Gruntfile.js) for example usage.
 
 ## More examples
 
@@ -137,4 +142,4 @@ blog/:year-:month-:day/:basename:ext
 :year/:month/:day/:slug/index.html
 //=> dest + '/2014/01/01/business-finance/index.html'
 ```
-
+Also see the [Gruntfile](./Gruntfile.js) for example usage.

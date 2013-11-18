@@ -5,6 +5,11 @@ username: jonschlinkert
 
 > {%= description %}
 
+## Table of Contents
+{%= toc %}
+
+Also see the [Gruntfile](./Gruntfile.js) for example usage.
+
 ## Contributing
 We welcome all kinds of contributions! The most basic way to show your support is to star the project, and if you'd like to get involed please see the [Contributing to {%= name %}]({%= homepage %}/blob/master/CONTRIBUTING.md) guide for information on contributing to this project.
 

@@ -2,8 +2,24 @@
 
 > Permalinks plugin for Assemble, the static site generator for Grunt.js, Yeoman and Node.js. This plugin enables powerful and configurable URI patterns, [Moment.js](http://momentjs.com/) for parsing dates, much more.
 
+## Table of Contents
+* [permalinks](#name)
+  * [Table of Contents](#table-of-contents)
+  * [Contributing](#contributing)
+  * [Quickstart](#quickstart)
+  * [Patterns](#patterns)
+  * [Options](#options)
+  * [Usage Examples](#usage-examples)
+  * [SEO](#seo)
+  * [Author](#author)
+  * [Release History](#release-history)
+  * [License](#license)
+
+
+Also see the [Gruntfile](./Gruntfile.js) for example usage.
+
 ## Contributing
-We welcome all kinds of contributions! The most basic way to show your support is to star the project, and if you'd like to get involed please see the [Contributing to permalinks](https://github.com/assemble/permalinks/blob/master/CONTRIBUTING.md) guide for information on contributing to this project.
+We welcome all kinds of contributions! The most basic way to show your support is to star the project, and if you'd like to get involed please see the [Contributing to permalinks](https://github.com/assemble/assemble-contrib-permalinks/blob/master/CONTRIBUTING.md) guide for information on contributing to this project.
 
 ## Quickstart
 
@@ -27,7 +43,7 @@ module.exports = function(grunt) {
           structure: ':year/:month/:day/foo:/index.html'
         }
       },
-      ...
+      files: {'blog/archives/': ['archives/*.hbs']}
     }
   });
   grunt.loadNpmTasks('assemble');
@@ -366,7 +382,7 @@ dest + /my-node-js-post/index.html
 dest + /my-javascript-post/index.html
 dest + /my-assemble-post/index.html
 ```
-
+Also see the [Gruntfile](./Gruntfile.js) for example usage.
 
 ### Using presets
 
@@ -402,11 +418,13 @@ which expands to: `./blog/:archives/:categories/:basename:/index:ext`, and would
 ```js
 ./blog/archives/categories/foo/index.html
 ```
+Also see the [Gruntfile](./Gruntfile.js) for example usage.
 
 ### Dest extension
 
 In most cases your generated HTML will have the `.html` extension, then using `:index.html` is probably fine. But if you happen to switch back and forthing between projects that alternate between `.htm` and `.html`, you can use `:index:ext` instead.
 
+Also see the [Gruntfile](./Gruntfile.js) for example usage.
 
 ### Path separators
 
@@ -417,6 +435,8 @@ You don't have to use slashes (`/`) only in your permalinks, you can use `-` or 
 ```
 
 **Warning**, this should be obvious, but make sure not to use a `.` in the middle of your paths, especially if you use Windows.
+
+Also see the [Gruntfile](./Gruntfile.js) for example usage.
 
 ### Dynamically build slugs
 
@@ -452,6 +472,7 @@ Would render to:
 ```
 blog/2014/01/01/business-finance/index.html
 ```
+Also see the [Gruntfile](./Gruntfile.js) for example usage.
 
 ### More examples
 
@@ -479,8 +500,7 @@ blog/:year-:month-:day/:basename:ext
 :year/:month/:day/:slug/index.html
 //=> dest + '/2014/01/01/business-finance/index.html'
 ```
-
-
+Also see the [Gruntfile](./Gruntfile.js) for example usage.
 
 
 ## SEO
@@ -557,7 +577,7 @@ Released under the MIT license
 
 ***
 
-_This file was generated on Sunday, November 10, 2013._
+_This file was generated on Monday, November 18, 2013._
 
 
 [moment]: http://momentjs.com/ "Moment.js Permalinks"

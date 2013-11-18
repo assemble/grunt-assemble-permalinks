@@ -19,7 +19,7 @@ module.exports = function(grunt) {
           structure: ':year/:month/:day/foo:/index.html'
         }
       },
-      ...
+      files: {'blog/archives/': ['archives/*.hbs']}
     }
   });
   grunt.loadNpmTasks('assemble');
