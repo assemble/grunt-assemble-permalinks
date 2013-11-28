@@ -1,3 +1,10 @@
+v0.3.0:
+  date: 2013-11-28
+  changes:
+  - "Updates dependencies to work with Grunt 0.4.2"
+  - "Adds `:num` permalink structure, for adding numbers to generated pages"
+  - "Adds `stripnumber` to strip leading numbers from pages. this works well with `:num` for replacing pages that are in order but poorly numbered"
+  - "Adds documentation for updates"
 v0.1.5:
   date: 2013-10-09
   changes:

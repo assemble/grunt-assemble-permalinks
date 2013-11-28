@@ -25,8 +25,8 @@
         </li>
         <li> <a href="../baz/index.html">2</a> </li>
         <li> <a href="../../../index.html">3</a> </li>
-        <li> <a href="../../../nested/permalinks/jon-schlinkert/quux/index.html">4</a> </li>
-        <li> <a href="../../../../permalinks/jon-schlinkert/foo/index.html">5</a> </li>
+        <li> <a href="../../../nested/assemble-contrib-permalinks/jon-schlinkert/quux/index.html">4</a> </li>
+        <li> <a href="../../../../assemble-contrib-permalinks/jon-schlinkert/foo/index.html">5</a> </li>
         <li> <a href="../../../../index.html">6</a> </li>
         <li class="next">
           <a href="../baz/index.html">&rsaquo;</a>
@@ -49,8 +49,8 @@
         </li>
         <li> <a href="../baz/index.html">2</a> </li>
         <li> <a href="../../../index.html">3</a> </li>
-        <li> <a href="../../../nested/permalinks/jon-schlinkert/quux/index.html">4</a> </li>
-        <li> <a href="../../../../permalinks/jon-schlinkert/foo/index.html">5</a> </li>
+        <li> <a href="../../../nested/assemble-contrib-permalinks/jon-schlinkert/quux/index.html">4</a> </li>
+        <li> <a href="../../../../assemble-contrib-permalinks/jon-schlinkert/foo/index.html">5</a> </li>
         <li> <a href="../../../../index.html">6</a> </li>
         <li class="next">
           <a href="../baz/index.html">&rsaquo;</a>
@@ -65,20 +65,29 @@
       <h4>paginate</h4>
       <ul class="pager">
         <li class="previous disabled">
-          <a href="index.html">&larr; Prev</a>
+          <a unselectable="on" class="unselectable">&larr; Prev</a>
         </li>
         <li class="active">
           <a href="index.html">1</a>
         </li>
         <li> <a href="../baz/index.html">2</a> </li>
         <li> <a href="../../../index.html">3</a> </li>
-        <li> <a href="../../../nested/permalinks/jon-schlinkert/quux/index.html">4</a> </li>
-        <li> <a href="../../../../permalinks/jon-schlinkert/foo/index.html">5</a> </li>
+        <li> <a href="../../../nested/assemble-contrib-permalinks/jon-schlinkert/quux/index.html">4</a> </li>
+        <li> <a href="../../../../assemble-contrib-permalinks/jon-schlinkert/foo/index.html">5</a> </li>
         <li> <a href="../../../../index.html">6</a> </li>
         <li class="next">
           <a href="../../../../index.html">Next &rarr;</a>
         </li>
       </ul>
+      <style>
+        .unselectable {
+          -webkit-touch-callout: none;
+          -webkit-user-select: none;
+          -moz-user-select: none;
+          -ms-user-select: none;
+          user-select: none;
+        }
+      </style>
       <hr>
       <div class="row">
         <div class="col-md-3">
@@ -95,10 +104,10 @@
               <a href="../../../index.html" class="list-group-item">
                 index
               </a>
-              <a href="../../../nested/permalinks/jon-schlinkert/quux/index.html" class="list-group-item">
+              <a href="../../../nested/assemble-contrib-permalinks/jon-schlinkert/quux/index.html" class="list-group-item">
                 quux
               </a>
-              <a href="../../../../permalinks/jon-schlinkert/foo/index.html" class="list-group-item">
+              <a href="../../../../assemble-contrib-permalinks/jon-schlinkert/foo/index.html" class="list-group-item">
                 foo
               </a>
               <a href="../../../../index.html" class="list-group-item">
@@ -120,8 +129,8 @@
               </li>
               <li> <a href="../baz/index.html">2</a> </li>
               <li> <a href="../../../index.html">3</a> </li>
-              <li> <a href="../../../nested/permalinks/jon-schlinkert/quux/index.html">4</a> </li>
-              <li> <a href="../../../../permalinks/jon-schlinkert/foo/index.html">5</a> </li>
+              <li> <a href="../../../nested/assemble-contrib-permalinks/jon-schlinkert/quux/index.html">4</a> </li>
+              <li> <a href="../../../../assemble-contrib-permalinks/jon-schlinkert/foo/index.html">5</a> </li>
               <li> <a href="../../../../index.html">6</a> </li>
               <li class="next">
                 <a href="../baz/index.html">Next &rarr;</a>
@@ -162,8 +171,8 @@
                   </li>
                   <li> <a href="../baz/index.html">Baz</a> </li>
                   <li> <a href="../../../index.html">Category Index</a> </li>
-                  <li> <a href="../../../nested/permalinks/jon-schlinkert/quux/index.html">Quux</a> </li>
-                  <li> <a href="../../../../permalinks/jon-schlinkert/foo/index.html">Foo Foo</a> </li>
+                  <li> <a href="../../../nested/assemble-contrib-permalinks/jon-schlinkert/quux/index.html">Quux</a> </li>
+                  <li> <a href="../../../../assemble-contrib-permalinks/jon-schlinkert/foo/index.html">Foo Foo</a> </li>
                   <li> <a href="../../../../index.html">Home</a> </li>
                 </ul>
               </div>
@@ -181,8 +190,8 @@
                   </li>
                   <li> <a href="../baz/index.html">Baz</a> </li>
                   <li> <a href="../../../index.html">Category Index</a> </li>
-                  <li> <a href="../../../nested/permalinks/jon-schlinkert/quux/index.html">Quux</a> </li>
-                  <li> <a href="../../../../permalinks/jon-schlinkert/foo/index.html">Foo Foo</a> </li>
+                  <li> <a href="../../../nested/assemble-contrib-permalinks/jon-schlinkert/quux/index.html">Quux</a> </li>
+                  <li> <a href="../../../../assemble-contrib-permalinks/jon-schlinkert/foo/index.html">Foo Foo</a> </li>
                   <li> <a href="../../../../index.html">Home</a> </li>
                 </ul>
               </div>
@@ -203,7 +212,7 @@
                   <div>Related pages for: <span class="label label-warning">one</span>
                   </div>
                   <ul>
-                    <li> <a href="../../../../permalinks/jon-schlinkert/foo/index.html">Foo Foo</a> </li>
+                    <li> <a href="../../../../assemble-contrib-permalinks/jon-schlinkert/foo/index.html">Foo Foo</a> </li>
                     <li> <a href="../../../../index.html">Home</a> </li>
                   </ul>
                   <div>Related pages for: <span class="label label-warning">three</span>
@@ -215,7 +224,7 @@
                   <div>Related pages for: <span class="label label-warning">two</span>
                   </div>
                   <ul>
-                    <li> <a href="../../../nested/permalinks/jon-schlinkert/quux/index.html">Quux</a> </li>
+                    <li> <a href="../../../nested/assemble-contrib-permalinks/jon-schlinkert/quux/index.html">Quux</a> </li>
                   </ul>
                 </div>
               </div>
@@ -229,7 +238,7 @@
                   <div>Related pages for: <span class="label label-warning">nested</span>
                   </div>
                   <ul>
-                    <li> <a href="../../../nested/permalinks/jon-schlinkert/quux/index.html">Quux</a> </li>
+                    <li> <a href="../../../nested/assemble-contrib-permalinks/jon-schlinkert/quux/index.html">Quux</a> </li>
                   </ul>
                   <div>Related pages for: <span class="label label-warning">yyy</span>
                   </div>

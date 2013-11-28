@@ -15,16 +15,16 @@
       <h4>pagination</h4>
       <ul class="pagination pagination-lg">
         <li class="prev">
-          <a href="articles/permalinks/jon-schlinkert/bar/index.html">&laquo;</a>
+          <a href="articles/assemble-contrib-permalinks/jon-schlinkert/bar/index.html">&laquo;</a>
         </li>
         <li class="prev">
-          <a href="permalinks/jon-schlinkert/foo/index.html">&lsaquo;</a>
+          <a href="assemble-contrib-permalinks/jon-schlinkert/foo/index.html">&lsaquo;</a>
         </li>
-        <li> <a href="articles/permalinks/jon-schlinkert/bar/index.html">1</a> </li>
-        <li> <a href="articles/permalinks/jon-schlinkert/baz/index.html">2</a> </li>
+        <li> <a href="articles/assemble-contrib-permalinks/jon-schlinkert/bar/index.html">1</a> </li>
+        <li> <a href="articles/assemble-contrib-permalinks/jon-schlinkert/baz/index.html">2</a> </li>
         <li> <a href="articles/index.html">3</a> </li>
-        <li> <a href="articles/nested/permalinks/jon-schlinkert/quux/index.html">4</a> </li>
-        <li> <a href="permalinks/jon-schlinkert/foo/index.html">5</a> </li>
+        <li> <a href="articles/nested/assemble-contrib-permalinks/jon-schlinkert/quux/index.html">4</a> </li>
+        <li> <a href="assemble-contrib-permalinks/jon-schlinkert/foo/index.html">5</a> </li>
         <li class="active">
           <a href="index.html">6</a>
         </li>
@@ -39,16 +39,16 @@
       <h4>pagination-justified</h4>
       <ul class="pagination pagination-lg justified">
         <li class="prev">
-          <a href="articles/permalinks/jon-schlinkert/bar/index.html">&laquo;</a>
+          <a href="articles/assemble-contrib-permalinks/jon-schlinkert/bar/index.html">&laquo;</a>
         </li>
         <li class="prev">
-          <a href="permalinks/jon-schlinkert/foo/index.html">&lsaquo;</a>
+          <a href="assemble-contrib-permalinks/jon-schlinkert/foo/index.html">&lsaquo;</a>
         </li>
-        <li> <a href="articles/permalinks/jon-schlinkert/bar/index.html">1</a> </li>
-        <li> <a href="articles/permalinks/jon-schlinkert/baz/index.html">2</a> </li>
+        <li> <a href="articles/assemble-contrib-permalinks/jon-schlinkert/bar/index.html">1</a> </li>
+        <li> <a href="articles/assemble-contrib-permalinks/jon-schlinkert/baz/index.html">2</a> </li>
         <li> <a href="articles/index.html">3</a> </li>
-        <li> <a href="articles/nested/permalinks/jon-schlinkert/quux/index.html">4</a> </li>
-        <li> <a href="permalinks/jon-schlinkert/foo/index.html">5</a> </li>
+        <li> <a href="articles/nested/assemble-contrib-permalinks/jon-schlinkert/quux/index.html">4</a> </li>
+        <li> <a href="assemble-contrib-permalinks/jon-schlinkert/foo/index.html">5</a> </li>
         <li class="active">
           <a href="index.html">6</a>
         </li>
@@ -65,20 +65,29 @@
       <h4>paginate</h4>
       <ul class="pager">
         <li class="previous">
-          <a href="articles/permalinks/jon-schlinkert/bar/index.html">&larr; Prev</a>
+          <a href="articles/assemble-contrib-permalinks/jon-schlinkert/bar/index.html">&larr; Prev</a>
         </li>
-        <li> <a href="articles/permalinks/jon-schlinkert/bar/index.html">1</a> </li>
-        <li> <a href="articles/permalinks/jon-schlinkert/baz/index.html">2</a> </li>
+        <li> <a href="articles/assemble-contrib-permalinks/jon-schlinkert/bar/index.html">1</a> </li>
+        <li> <a href="articles/assemble-contrib-permalinks/jon-schlinkert/baz/index.html">2</a> </li>
         <li> <a href="articles/index.html">3</a> </li>
-        <li> <a href="articles/nested/permalinks/jon-schlinkert/quux/index.html">4</a> </li>
-        <li> <a href="permalinks/jon-schlinkert/foo/index.html">5</a> </li>
+        <li> <a href="articles/nested/assemble-contrib-permalinks/jon-schlinkert/quux/index.html">4</a> </li>
+        <li> <a href="assemble-contrib-permalinks/jon-schlinkert/foo/index.html">5</a> </li>
         <li class="active">
           <a href="index.html">6</a>
         </li>
         <li class="next disabled">
-          <a href="index.html">Next &rarr;</a>
+          <a unselectable="on" class="unselectable">Next &rarr;</a>
         </li>
       </ul>
+      <style>
+        .unselectable {
+          -webkit-touch-callout: none;
+          -webkit-user-select: none;
+          -moz-user-select: none;
+          -ms-user-select: none;
+          user-select: none;
+        }
+      </style>
       <hr>
       <div class="row">
         <div class="col-md-3">
@@ -86,19 +95,19 @@
 
             <!-- navigation -->
             <div class="list-group">
-              <a href="articles/permalinks/jon-schlinkert/bar/index.html" class="list-group-item">
+              <a href="articles/assemble-contrib-permalinks/jon-schlinkert/bar/index.html" class="list-group-item">
                 bar
               </a>
-              <a href="articles/permalinks/jon-schlinkert/baz/index.html" class="list-group-item">
+              <a href="articles/assemble-contrib-permalinks/jon-schlinkert/baz/index.html" class="list-group-item">
                 baz
               </a>
               <a href="articles/index.html" class="list-group-item">
                 index
               </a>
-              <a href="articles/nested/permalinks/jon-schlinkert/quux/index.html" class="list-group-item">
+              <a href="articles/nested/assemble-contrib-permalinks/jon-schlinkert/quux/index.html" class="list-group-item">
                 quux
               </a>
-              <a href="permalinks/jon-schlinkert/foo/index.html" class="list-group-item">
+              <a href="assemble-contrib-permalinks/jon-schlinkert/foo/index.html" class="list-group-item">
                 foo
               </a>
               <a href="index.html" class="list-group-item active">
@@ -110,16 +119,16 @@
             <!-- pagination -->
             <ul class="nav nav-pills nav-stacked">
               <li class="prev">
-                <a href="articles/permalinks/jon-schlinkert/bar/index.html">First</a>
+                <a href="articles/assemble-contrib-permalinks/jon-schlinkert/bar/index.html">First</a>
               </li>
               <li class="prev">
-                <a href="permalinks/jon-schlinkert/foo/index.html">&larr; Previous</a>
+                <a href="assemble-contrib-permalinks/jon-schlinkert/foo/index.html">&larr; Previous</a>
               </li>
-              <li> <a href="articles/permalinks/jon-schlinkert/bar/index.html">1</a> </li>
-              <li> <a href="articles/permalinks/jon-schlinkert/baz/index.html">2</a> </li>
+              <li> <a href="articles/assemble-contrib-permalinks/jon-schlinkert/bar/index.html">1</a> </li>
+              <li> <a href="articles/assemble-contrib-permalinks/jon-schlinkert/baz/index.html">2</a> </li>
               <li> <a href="articles/index.html">3</a> </li>
-              <li> <a href="articles/nested/permalinks/jon-schlinkert/quux/index.html">4</a> </li>
-              <li> <a href="permalinks/jon-schlinkert/foo/index.html">5</a> </li>
+              <li> <a href="articles/nested/assemble-contrib-permalinks/jon-schlinkert/quux/index.html">4</a> </li>
+              <li> <a href="assemble-contrib-permalinks/jon-schlinkert/foo/index.html">5</a> </li>
               <li class="active">
                 <a href="index.html">6</a>
               </li>
@@ -157,11 +166,11 @@
                   <strong>Page title: Home</strong>
                 </div>
                 <ul class="nav nav-pills nav-stacked">
-                  <li> <a href="articles/permalinks/jon-schlinkert/bar/index.html">Bar</a> </li>
-                  <li> <a href="articles/permalinks/jon-schlinkert/baz/index.html">Baz</a> </li>
+                  <li> <a href="articles/assemble-contrib-permalinks/jon-schlinkert/bar/index.html">Bar</a> </li>
+                  <li> <a href="articles/assemble-contrib-permalinks/jon-schlinkert/baz/index.html">Baz</a> </li>
                   <li> <a href="articles/index.html">Category Index</a> </li>
-                  <li> <a href="articles/nested/permalinks/jon-schlinkert/quux/index.html">Quux</a> </li>
-                  <li> <a href="permalinks/jon-schlinkert/foo/index.html">Foo Foo</a> </li>
+                  <li> <a href="articles/nested/assemble-contrib-permalinks/jon-schlinkert/quux/index.html">Quux</a> </li>
+                  <li> <a href="assemble-contrib-permalinks/jon-schlinkert/foo/index.html">Foo Foo</a> </li>
                   <li class="active">
                     <a href="index.html">Home</a>
                   </li>
@@ -176,11 +185,11 @@
                   <strong>Page title: Home</strong>
                 </div>
                 <ul class="nav nav-pills nav-stacked">
-                  <li> <a href="articles/permalinks/jon-schlinkert/bar/index.html">Bar</a> </li>
-                  <li> <a href="articles/permalinks/jon-schlinkert/baz/index.html">Baz</a> </li>
+                  <li> <a href="articles/assemble-contrib-permalinks/jon-schlinkert/bar/index.html">Bar</a> </li>
+                  <li> <a href="articles/assemble-contrib-permalinks/jon-schlinkert/baz/index.html">Baz</a> </li>
                   <li> <a href="articles/index.html">Category Index</a> </li>
-                  <li> <a href="articles/nested/permalinks/jon-schlinkert/quux/index.html">Quux</a> </li>
-                  <li> <a href="permalinks/jon-schlinkert/foo/index.html">Foo Foo</a> </li>
+                  <li> <a href="articles/nested/assemble-contrib-permalinks/jon-schlinkert/quux/index.html">Quux</a> </li>
+                  <li> <a href="assemble-contrib-permalinks/jon-schlinkert/foo/index.html">Foo Foo</a> </li>
                   <li class="active">
                     <a href="index.html">Home</a>
                   </li>
@@ -196,12 +205,12 @@
                   <div>Related pages for: <span class="label label-warning">bbb</span>
                   </div>
                   <ul>
-                    <li> <a href="articles/permalinks/jon-schlinkert/bar/index.html">Bar</a> </li>
+                    <li> <a href="articles/assemble-contrib-permalinks/jon-schlinkert/bar/index.html">Bar</a> </li>
                   </ul>
                   <div>Related pages for: <span class="label label-warning">one</span>
                   </div>
                   <ul>
-                    <li> <a href="permalinks/jon-schlinkert/foo/index.html">Foo Foo</a> </li>
+                    <li> <a href="assemble-contrib-permalinks/jon-schlinkert/foo/index.html">Foo Foo</a> </li>
                     <li class="active">
                       <a href="index.html">Home</a>
                     </li>
@@ -217,7 +226,7 @@
                   <div>Related pages for: <span class="label label-warning">two</span>
                   </div>
                   <ul>
-                    <li> <a href="articles/nested/permalinks/jon-schlinkert/quux/index.html">Quux</a> </li>
+                    <li> <a href="articles/nested/assemble-contrib-permalinks/jon-schlinkert/quux/index.html">Quux</a> </li>
                   </ul>
                 </div>
               </div>
@@ -231,17 +240,17 @@
                   <div>Related pages for: <span class="label label-warning">nested</span>
                   </div>
                   <ul>
-                    <li> <a href="articles/nested/permalinks/jon-schlinkert/quux/index.html">Quux</a> </li>
+                    <li> <a href="articles/nested/assemble-contrib-permalinks/jon-schlinkert/quux/index.html">Quux</a> </li>
                   </ul>
                   <div>Related pages for: <span class="label label-warning">yyy</span>
                   </div>
                   <ul>
-                    <li> <a href="articles/permalinks/jon-schlinkert/baz/index.html">Baz</a> </li>
+                    <li> <a href="articles/assemble-contrib-permalinks/jon-schlinkert/baz/index.html">Baz</a> </li>
                   </ul>
                   <div>Related pages for: <span class="label label-warning">zzz</span>
                   </div>
                   <ul>
-                    <li> <a href="articles/permalinks/jon-schlinkert/baz/index.html">Baz</a> </li>
+                    <li> <a href="articles/assemble-contrib-permalinks/jon-schlinkert/baz/index.html">Baz</a> </li>
                   </ul>
                 </div>
               </div>

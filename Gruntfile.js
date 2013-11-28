@@ -11,7 +11,7 @@
 module.exports = function(grunt) {
 
   var prettify = require('pretty');
-  var _ = grunt.util._;
+  var _ = require('lodash');
 
   // Project configuration.
   grunt.initConfig({
@@ -227,6 +227,34 @@ module.exports = function(grunt) {
       }
     },
 
+    /**
+     * Pull down a list of repos from Github.
+     * (bundled with the readme task)
+     */
+    repos: {
+      assemble: {
+        options: {
+          username: 'assemble',
+          include: ['contrib'],
+          exclude: ['example', 'permalinks', 'rss']
+        },
+        files: {
+          'docs/repos.json': ['repos?page=1&per_page=100']
+        }
+      }
+    },
+
+
+    /**
+     * Extend context for templates
+     * with repos.json
+     */
+    readme: {
+      options: {
+        metadata: ['docs/repos.json']
+      }
+    },
+
     // Before generating new files, remove any files from previous build.
     clean: {
       actual: ['test/actual/**'],
@@ -242,6 +270,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-readme');
+  grunt.loadNpmTasks('grunt-repos');
   grunt.loadNpmTasks('assemble');
 
   // By default, lint and run all tests.

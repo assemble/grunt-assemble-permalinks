@@ -5,13 +5,12 @@ username: jonschlinkert
 
 > {%= description %}
 
-## Table of Contents
 {%= toc %}
 
 Also see the [Gruntfile](./Gruntfile.js) for example usage.
 
 ## Contributing
-We welcome all kinds of contributions! The most basic way to show your support is to star the project, and if you'd like to get involed please see the [Contributing to {%= name %}]({%= homepage %}/blob/master/CONTRIBUTING.md) guide for information on contributing to this project.
+We welcome all kinds of contributions! The most basic way to show your support is to star the project, and if you'd like to get involved please see the [Contributing to {%= name %}]({%= homepage %}/blob/master/CONTRIBUTING.md) guide for information on contributing to this project.
 
 ## Quickstart
 {%= _.doc("quickstart.md") %}
@@ -28,29 +27,14 @@ We welcome all kinds of contributions! The most basic way to show your support i
 ## SEO
 {%= _.doc("seo.md") %}
 
-## Author
+## Other Assemble plugins
+Here are some other projects you might be interested in from the [Assemble](http://assemble.io) core team.
+{% _.each(repos, function(repo) { %}
++ [{%= repo.name %}]({%= repo.url %}): {%= repo.description %} {% }); %}
+Visit [assemble.io/plugins](http:/assemble.io/plugins/) for more information about [Assemble](http:/assemble.io/) plugins.
 
-**Jon Schlinkert**
-
-+ [github.com/{%= username %}](https://github.com/{%= username %})
-+ [twitter.com/{%= username %}](http://twitter.com/{%= username %})
-
-## Release History
-{% if (changelog) {
-  _.each(changelog, function(details, version) {
-    var date = details.date;
-    if (date instanceof Date) {
-      date = grunt.template.date(new Date(date.getTime() + date.getTimezoneOffset() * 60000), 'yyyy-mm-dd');
-    }
-    print('\n * ' + [
-      date,
-      version,
-      details.changes.join(' '),
-    ].join('\u2003\u2003\u2003'));
-  });
-} else { %}
-_(Nothing yet)_
-{% } %}
+## Authors
+{%= _.contrib("authors.md") %}
 
 ## License
 {%= copyright %}
@@ -58,7 +42,4 @@ _(Nothing yet)_
 
 ***
 
-_This file was generated on {%= grunt.template.date("fullDate") %}._
-
-
-[moment]: http://momentjs.com/ "Moment.js Permalinks"
+{%= _.include("footer.md") %}

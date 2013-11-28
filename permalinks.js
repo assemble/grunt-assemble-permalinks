@@ -17,11 +17,6 @@ var frep   = require('frep');
 // Local utils
 var Utils  = require('./lib/utils');
 
-var options = {
-  stage: 'render:pre:pages'
-};
-
-
 /**
  * Permalinks Plugin
  * @param  {Object}   params
@@ -35,7 +30,7 @@ module.exports = function(params, callback) {
   var assemble       = params.assemble;
   var grunt          = params.grunt;
 
-  var permalinks     = assemble.options.permalinks;
+  var options        = assemble.options.permalinks;
   var pages          = assemble.options.pages;
   var originalAssets = assemble.options.originalAssets;
 
@@ -46,17 +41,19 @@ module.exports = function(params, callback) {
 
 
   // Skip over the plugin if it isn't defined in the options.
-  if(!_.isUndefined(permalinks)) {
+  if(!_.isUndefined(options)) {
 
+    var i = 0;
     async.forEach(pages, function(page, next) {
 
-      // Slugify basenames by default.
-      permalinks.slugify = true;
+      i++;
 
+      // Slugify basenames by default.
+      options.slugify = true;
 
       // Get the permalink pattern to use from options.permalinks.structure.
       // If one isn't defined, don't change anything.
-      var structure = permalinks.structure;
+      var structure = options.structure;
 
       // Create a placeholder for page properties.
       var props = [];
@@ -70,14 +67,14 @@ module.exports = function(params, callback) {
        * Properties to omit from the params object.
        */
       var exclusions = ['_page', 'data', 'filePair', 'page', 'pageName'];
-          exclusions = _.union([], exclusions, permalinks.exclusions || []);
+          exclusions = _.union([], exclusions, options.exclusions || []);
 
 
       /**
        * LANGUAGE OPTION
        * Set the default language.
        */
-      moment.lang(permalinks.lang || 'en');
+      moment.lang(options.lang || 'en');
 
       var format = function(d) {
         return moment(yfm.date).format(d);
@@ -91,7 +88,7 @@ module.exports = function(params, callback) {
        */
       var datePatterns = [
         // Full date
-        {pattern: /:\bdate\b/,      replacement: format(permalinks.dateFormats || "YYYY/MM/DD")},
+        {pattern: /:\bdate\b/,      replacement: format(options.dateFormats || "YYYY/MM/DD")},
         // Long date formats
         {pattern: /:\bL\b/,         replacement: format("MM/DD/YYYY")},
         {pattern: /:\b1\b/,         replacement: format("M/D/YYYY")},
@@ -148,17 +145,27 @@ module.exports = function(params, callback) {
        * `slugify` option
        * Ensure that basenames are suitable to be used as URLs.
        */
-      if(permalinks.slugify) {
+      if(options.slugify) {
         if(!yfm.slug) {
           page.slug = _str.slugify(page.basename);
         }
         page.basename = _str.slugify(page.basename);
       }
 
+      /**
+       * Strip leading numbers from pages
+       * Works well with `:num` pattern
+       * @examples
+       *   010foo.html,011ar.html => foo.html,bar.html
+       */
+      if(options.stripnumber === true) {
+        page.basename = page.basename.replace(/^\d+\-?/, '');
+      }
 
       // Best guesses at some useful patterns
       var specialPatterns = [
-        {pattern: /:\bcategory\b/,  replacement: _str.slugify(_.first(yfm.categories))}
+        {pattern: /:\bcategory\b/,  replacement: _str.slugify(_.first(yfm.categories))},
+        {pattern: /:\bnum\b/,       replacement: Utils.pageNumber(i)},
       ];
 
       // Push properties on the `page` object into the "props" array
@@ -177,7 +184,7 @@ module.exports = function(params, callback) {
 
       // All the replacement patterns contructed from dates, the page obj,
       // and page.data obj.
-      var replacements = _.union([], permalinks.patterns || [], datePatterns, props, specialPatterns);
+      var replacements = _.union([], options.patterns || [], datePatterns, props, specialPatterns);
 
 
       /**
@@ -185,16 +192,17 @@ module.exports = function(params, callback) {
        * Pre-formatted permalink structures. If a preset is defined, append
        * it to the user-defined structure.
        */
-      if(permalinks.preset && String(permalinks.preset).length !== 0) {
+      if(options.preset && String(options.preset).length !== 0) {
 
         // The preset
         var presets = {
+          numbered:  path.join((structure || ''), ':num-:basename:ext'),
           pretty:    path.join((structure || ''), ':basename/index:ext'),
           dayname:   path.join((structure || ''), ':YYYY/:MM/:DD/:basename/index:ext'),
           monthname: path.join((structure || ''), ':YYYY/:MM/:basename/index:ext')
         };
         // Presets are joined to structures, so if a preset is specified, use it.
-        structure = String(_.values(_.pick(presets, permalinks.preset)));
+        structure = String(_.values(_.pick(presets, options.preset)));
       }
 
 
@@ -208,7 +216,7 @@ module.exports = function(params, callback) {
        * WRITE PERMALINKS
        * Append the permalink to the dest path defined in the target.
        */
-      if(_.isUndefined(permalinks.structure) && _.isUndefined(permalinks.preset)) {
+      if(_.isUndefined(options.structure) && _.isUndefined(options.preset)) {
         page.dest = page.dest;
       } else {
         if (page.basename === 'index') {
@@ -217,17 +225,19 @@ module.exports = function(params, callback) {
           page.dest = Utils.normalizePath(path.join(page.dirname, permalink));
         }
       }
+
       page.assets = Utils.calculatePath(page.dest, originalAssets, originalAssets);
 
       grunt.verbose.ok('page'.yellow, page);
       grunt.verbose.ok('page.dest'.yellow, page.dest);
       grunt.verbose.ok('page.assets'.yellow, page.assets);
-
-      grunt.verbose.ok('Generated permalink to:'.yellow, page.dest);
+      grunt.verbose.ok('Generated permalink for:'.yellow, page.dest);
       next();
     });
 
   } callback();
 };
 
-module.exports.options = options;
+module.exports.options = {
+  stage: 'render:pre:pages'
+};

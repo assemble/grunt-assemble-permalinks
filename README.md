@@ -1,32 +1,30 @@
-# permalinks [![NPM version](https://badge.fury.io/js/permalinks.png)](http://badge.fury.io/js/permalinks) 
+# assemble-contrib-permalinks [![NPM version](https://badge.fury.io/js/assemble-contrib-permalinks.png)](http://badge.fury.io/js/assemble-contrib-permalinks) 
 
 > Permalinks plugin for Assemble, the static site generator for Grunt.js, Yeoman and Node.js. This plugin enables powerful and configurable URI patterns, [Moment.js](http://momentjs.com/) for parsing dates, much more.
 
-## Table of Contents
-* [permalinks](#name)
-  * [Table of Contents](#table-of-contents)
+* [assemble-contrib-permalinks](#name)
   * [Contributing](#contributing)
   * [Quickstart](#quickstart)
   * [Patterns](#patterns)
   * [Options](#options)
   * [Usage Examples](#usage-examples)
   * [SEO](#seo)
-  * [Author](#author)
-  * [Release History](#release-history)
+  * [Other Assemble plugins](#other-assemble-plugins)
+  * [Authors](#authors)
   * [License](#license)
 
 
 Also see the [Gruntfile](./Gruntfile.js) for example usage.
 
 ## Contributing
-We welcome all kinds of contributions! The most basic way to show your support is to star the project, and if you'd like to get involed please see the [Contributing to permalinks](https://github.com/assemble/assemble-contrib-permalinks/blob/master/CONTRIBUTING.md) guide for information on contributing to this project.
+We welcome all kinds of contributions! The most basic way to show your support is to star the project, and if you'd like to get involved please see the [Contributing to assemble-contrib-permalinks](https://github.com/assemble/assemble-contrib-permalinks/blob/master/CONTRIBUTING.md) guide for information on contributing to this project.
 
 ## Quickstart
 
 From the same directory as your project's [Gruntfile][Getting Started] and [package.json][], install this plugin with the following command:
 
 ```bash
-npm install permalinks --save-dev
+npm install assemble-contrib-permalinks --save-dev
 ```
 
 Once that's done, just add `permalinks`, the name of this module, to the `plugins` option in the Assemble task:
@@ -38,7 +36,7 @@ module.exports = function(grunt) {
   grunt.initConfig({
     assemble: {
       options: {
-        plugins: ['permalinks'],
+        plugins: ['assemble-contrib-permalinks', 'other/plugins/*'],
         permalinks: {
           structure: ':year/:month/:day/foo:/index.html'
         }
@@ -557,19 +555,32 @@ assemble: {
 [moment]: http://momentjs.com/ "Moment.js Permalinks"
 
 
-## Author
+## Other Assemble plugins
+Here are some other projects you might be interested in from the [Assemble](http://assemble.io) core team.
+
++ [assemble-contrib-anchors](https://github.com/assemble/assemble-contrib-anchors): Assemble plugin for creating anchor tags from generated html. 
++ [assemble-contrib-contextual](https://github.com/assemble/assemble-contrib-contextual): Generates a JSON file containing the context of each page. Basic plugin to help see what's happening in the build. 
++ [assemble-contrib-decompress](https://github.com/assemble/assemble-contrib-decompress): Assemble plugin for extracting zip, tar and tar.gz archives.  
++ [assemble-contrib-download](https://github.com/assemble/assemble-contrib-download): Assemble plugin for downloading files from GitHub. 
++ [assemble-contrib-lunr](https://github.com/assemble/assemble-contrib-lunr): Assemble plugin for creating a search engine within your static site using lunr.js. 
++ [assemble-contrib-markdown](https://github.com/assemble/assemble-contrib-markdown): Convert markdown files to HTML using marked.js. This plugin is an alternative to Assemble's markdown Handlebars helpers. Both are useful in different scenarios. 
++ [assemble-contrib-sitemap](https://github.com/assemble/assemble-contrib-sitemap): Sitemap generator plugin for Assemble 
++ [assemble-contrib-toc](https://github.com/assemble/assemble-contrib-toc): Create a table of contents in the generated HTML, using Cheerio.js 
++ [assemble-contrib-wordcount](https://github.com/assemble/assemble-contrib-wordcount): Assemble plugin for displaying a word-count on blog posts or pages. 
+Visit [assemble.io/plugins](http:/assemble.io/plugins/) for more information about [Assemble](http:/assemble.io/) plugins.
+
+## Authors
 
 **Jon Schlinkert**
 
-+ [github.com/jonschlinkert](https://github.com/jonschlinkert)
-+ [twitter.com/jonschlinkert](http://twitter.com/jonschlinkert)
++ [github/jonschlinkert](https://github.com/jonschlinkert)
++ [twitter/jonschlinkert](http://twitter.com/jonschlinkert)
 
-## Release History
+**Brian Woodward**
 
- * 2013-10-09   v0.1.5   Adds logic to ignore permalink structures for files named "index". Fixes [issue 20](https://github.com/assemble/permalinks/issues/20). Updates replacement patterns to use RegExp and word boundaries to minimize potential for moment.js to greedily modify non-date patterns.
- * 2013-10-04   v0.1.2   Adds "presets" per [issue 6](https://github.com/assemble/permalinks/issues/6).
- * 2013-10-03   v0.1.1   Renames "pattern" to "structure".
- * 2013-10-03   v0.1.0   First commmit.
++ [github/doowb](https://github.com/doowb)
++ [twitter/doowb](http://twitter.com/jonschlinkert)
+
 
 ## License
 Copyright (c) 2013 Jon Schlinkert, contributors.
@@ -577,7 +588,9 @@ Released under the MIT license
 
 ***
 
-_This file was generated on Monday, November 18, 2013._
+_This file was generated by [grunt-readme](https://github.com/assemble/grunt-readme) on Thursday, November 28, 2013._
 
+[grunt]: http://gruntjs.com/
+[Getting Started]: https://github.com/gruntjs/grunt/blob/devel/docs/getting_started.md
+[package.json]: https://npmjs.org/doc/json.html
 
-[moment]: http://momentjs.com/ "Moment.js Permalinks"

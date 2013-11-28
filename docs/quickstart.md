@@ -14,7 +14,7 @@ module.exports = function(grunt) {
   grunt.initConfig({
     assemble: {
       options: {
-        plugins: ['permalinks'],
+        plugins: ['{%= name %}', 'other/plugins/*'],
         permalinks: {
           structure: ':year/:month/:day/foo:/index.html'
         }
