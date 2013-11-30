@@ -34,9 +34,9 @@ module.exports = function(params, callback) {
   var pages          = assemble.options.pages;
   var originalAssets = assemble.options.originalAssets;
 
-  var async          = grunt.util.async;
-  var _str           = grunt.util._.str;
-  var _              = grunt.util._;
+  var async          = require('async');
+  var _str           = require('underscore.string');
+  var _              = require('lodash');
 
 
 

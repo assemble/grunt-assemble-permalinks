@@ -25,6 +25,7 @@
     "node": ">= 0.8.0"
   },
   "dependencies": {
+    "async": "~0.2.9",
     "frep": "~0.1.2",
     "lodash": "~2.4.0",
     "moment": "~2.2.1",
@@ -38,7 +39,7 @@
     "grunt-repos": "~0.1.2",
     "handlebars-helper-eachitems": "~0.1.2",
     "handlebars-helper-paginate": "~0.2.0",
-    "pretty": "~0.1.1"
+    "grunt-prettify": "~0.3.1"
   },
   "peerDependencies": {
     "assemble": "~0.4.12"

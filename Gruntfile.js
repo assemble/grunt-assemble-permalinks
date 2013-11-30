@@ -10,9 +10,6 @@
 
 module.exports = function(grunt) {
 
-  var prettify = require('pretty');
-  var _ = require('lodash');
-
   // Project configuration.
   grunt.initConfig({
 
@@ -41,8 +38,7 @@ module.exports = function(grunt) {
         helpers: ['test/fixtures/helpers/*.js'],
         layout: 'test/fixtures/default.hbs',
         data: 'test/fixtures/ipsum.json',
-        assets: 'test/assets',
-        postprocess: prettify
+        assets: 'test/assets'
       },
       // Should not modify dest path. Files array format.
       no_opts_files: {
@@ -244,6 +240,20 @@ module.exports = function(grunt) {
       }
     },
 
+    /**
+     * Beautify generated HTML for easier diffs
+     */
+    prettify: {
+      defaults: {
+        options: {
+          padcomments: 1,
+          sanitize: true
+        },
+        files: [
+          {expand: true, cwd: 'test/actual', src: ['**/*.html'], dest: 'test/actual/', ext: '.html'}
+        ]
+      }
+    },
 
     /**
      * Extend context for templates
@@ -269,10 +279,17 @@ module.exports = function(grunt) {
   // These plugins provide necessary tasks.
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-prettify');
   grunt.loadNpmTasks('grunt-readme');
   grunt.loadNpmTasks('grunt-repos');
   grunt.loadNpmTasks('assemble');
 
   // By default, lint and run all tests.
-  grunt.registerTask('default', ['jshint', 'clean', 'assemble', 'readme']);
+  grunt.registerTask('default', [
+    'jshint',
+    'clean',
+    'assemble',
+    'prettify',
+    'readme'
+  ]);
 };
