@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "async": "~0.2.9",
+    "digits": "~0.1.2",
     "frep": "~0.1.2",
     "lodash": "~2.4.0",
     "moment": "~2.2.1",

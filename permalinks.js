@@ -13,9 +13,10 @@ var path  = require('path');
 // node_modules
 var moment = require('moment');
 var frep   = require('frep');
+var digits = require('digits');
 
 // Local utils
-var Utils  = require('./lib/utils');
+var utils  = require('./lib/utils');
 
 /**
  * Permalinks Plugin
@@ -39,11 +40,12 @@ module.exports = function(params, callback) {
   var _              = require('lodash');
 
 
-
   // Skip over the plugin if it isn't defined in the options.
   if(!_.isUndefined(options)) {
 
     var i = 0;
+    var len = pages.length;
+
     async.forEach(pages, function(page, next) {
 
       i++;
@@ -140,7 +142,6 @@ module.exports = function(params, callback) {
         {pattern: /:\bp\b/,         replacement: format("p")},
       ];
 
-
       /**
        * `slugify` option
        * Ensure that basenames are suitable to be used as URLs.
@@ -156,7 +157,7 @@ module.exports = function(params, callback) {
        * Strip leading numbers from pages
        * Works well with `:num` pattern
        * @examples
-       *   010foo.html,011ar.html => foo.html,bar.html
+       *   010foo.html,011bar.html => foo.html,bar.html
        */
       if(options.stripnumber === true) {
         page.basename = page.basename.replace(/^\d+\-?/, '');
@@ -164,8 +165,29 @@ module.exports = function(params, callback) {
 
       // Best guesses at some useful patterns
       var specialPatterns = [
-        {pattern: /:\bcategory\b/,  replacement: _str.slugify(_.first(yfm.categories))},
-        {pattern: /:\bnum\b/,       replacement: Utils.pageNumber(i)},
+        {pattern: /:\bcategory\b/, replacement: _str.slugify(_.first(yfm.categories))},
+        {pattern: /:\bnum\b/, replacement: digits.pad(i, {auto: len})},
+        {
+          pattern: /:(0)+/,
+          replacement: function (match) {
+            var matchLen = String(match).length - 1;
+            return digits.pad(i, {digits: matchLen});
+          }
+        },
+        {
+          pattern: /:random\(([^)]+)\)/,
+          replacement: function (a, b) {
+            var len, chars;
+            if(b.match(/,/)) {
+              len = parseInt(b.split(',')[1], 10);
+              chars = b.split(',')[0];
+              return utils.randomize(chars, len);
+            } else {
+              var len = b.length;
+              return utils.randomize(b, len);
+            }
+          }
+        }
       ];
 
       // Push properties on the `page` object into the "props" array
@@ -186,7 +208,6 @@ module.exports = function(params, callback) {
       // and page.data obj.
       var replacements = _.union([], options.patterns || [], datePatterns, props, specialPatterns);
 
-
       /**
        * PRESETS
        * Pre-formatted permalink structures. If a preset is defined, append
@@ -201,16 +222,27 @@ module.exports = function(params, callback) {
           dayname:   path.join((structure || ''), ':YYYY/:MM/:DD/:basename/index:ext'),
           monthname: path.join((structure || ''), ':YYYY/:MM/:basename/index:ext')
         };
-        // Presets are joined to structures, so if a preset is specified, use it.
+        // Presets are joined to structures, so if a preset is specified
+        // use the preset the new structure.
         structure = String(_.values(_.pick(presets, options.preset)));
       }
 
-
       /**
        * CREATE PERMALINKS
-       * Construct the permalink string.
+       * Construct the permalink string. Modifies string with an array
+       * of replacement patterns passed into options.patterns
        */
       var permalink = frep.strWithArr(structure || page.dest, replacements);
+
+      // Generate a javascript file with all non-function replacement patterns
+      grunt.verbose.ok('replacements'.yellow, replacements);
+      if(options.debug) {
+        if(typeof(options.debug) === 'string') {
+          grunt.file.write(options.debug, require('util').inspect(replacements));
+        } else {
+          throw console.error('"options.debug" must be a file path.');
+        }
+      }
 
       /**
        * WRITE PERMALINKS
@@ -222,11 +254,11 @@ module.exports = function(params, callback) {
         if (page.basename === 'index') {
           page.dest = page.dest;
         } else {
-          page.dest = Utils.normalizePath(path.join(page.dirname, permalink));
+          page.dest = utils.normalizePath(path.join(page.dirname, permalink));
         }
       }
 
-      page.assets = Utils.calculatePath(page.dest, originalAssets, originalAssets);
+      page.assets = utils.calculatePath(page.dest, originalAssets, originalAssets);
 
       grunt.verbose.ok('page'.yellow, page);
       grunt.verbose.ok('page.dest'.yellow, page.dest);

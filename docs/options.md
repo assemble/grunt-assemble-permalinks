@@ -74,7 +74,6 @@ options: {
 }
 ```
 
-
 ## lang
 Type: `String`
 Default: `en`

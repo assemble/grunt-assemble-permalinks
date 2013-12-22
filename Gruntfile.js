@@ -61,6 +61,53 @@ module.exports = function(grunt) {
         src: 'test/fixtures/pages/**/*.hbs',
         dest: 'test/actual/no_opts_flatten/'
       },
+      // Should flatten, then use 'dest + permalinks structure + permalinks preset' for dest
+      preset_flatten: {
+        options: {
+          ext: '.html',
+          flatten: true,
+          permalinks: {
+            preset: 'pretty',
+            structure: ':section'
+          }
+        },
+        src: 'test/fixtures/pages/**/*.hbs',
+        dest: 'test/actual/preset_flatten/'
+      },
+      // Should add a unique number to each file name, and numbers should be padded with
+      // the specified number of digits
+      digits_specified: {
+        options: {
+          permalinks: {
+            structure: ':section/:basename-:0000:ext'
+          }
+        },
+        files: [
+          {expand: true, cwd: 'test/fixtures/pages', src: ['**/*.hbs'], dest: 'test/actual/digits_specified/', ext: '.html'}
+        ]
+      },
+      // Should add a unique number to each file name
+      digits_auto: {
+        options: {
+          permalinks: {
+            structure: ':section/:basename-:num:ext'
+          }
+        },
+        files: [
+          {expand: true, cwd: 'test/fixtures/pages', src: ['**/*.hbs'], dest: 'test/actual/digits_auto/', ext: '.html'}
+        ]
+      },
+      // Should add a unique number to each file name
+      random: {
+        options: {
+          permalinks: {
+            structure: ':section/:random(0Aa,9)-:basename:ext'
+          }
+        },
+        files: [
+          {expand: true, cwd: 'test/fixtures/pages', src: ['**/*.hbs'], dest: 'test/actual/random/', ext: '.html'}
+        ]
+      },
       // Should modify dest path using preset "pretty"
       preset_pretty: {
         options: {
@@ -95,17 +142,6 @@ module.exports = function(grunt) {
         ]
       },
       // Should modify dest path using permalinks structure
-      structure_date: {
-        options: {
-          permalinks: {
-            structure: ':date/index:ext'
-          }
-        },
-        files: [
-          {expand: true, cwd: 'test/fixtures/pages', src: ['**/*.hbs'], dest: 'test/actual/structure_date/', ext: '.html'}
-        ]
-      },
-      // Should modify dest path using permalinks structure
       structure_basename: {
         options: {
           permalinks: {
@@ -125,6 +161,28 @@ module.exports = function(grunt) {
         },
         files: [
           {expand: true, cwd: 'test/fixtures/pages', src: ['**/*.hbs'], dest: 'test/actual/dates/', ext: '.html'}
+        ]
+      },
+      // Date patterns should not collide with non-date patterns
+      date_collision: {
+        options: {
+          permalinks: {
+            structure: ':YYYY/:MM/:DD/:basename/index:ext'
+          }
+        },
+        files: [
+          {expand: true, cwd: 'test/fixtures/pages', src: ['**/*.hbs'], dest: 'test/actual/date_collision/', ext: '.html'}
+        ]
+      },
+      // Should modify dest path using permalinks structure
+      structure_date: {
+        options: {
+          permalinks: {
+            structure: ':date/index:ext'
+          }
+        },
+        files: [
+          {expand: true, cwd: 'test/fixtures/pages', src: ['**/*.hbs'], dest: 'test/actual/structure_date/', ext: '.html'}
         ]
       },
       // Should modify dest path using a built-in property from context
@@ -205,7 +263,7 @@ module.exports = function(grunt) {
             structure: ':project/:author',
             patterns: [
               {
-                // should be "permalinks"
+                // should be "assemble-contrib-permalinks"
                 pattern: ':project',
                 replacement: '<%= pkg.name %>'
               },
@@ -219,6 +277,19 @@ module.exports = function(grunt) {
         },
         files: [
           {expand: true, cwd: 'test/fixtures/pages', src: ['**/*.hbs'], dest: 'test/actual/replacement_pattern/', ext: '.html'}
+        ]
+      },
+      // Should generate a javascript file with all non-function replacement patterns
+      debug_option: {
+        options: {
+          permalinks: {
+            debug: 'test/actual/replacements.js',
+            preset: 'pretty',
+            structure: ':YYYY/:MM/:DD'
+          }
+        },
+        files: [
+          {expand: true, cwd: 'test/fixtures/pages', src: ['**/*.hbs'], dest: 'test/actual/collections_complex/', ext: '.html'}
         ]
       }
     },
