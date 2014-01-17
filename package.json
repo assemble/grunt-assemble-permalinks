@@ -30,7 +30,8 @@
     "frep": "~0.1.2",
     "lodash": "~2.4.0",
     "moment": "~2.2.1",
-    "underscore.string": "~2.3.3"
+    "underscore.string": "~2.3.3",
+    "strings": "~0.1.1"
   },
   "devDependencies": {
     "grunt": "~0.4.2",

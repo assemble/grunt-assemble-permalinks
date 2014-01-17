@@ -11,12 +11,26 @@
 var path  = require('path');
 
 // node_modules
+var async = require('async');
+var _str = require('underscore.string');
+var _ = require('lodash');
 var moment = require('moment');
 var frep   = require('frep');
 var digits = require('digits');
+var strings = require('strings');
 
 // Local utils
 var utils  = require('./lib/utils');
+
+// strings middleware wrapper to just return the generic
+// key/value object
+var wrapper = function(patterns) {
+  return function() {
+    return _.map(patterns, function(pattern) {
+      return new strings.Pattern(pattern.pattern, pattern.replacement);
+    });
+  };
+};
 
 /**
  * Permalinks Plugin
@@ -35,9 +49,6 @@ module.exports = function(params, callback) {
   var pages          = assemble.options.pages;
   var originalAssets = assemble.options.originalAssets;
 
-  var async          = require('async');
-  var _str           = require('underscore.string');
-  var _              = require('lodash');
 
 
   // Skip over the plugin if it isn't defined in the options.
@@ -56,6 +67,7 @@ module.exports = function(params, callback) {
       // Get the permalink pattern to use from options.permalinks.structure.
       // If one isn't defined, don't change anything.
       var structure = options.structure;
+      var stringsExe = strings();
 
       // Create a placeholder for page properties.
       var props = [];
@@ -208,6 +220,9 @@ module.exports = function(params, callback) {
       // and page.data obj.
       var replacements = _.union([], options.patterns || [], datePatterns, props, specialPatterns);
 
+      // register the replacements as middleware
+      stringsExe.use(wrapper(replacements));
+
       /**
        * PRESETS
        * Pre-formatted permalink structures. If a preset is defined, append
@@ -227,12 +242,6 @@ module.exports = function(params, callback) {
         structure = String(_.values(_.pick(presets, options.preset)));
       }
 
-      /**
-       * CREATE PERMALINKS
-       * Construct the permalink string. Modifies string with an array
-       * of replacement patterns passed into options.patterns
-       */
-      var permalink = frep.strWithArr(structure || page.dest, replacements);
 
       // Generate a javascript file with all non-function replacement patterns
       grunt.verbose.ok('replacements'.yellow, replacements);
@@ -243,6 +252,14 @@ module.exports = function(params, callback) {
           throw console.error('"options.debug" must be a file path.');
         }
       }
+
+      /**
+       * CREATE PERMALINKS
+       * Construct the permalink string. Modifies string with an array
+       * of replacement patterns passed into options.patterns
+       */
+      //var permalink = frep.strWithArr(structure || page.dest, replacements);
+      var permalink = stringsExe.run(structure || page.dest);
 
       /**
        * WRITE PERMALINKS
