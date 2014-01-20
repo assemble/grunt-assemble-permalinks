@@ -14,8 +14,6 @@ var path  = require('path');
 var async = require('async');
 var _str = require('underscore.string');
 var _ = require('lodash');
-var moment = require('moment');
-var frep   = require('frep');
 var digits = require('digits');
 var strings = require('strings');
 
@@ -49,8 +47,6 @@ module.exports = function(params, callback) {
   var pages          = assemble.options.pages;
   var originalAssets = assemble.options.originalAssets;
 
-
-
   // Skip over the plugin if it isn't defined in the options.
   if(!_.isUndefined(options)) {
 
@@ -69,12 +65,8 @@ module.exports = function(params, callback) {
       var structure = options.structure;
       var stringsExe = strings();
 
-      // Create a placeholder for page properties.
-      var props = {};
-
       // Convenience variable for YAML front matter.
       var yfm  = page.data;
-
 
       /**
        * EXCLUSION PATTERNS OPTION
@@ -83,12 +75,6 @@ module.exports = function(params, callback) {
       var exclusions = ['_page', 'data', 'filePair', 'page', 'pageName'];
           exclusions = _.union([], exclusions, options.exclusions || []);
 
-
-      /**
-       * LANGUAGE OPTION
-       * Set the default language.
-       */
-      // moment.lang(options.lang || 'en');
 
       /**
        * `slugify` option
