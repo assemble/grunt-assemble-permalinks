@@ -11,12 +11,24 @@
 var path  = require('path');
 
 // node_modules
-var moment = require('moment');
-var frep   = require('frep');
+var async = require('async');
+var _str = require('underscore.string');
+var _ = require('lodash');
 var digits = require('digits');
+var strings = require('strings');
 
 // Local utils
 var utils  = require('./lib/utils');
+
+// strings middleware wrapper to just return the generic
+// key/value object
+var wrapper = function(patterns) {
+  return function() {
+    return _.map(patterns, function(pattern) {
+      return new strings.Pattern(pattern.pattern, pattern.replacement);
+    });
+  };
+};
 
 /**
  * Permalinks Plugin
@@ -35,11 +47,6 @@ module.exports = function(params, callback) {
   var pages          = assemble.options.pages;
   var originalAssets = assemble.options.originalAssets;
 
-  var async          = require('async');
-  var _str           = require('underscore.string');
-  var _              = require('lodash');
-
-
   // Skip over the plugin if it isn't defined in the options.
   if(!_.isUndefined(options)) {
 
@@ -56,13 +63,10 @@ module.exports = function(params, callback) {
       // Get the permalink pattern to use from options.permalinks.structure.
       // If one isn't defined, don't change anything.
       var structure = options.structure;
-
-      // Create a placeholder for page properties.
-      var props = [];
+      var stringsExe = strings();
 
       // Convenience variable for YAML front matter.
       var yfm  = page.data;
-
 
       /**
        * EXCLUSION PATTERNS OPTION
@@ -71,76 +75,6 @@ module.exports = function(params, callback) {
       var exclusions = ['_page', 'data', 'filePair', 'page', 'pageName'];
           exclusions = _.union([], exclusions, options.exclusions || []);
 
-
-      /**
-       * LANGUAGE OPTION
-       * Set the default language.
-       */
-      moment.lang(options.lang || 'en');
-
-      var format = function(d) {
-        return moment(yfm.date).format(d);
-      };
-
-
-      /**
-       * REPLACEMENT PATTERNS
-       * Replacement variables for permalink structure.
-       * Format the date from the YAML front matter of a page.
-       */
-      var datePatterns = [
-        // Full date
-        {pattern: /:\bdate\b/,      replacement: format(options.dateFormats || "YYYY/MM/DD")},
-        // Long date formats
-        {pattern: /:\bL\b/,         replacement: format("MM/DD/YYYY")},
-        {pattern: /:\b1\b/,         replacement: format("M/D/YYYY")},
-        // Year (2013, 13)
-        {pattern: /:\byear\b/,      replacement: format("YYYY")},
-        {pattern: /:\bYYYY\b/,      replacement: format("YYYY")},
-        {pattern: /:\bYY\b/,        replacement: format("YY")},
-        // Month name (January, Jan)
-        {pattern: /:\bmonthname\b/, replacement: format("MMMM")},
-        {pattern: /:\bMMMM\b/,      replacement: format("MMMM")},
-        {pattern: /:\bMMM\b/,       replacement: format("MMM")},
-        // Month number (1, 01)
-        {pattern: /:\bmonth\b/,     replacement: format("MM")},
-        {pattern: /:\bMM\b/,        replacement: format("MM")},
-        {pattern: /:\bmo\b/,        replacement: format("MM")},
-        {pattern: /:\bM\b/,         replacement: format("M")},
-        // Day of the year
-        {pattern: /:\bDDDD\b/,      replacement: format("DDDD")},
-        {pattern: /:\bDDD\b/,       replacement: format("DDD")},
-        // Day of the month
-        {pattern: /:\bday\b/,       replacement: format("DD")},
-        {pattern: /:\bDD\b/,        replacement: format("DD")},
-        {pattern: /:\bD\b/,         replacement: format("D")},
-        // Day of the week (wednesday/wed)
-        {pattern: /:\bdddd\b/,      replacement: format("dddd")},
-        {pattern: /:\bddd\b/,       replacement: format("ddd")},
-        {pattern: /:\bdd\b/,        replacement: format("dd")},
-        {pattern: /:\bd\b/,         replacement: format("d")},
-        // Hour
-        {pattern: /:\bhour\b/,      replacement: format("HH")},
-        {pattern: /:\bHH\b/,        replacement: format("HH")},
-        {pattern: /:\bH\b/,         replacement: format("H")},
-        {pattern: /:\bhh\b/,        replacement: format("hh")},
-        {pattern: /:\bh\b/,         replacement: format("h")},
-        // Minute
-        {pattern: /:\bminute\b/,    replacement: format("mm")},
-        {pattern: /:\bmin\b/,       replacement: format("mm")},
-        {pattern: /:\bmm\b/,        replacement: format("mm")},
-        {pattern: /:\bm\b/,         replacement: format("m")},
-        // Second
-        {pattern: /:\bsecond\b/,    replacement: format("ss")},
-        {pattern: /:\bsec\b/,       replacement: format("ss")},
-        {pattern: /:\bss\b/,        replacement: format("ss")},
-        {pattern: /:\bs\b/,         replacement: format("s")},
-        // AM/PM, am/pm
-        {pattern: /:\bA\b/,         replacement: format("A")},
-        {pattern: /:\ba\b/,         replacement: format("a")},
-        {pattern: /:\bP\b/,         replacement: format("P")},
-        {pattern: /:\bp\b/,         replacement: format("p")},
-      ];
 
       /**
        * `slugify` option
@@ -163,20 +97,16 @@ module.exports = function(params, callback) {
         page.basename = page.basename.replace(/^\d+\-?/, '');
       }
 
+
       // Best guesses at some useful patterns
-      var specialPatterns = [
-        {pattern: /:\bcategory\b/, replacement: _str.slugify(_.first(yfm.categories))},
-        {pattern: /:\bnum\b/, replacement: digits.pad(i, {auto: len})},
-        {
-          pattern: /:(0)+/,
-          replacement: function (match) {
+      var specialPatterns = {
+        'category': new strings.Pattern(/:\bcategory\b/, _str.slugify(_.first(yfm.categories))),
+        'num': new strings.Pattern(/:\bnum\b/, digits.pad(i, {auto: len})),
+        'digits': new strings.Pattern(/:(0)+/, function (match) {
             var matchLen = String(match).length - 1;
             return digits.pad(i, {digits: matchLen});
-          }
-        },
-        {
-          pattern: /:random\(([^)]+)\)/,
-          replacement: function (a, b) {
+          }),
+        'random': new strings.Pattern(/:random\(([^)]+)\)/, function (a, b) {
             var len, chars;
             if(b.match(/,/)) {
               len = parseInt(b.split(',')[1], 10);
@@ -186,27 +116,34 @@ module.exports = function(params, callback) {
               var len = b.length;
               return utils.randomize(b, len);
             }
-          }
-        }
-      ];
+          })
+      };
 
-      // Push properties on the `page` object into the "props" array
-      // so we can use them to dynamically construct replacement patterns
-      _.keys(_.omit(page, exclusions)).map(function(key) {
-        props.push({pattern: new RegExp(':\\b' + key + '\\b'), replacement: page[key]});
-      });
+      // register the replacements as middleware
+      stringsExe
+        .use(specialPatterns) // specialPatterns
 
-      // Push properties on the `page.data` object into the "props" array
-      // so we can use them to dynamically construct replacement patterns
-      _.keys(_.omit(yfm, exclusions)).map(function(key) {
-        props.push({pattern: new RegExp(':\\b' + key + '\\b'), replacement: _str.slugify(yfm[key])});
-      });
+        // add all the page data directly
+        .use(page)
 
+        // wrap the yfm data with slugify
+        .use(function () {
+          var ctx = {};
+          _.keys(yfm).map(function(key) {
+            ctx[key] = _str.slugify(yfm[key]);            
+          });
+          return ctx;
+        })
 
+        // use the yfm.date for dates
+        .use(strings.dates(yfm.date, _.pick(options, 'lang'))) // datePatterns
 
-      // All the replacement patterns contructed from dates, the page obj,
-      // and page.data obj.
-      var replacements = _.union([], options.patterns || [], datePatterns, props, specialPatterns);
+        // wrap any additional patters
+        .use(wrapper(options.patterns || [])) // options.patterns || []
+
+        // exclude some fields
+        .exclude(exclusions)
+      ;
 
       /**
        * PRESETS
@@ -227,22 +164,22 @@ module.exports = function(params, callback) {
         structure = String(_.values(_.pick(presets, options.preset)));
       }
 
+
+      // Generate a javascript file with all non-function replacement patterns
+      if(options.debug) {
+        if(typeof(options.debug) === 'string') {
+          //grunt.file.write(options.debug, require('util').inspect(replacements));
+        } else {
+          throw console.error('"options.debug" must be a file path.');
+        }
+      }
+
       /**
        * CREATE PERMALINKS
        * Construct the permalink string. Modifies string with an array
        * of replacement patterns passed into options.patterns
        */
-      var permalink = frep.strWithArr(structure || page.dest, replacements);
-
-      // Generate a javascript file with all non-function replacement patterns
-      grunt.verbose.ok('replacements'.yellow, replacements);
-      if(options.debug) {
-        if(typeof(options.debug) === 'string') {
-          grunt.file.write(options.debug, require('util').inspect(replacements));
-        } else {
-          throw console.error('"options.debug" must be a file path.');
-        }
-      }
+      var permalink = stringsExe.run(structure || page.dest);
 
       /**
        * WRITE PERMALINKS

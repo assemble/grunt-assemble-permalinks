@@ -6,3 +6,5 @@ temp
 TODO.md
 
 *.sublime-*
+
+test/actual/random/*
