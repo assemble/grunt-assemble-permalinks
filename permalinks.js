@@ -123,23 +123,17 @@ module.exports = function(params, callback) {
       stringsExe
         .use(specialPatterns) // specialPatterns
 
-        // add all the page data directly
+        // expose page data to Strings
         .use(page)
 
-        // wrap the yfm data with slugify
-        .use(function () {
-          var ctx = {};
-          _.keys(yfm).map(function(key) {
-            ctx[key] = _str.slugify(yfm[key]);            
-          });
-          return ctx;
-        })
+        // expose yfm data to Strings
+        .use(yfm)
 
         // use the yfm.date for dates
         .use(strings.dates(yfm.date, _.pick(options, 'lang'))) // datePatterns
 
-        // wrap any additional patters
-        .use(wrapper(options.patterns || [])) // options.patterns || []
+        // wrap any additional patterns
+        .use(wrapper(options.patterns || []))
 
         // exclude some fields
         .exclude(exclusions)
