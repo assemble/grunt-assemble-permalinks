@@ -56,7 +56,7 @@ Example:
 
 * `:00` will result in two-digit numbers
 * `:000` will result in three-digit numbers
-* `:00000000` will result in eigth-digit numbers, and so on...
+* `:00000000` will result in eight-digit numbers, and so on...
 
 ### `:random(Pattern, Number)`
 Adds randomized characters based on the pattern provided in the parentheses. The first parameter defines the pattern you wish to use, and an optional second parameter defines the number of characters to generate.
@@ -65,7 +65,7 @@ For example, `:random(A, 4)` (whitespace insenstive) would result in randomized 
 
 **no second parameter**
 
-If a second parameter is not provided, then the  `length()` of the characters used in the first parameter will be used to determine the number of digits to out put. For example:
+If a second parameter is not provided, then the  `length()` of the characters used in the first parameter will be used to determine the number of digits to output. For example:
 
 * `:random(AAAA)` is equivelant to `:random(A, 4)`
 * `:random(AAA0)` and `:random(AA00)` and `:random(A0A0)` are equivelant to `:random(A0, 4)`

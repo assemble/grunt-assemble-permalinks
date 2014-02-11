@@ -16,7 +16,7 @@ module.exports = function(grunt) {
       options: {
         plugins: ['{%= name %}', 'other/plugins/*'],
         permalinks: {
-          structure: ':year/:month/:day/foo:/index.html'
+          structure: ':year/:month/:day/:foo/index.html'
         }
       },
       files: {'blog/archives/': ['archives/*.hbs']}
