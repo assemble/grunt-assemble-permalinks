@@ -36,7 +36,8 @@ module.exports = function(grunt) {
       options: {
         plugins: ['./permalinks.js'],
         helpers: ['test/fixtures/helpers/*.js'],
-        layout: 'test/fixtures/default.hbs',
+        layoutdir: 'test/fixtures',
+        layout: 'default.hbs',
         data: 'test/fixtures/ipsum.json',
         assets: 'test/assets'
       },
@@ -277,6 +278,32 @@ module.exports = function(grunt) {
         },
         files: [
           {expand: true, cwd: 'test/fixtures/pages', src: ['**/*.hbs'], dest: 'test/actual/replacement_pattern/', ext: '.html'}
+        ]
+      },
+      // Should modify dest path using a filename replacement date with preset
+      filename_replacement_preset: {
+        options: {
+          engine: 'handlebars',
+          permalinks: {
+            preset: 'pretty',
+            filename: true
+          }
+        },
+        files: [
+          {expand: true, cwd: 'test/fixtures/posts', src: ['**/*.md'], dest: 'test/actual/filename_replacement_preset/', ext: '.html'}
+        ]
+      },
+      // Should modify dest path using a filename replacement date with structure
+      filename_replacement_structure: {
+        options: {
+          engine: 'handlebars',
+          permalinks: {
+            structure: ':category/:basename/index:ext',
+            filename: true
+          }
+        },
+        files: [
+          {expand: true, cwd: 'test/fixtures/posts', src: ['**/*.md'], dest: 'test/actual/filename_replacement_structure/', ext: '.html'}
         ]
       },
       // Should generate a javascript file with all non-function replacement patterns

@@ -98,18 +98,6 @@ module.exports = function(params, callback) {
       }
 
       /**
-       * Strip date from pages 
-       * Works well with `:date` pattern
-       * @examples
-       *   2014-02-10-foo.html => foo.html
-       */
-      if(options.stripdate === true) {
-        page.basename = page.basename.replace(/^(\d+)-(\d+)-(\d+)-?/, '', function (y, m, d) {
-          return [y,m,d].join('/');
-        });
-      }
-
-      /**
        * Strip date from filename
        * And modify `basename` and `slug` property
        * If no yfm for `date`, make date replacement avalaible as page.data.date context
