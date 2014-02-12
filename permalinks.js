@@ -97,6 +97,37 @@ module.exports = function(params, callback) {
         page.basename = page.basename.replace(/^\d+\-?/, '');
       }
 
+      /**
+       * Strip date from pages 
+       * Works well with `:date` pattern
+       * @examples
+       *   2014-02-10-foo.html => foo.html
+       */
+      if(options.stripdate === true) {
+        page.basename = page.basename.replace(/^(\d+)-(\d+)-(\d+)-?/, '', function (y, m, d) {
+          return [y,m,d].join('/');
+        });
+      }
+
+      /**
+       * Strip date from filename
+       * And modify `basename` and `slug` property
+       * If no yfm for `date`, make date replacement avalaible as page.data.date context
+       * @examples
+       *   2014-02-10-foo.html => foo.html
+       *   {
+       *     basename: foo,
+       *     slug: foo
+       *   },
+       *   data: { date: date object(2014-02-10) }
+       */
+      if(options.filename === true) {
+        page.basename = page.slug = page.basename.replace(/^(\d+)-(\d+)-(\d+)-?/, function (a, y, m, d) {
+          page.data.date = (page.data.date) ? page.data.date : new Date([y,m,d].join('-'));
+          return [].join('/');
+        });
+      }
+
 
       // Best guesses at some useful patterns
       var specialPatterns = {
