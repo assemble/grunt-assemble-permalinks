@@ -120,7 +120,7 @@ Also see the [Gruntfile](./Gruntfile.js) for example usage.
 
 Keep in mind that the date is formatted the way you want it, you don't need to follow these examples. Also, some of these variables will only work if you add that property to your pages, and setup the replacement patterns.
 
-```js
+```bash
 :YYYY/:MM/:DD/news/:id/index:ext
 //=> dest + '/2014/01/01/news/001/index.html'
 

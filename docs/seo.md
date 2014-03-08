@@ -30,16 +30,16 @@ Since the `:author` variable isn't actually built in, you'll need to add it as a
 If you need to use a custom variable, such as `:author` or `:title`, just add it like this:
 
 ```js
-var _ = grunt.util._;
+var _str = require('underscore.string');
 
 assemble: {
   options: {
     permalinks: {
       structure: ':author:ext',
-      replacements: [
+      patterns: [
         {
-          structure: ':author',
-          replacement: '<%= _.slugify(pkg.author.name) %>'
+          pattern: ':author',
+          replacement: '<%= _str.slugify(pkg.author.name) %>'
         }
       ]
     }
