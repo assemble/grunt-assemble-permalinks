@@ -279,6 +279,25 @@ module.exports = function(grunt) {
           {expand: true, cwd: 'test/fixtures/pages', src: ['**/*.hbs'], dest: 'test/actual/replacement_pattern/', ext: '.html'}
         ]
       },
+      // Should modify dest path using a custom replacement function
+      custom_replacement_function: {
+        options: {
+          permalinks: {
+            structure: ':tag/:basename.html',
+            patterns: [
+              {
+                pattern: ':tag',
+                replacement: function (src) {
+                  return this.tags ? this.tags[0] : 'default';
+                }
+              }
+            ]
+          }
+        },
+        files: [
+          {expand: true, cwd: 'test/fixtures/pages', src: ['**/*.hbs'], dest: 'test/actual/replacement_function/', ext: '.html'}
+        ]
+      },
       // Should generate a javascript file with all non-function replacement patterns
       debug_option: {
         options: {
@@ -318,7 +337,8 @@ module.exports = function(grunt) {
       defaults: {
         options: {
           padcomments: 1,
-          sanitize: true
+          sanitize: true,
+          ocd: true
         },
         files: [
           {expand: true, cwd: 'test/actual', src: ['**/*.html'], dest: 'test/actual/', ext: '.html'}

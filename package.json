@@ -29,7 +29,7 @@
     "digits": "~0.1.2",
     "lodash": "~2.4.0",
     "underscore.string": "~2.3.3",
-    "strings": "~0.1.1"
+    "strings": "^0.2.0"
   },
   "devDependencies": {
     "grunt": "~0.4.2",

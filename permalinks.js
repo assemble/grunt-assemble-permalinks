@@ -63,7 +63,6 @@ module.exports = function(params, callback) {
       // Get the permalink pattern to use from options.permalinks.structure.
       // If one isn't defined, don't change anything.
       var structure = options.structure;
-      var stringsExe = strings();
 
       // Convenience variable for YAML front matter.
       var yfm  = page.data;
@@ -120,7 +119,7 @@ module.exports = function(params, callback) {
       };
 
       // register the replacements as middleware
-      stringsExe
+      strings
         .use(specialPatterns) // specialPatterns
 
         // expose page data to Strings
@@ -173,7 +172,7 @@ module.exports = function(params, callback) {
        * Construct the permalink string. Modifies string with an array
        * of replacement patterns passed into options.patterns
        */
-      var permalink = stringsExe.run(structure || page.dest);
+      var permalink = strings.run(structure || page.dest);
 
       /**
        * WRITE PERMALINKS
