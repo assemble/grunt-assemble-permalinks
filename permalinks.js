@@ -143,7 +143,6 @@ module.exports = function(params, callback) {
        * Pre-formatted permalink structures. If a preset is defined, append
        * it to the user-defined structure.
        */
-      if(options.preset && String(options.preset).length !== 0) {
 
         // The preset
         var presets = {
@@ -152,11 +151,18 @@ module.exports = function(params, callback) {
           dayname:   path.join((structure || ''), ':YYYY/:MM/:DD/:basename/index:ext'),
           monthname: path.join((structure || ''), ':YYYY/:MM/:basename/index:ext')
         };
+
+      if(options.preset && String(options.preset).length !== 0) {
+
+        // Get the specified preset
+        var preset = _.values(_.pick(presets, options.preset));
+
+        if (preset.length !== 0) {
         // Presets are joined to structures, so if a preset is specified
         // use the preset the new structure.
-        structure = String(_.values(_.pick(presets, options.preset)));
+          structure = String(preset);
+        }
       }
-
 
       // Generate a javascript file with all non-function replacement patterns
       if(options.debug) {
@@ -178,7 +184,7 @@ module.exports = function(params, callback) {
        * WRITE PERMALINKS
        * Append the permalink to the dest path defined in the target.
        */
-      if(_.isUndefined(options.structure) && _.isUndefined(options.preset)) {
+      if(_.isUndefined(options.structure) && _.isUndefined(structure)) {
         page.dest = page.dest;
       } else {
         if (page.basename === 'index') {
