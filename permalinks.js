@@ -181,11 +181,7 @@ module.exports = function(params, callback) {
       if(_.isUndefined(options.structure) && _.isUndefined(options.preset)) {
         page.dest = page.dest;
       } else {
-        if (page.basename === 'index') {
-          page.dest = page.dest;
-        } else {
-          page.dest = utils.normalizePath(path.join(page.dirname, permalink));
-        }
+        page.dest = utils.normalizePath(path.join(page.dirname, permalink));
       }
 
       page.assets = utils.calculatePath(page.dest, originalAssets, originalAssets);
