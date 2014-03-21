@@ -14,7 +14,6 @@ Also see the [Gruntfile](./Gruntfile.js) for example usage.
 ## Quickstart
 {%= docs("quickstart") %}
 
-
 ## The "permalinks" plugin
 
 ### Patterns

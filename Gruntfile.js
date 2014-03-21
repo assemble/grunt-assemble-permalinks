@@ -346,16 +346,6 @@ module.exports = function(grunt) {
       }
     },
 
-    /**
-     * Extend context for templates
-     * with repos.json
-     */
-    readme: {
-      options: {
-        metadata: ['docs/repos.json']
-      }
-    },
-
     // Before generating new files, remove any files from previous build.
     clean: {
       actual: ['test/actual/**'],
@@ -372,6 +362,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-prettify');
   grunt.loadNpmTasks('grunt-repos');
+  grunt.loadNpmTasks('grunt-verb');
   grunt.loadNpmTasks('assemble');
 
   // By default, lint and run all tests.
@@ -379,6 +370,7 @@ module.exports = function(grunt) {
     'jshint',
     'clean',
     'assemble',
-    'prettify'
+    'prettify',
+    'verb'
   ]);
 };

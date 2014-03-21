@@ -1,29 +1,39 @@
-# assemble-contrib-permalinks [![NPM version](https://badge.fury.io/js/assemble-contrib-permalinks.png)](http://badge.fury.io/js/assemble-contrib-permalinks) 
+# assemble-contrib-permalinks [![NPM version](https://badge.fury.io/js/assemble-contrib-permalinks.png)](http://badge.fury.io/js/assemble-contrib-permalinks)
 
 > Permalinks plugin for Assemble, the static site generator for Grunt.js, Yeoman and Node.js. This plugin enables powerful and configurable URI patterns, [Moment.js](http://momentjs.com/) for parsing dates, much more.
 
 ## Table of Contents
-* [Contributing](#contributing)
+
+<!-- toc -->
 * [Quickstart](#quickstart)
 * [The "permalinks" plugin](#the-permalinks-plugin)
   * [Patterns](#patterns)
+  * [Permalink structure](#permalink-structure)
+  * [How replacement patterns work](#how-replacement-patterns-work)
+  * [Special patterns](#special-patterns)
+  * [Date patterns](#date-patterns)
   * [Options](#options)
+  * [structure](#structure)
+  * [preset](#preset)
+  * [dateFormats](#dateformats)
+  * [lang](#lang)
+  * [exclusions](#exclusions)
   * [Usage Examples](#usage-examples)
+  * [Pretty URLs](#pretty-urls)
+  * [Using presets](#using-presets)
+  * [Dest extension](#dest-extension)
+  * [Path separators](#path-separators)
+* [Dynamically build slugs](#dynamically-build-slugs)
+* [More examples](#more-examples)
   * [SEO](#seo)
+  * [Recommendations](#recommendations)
+* [Contributing](#contributing)
 * [Other Assemble plugins](#other-assemble-plugins)
 * [Authors](#authors)
 * [License](#license)
 
-
+<!-- toc stop -->
 Also see the [Gruntfile](./Gruntfile.js) for example usage.
-
-## Contributing
-Find a bug? Have a feature request? Please [create an Issue](https://github.com/assemble/assemble-contrib-permalinks/issues).
-
-In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [grunt][], and build the documentation with [grunt-readme](https://github.com/assemble/grunt-readme).
-
-Pull requests are also encouraged, and if you find this project useful please consider "starring" it to show your support! Thanks!
-
 
 ## Quickstart
 
@@ -61,9 +71,8 @@ If everything was installed and configured correctly, you should be ready to go!
 [Getting Started]: https://github.com/gruntjs/grunt/blob/devel/docs/getting_started.md
 [package.json]: https://npmjs.org/doc/json.html
 
-
-
 ## The "permalinks" plugin
+
 ### Patterns
 ### Permalink structure
 
@@ -191,9 +200,9 @@ slug:
 ---
 ```
 
-### [Moment.js](http://momentjs.com/) date patterns
+### Date patterns
 
-> This plugin uses the incredibly feature rich and flexible [moment.js](http://momentjs.com/) for parsing dates. If you have a feature request, please don't hesitate to create an issue or make a pull request.
+> This plugin uses the incredibly feature rich and flexible [moment.js](http://momentjs.com/) for parsing dates. Please consult the [moment.js documentation](http://momentjs.com/docs/) for usage information and for the full list of available options.
 
 For the date variables to work, a `date` property must exist on the page object.
 
@@ -284,7 +293,6 @@ date: 2014-01-29 3:45 PM
 * `:s`:         Seconds. Example: `9`.
 * `:sec`:       Alias for `ss`|`s`.
 * `:second`:    Alias for `ss`|`s`.
-
 
 
 ### Options
@@ -403,7 +411,6 @@ options: {
 ```
 
 
-
 ### Usage Examples
 ### Pretty URLs
 
@@ -487,7 +494,7 @@ You don't have to use slashes (`/`) only in your permalinks, you can use `-` or 
 
 Also see the [Gruntfile](./Gruntfile.js) for example usage.
 
-### Dynamically build slugs
+## Dynamically build slugs
 
 You can even dynamically build up strings using Lo-Dash templates:
 
@@ -495,7 +502,7 @@ You can even dynamically build up strings using Lo-Dash templates:
 ---
 date: 1-1-2014
 
-## Dynamically build the slug for example
+# Dynamically build the slug for example
 area: business
 section: finance
 slug: <%= area %>-<%= section %>
@@ -523,7 +530,7 @@ blog/2014/01/01/business-finance/index.html
 ```
 Also see the [Gruntfile](./Gruntfile.js) for example usage.
 
-### More examples
+## More examples
 
 Keep in mind that the date is formatted the way you want it, you don't need to follow these examples. Also, some of these variables will only work if you add that property to your pages, and setup the replacement patterns.
 
@@ -551,10 +558,10 @@ blog/:year-:month-:day/:basename:ext
 ```
 Also see the [Gruntfile](./Gruntfile.js) for example usage.
 
-
 ### SEO
 ### Recommendations
-Permalinks are important for SEO. but you should spend some time thinking about the strategy you want to use before you decide on a URL structure.
+
+> Permalinks are important for SEO. but you should spend some time thinking about the strategy you want to use before you decide on a URL structure.
 
 
 #### Avoid date-based permalinks
@@ -605,7 +612,13 @@ assemble: {
 
 [moment]: http://momentjs.com/ "Moment.js Permalinks"
 
+## Contributing
+Find a bug? Have a feature request? Please [create an Issue](https://github.com/assemble/assemble-contrib-permalinks/issues).
 
+In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality,
+and run `docs` in the command line to build the docs with [Verb](https://github.com/assemble/verb).
+
+Pull requests are also encouraged, and if you find this project useful please consider "starring" it to show your support! Thanks!
 
 ## Other Assemble plugins
 Here are some related projects you might be interested in from the [Assemble](http://assemble.io) core team.
@@ -616,13 +629,13 @@ Here are some related projects you might be interested in from the [Assemble](ht
 + [assemble-contrib-download](https://github.com/assemble/assemble-contrib-download): Assemble plugin for downloading files from GitHub. 
 + [assemble-contrib-i18n](https://github.com/assemble/assemble-contrib-i18n): Plugin for adding i18n support to Assemble projects. 
 + [assemble-contrib-lunr](https://github.com/assemble/assemble-contrib-lunr): Assemble plugin for creating a search engine within your static site using lunr.js. 
-+ [assemble-contrib-markdown](https://github.com/assemble/assemble-contrib-markdown): Convert markdown files to HTML using marked.js. This plugin is an alternative to Assemble's markdown Handlebars helpers. Both are useful in different scenarios. 
++ [assemble-contrib-markdown](https://github.com/assemble/assemble-contrib-markdown): HEADS UP! This isn't ready for prime time! Convert markdown files to HTML using marked.js. This plugin is an alternative to Assemble's markdown Handlebars helpers. Both are useful in different scenarios. 
++ [assemble-contrib-pagination](https://github.com/assemble/assemble-contrib-pagination): WIP this plugin isn't ready for use! 
 + [assemble-contrib-sitemap](https://github.com/assemble/assemble-contrib-sitemap): Sitemap generator plugin for Assemble 
 + [assemble-contrib-toc](https://github.com/assemble/assemble-contrib-toc): Create a table of contents in the generated HTML, using Cheerio.js 
 + [assemble-contrib-wordcount](https://github.com/assemble/assemble-contrib-wordcount): Assemble plugin for displaying a word-count on blog posts or pages. 
 
 Visit [assemble.io/plugins](http:/assemble.io/plugins/) for more information about [Assemble](http:/assemble.io/) plugins.
-
 
 
 ## Authors
@@ -637,15 +650,10 @@ Visit [assemble.io/plugins](http:/assemble.io/plugins/) for more information abo
 + [github/doowb](https://github.com/doowb)
 + [twitter/doowb](http://twitter.com/jonschlinkert)
 
-
 ## License
 Copyright (c) 2014 Jon Schlinkert, contributors.
 Released under the MIT license
 
 ***
 
-_This file was generated by [grunt-readme](https://github.com/assemble/grunt-readme) on Tuesday, March 18, 2014._
-
-[grunt]: http://gruntjs.com/
-[Getting Started]: https://github.com/gruntjs/grunt/blob/devel/docs/getting_started.md
-[package.json]: https://npmjs.org/doc/json.html
+_This file was generated by [verb-cli](https://github.com/assemble/verb-cli) on March 21, 2014._

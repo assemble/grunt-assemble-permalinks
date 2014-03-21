@@ -124,9 +124,9 @@ slug:
 ---
 ```
 
-## [Moment.js](http://momentjs.com/) date patterns
+## Date patterns
 
-> This plugin uses the incredibly feature rich and flexible [moment.js](http://momentjs.com/) for parsing dates. If you have a feature request, please don't hesitate to create an issue or make a pull request.
+> This plugin uses the incredibly feature rich and flexible [moment.js](http://momentjs.com/) for parsing dates. Please consult the [moment.js documentation](http://momentjs.com/docs/) for usage information and for the full list of available options.
 
 For the date variables to work, a `date` property must exist on the page object.
 
