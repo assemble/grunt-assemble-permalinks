@@ -1,5 +1,6 @@
 ## Recommendations
-Permalinks are important for SEO. but you should spend some time thinking about the strategy you want to use before you decide on a URL structure.
+
+> Permalinks are important for SEO. but you should spend some time thinking about the strategy you want to use before you decide on a URL structure.
 
 
 ### Avoid date-based permalinks
