@@ -1,34 +1,36 @@
 /*
- * Assemble Plugin: Permalinks
- * https://github.com/assemble/permalinks
- * Assemble is the 100% JavaScript static site generator for Node.js, Grunt.js, and Yeoman.
+ * permalinks plugin for Assemble <https://github.com/assemble/permalinks>
  *
- * Copyright (c) 2013 Jon Schlinkert, Brian Woodward, contributors.
+ * Copyright (c) 2014 Jon Schlinkert, Brian Woodward, contributors.
  * Licensed under the MIT license.
  */
 
-// Node.js
-var path  = require('path');
+const path  = require('path');
 
 // node_modules
-var async = require('async');
-var _str = require('underscore.string');
-var _ = require('lodash');
-var digits = require('digits');
-var strings = require('strings');
+const async = require('async');
+const digits = require('digits');
+const strings = require('strings');
+const _str = require('underscore.string');
+const _ = require('lodash');
+const utils  = require('./lib/utils');
 
-// Local utils
-var utils  = require('./lib/utils');
 
-// strings middleware wrapper to just return the generic
-// key/value object
-var wrapper = function(patterns) {
+/**
+ * Wrapper for `strings` middleware.
+ *
+ * @param {Array} array of replacement patterns
+ * @return {Object} return the generic key/value object
+ */
+
+function wrapper(patterns) {
   return function() {
     return _.map(patterns, function(pattern) {
       return new strings.Pattern(pattern.pattern, pattern.replacement);
     });
   };
-};
+}
+
 
 /**
  * Permalinks Plugin
@@ -37,15 +39,13 @@ var wrapper = function(patterns) {
  * @return {String}   The permalink string
  */
 module.exports = function(params, callback) {
-
-  'use strict';
-
   var assemble       = params.assemble;
   var grunt          = params.grunt;
 
   var options        = assemble.options.permalinks;
   var pages          = assemble.options.pages;
   var originalAssets = assemble.options.originalAssets;
+
 
   // Skip over the plugin if it isn't defined in the options.
   if(!_.isUndefined(options)) {
@@ -54,31 +54,53 @@ module.exports = function(params, callback) {
     var len = pages.length;
 
     async.forEach(pages, function(page, next) {
-
       i++;
 
-      // Slugify basenames by default.
+
+      /**
+       * `options.permalinks.slugify`. Slugify basenames by default.
+       *
+       * @type  {Boolean}
+       */
+
       options.slugify = true;
 
-      // Get the permalink pattern to use from options.permalinks.structure.
-      // If one isn't defined, don't change anything.
+
+      /**
+       * The permalink structure to use. If one isn't defined
+       * the dest path will not be modified.
+       *
+       * @type  {String}
+       */
+
       var structure = options.structure;
 
-      // Convenience variable for YAML front matter.
+
+      /**
+       * Properties from YAML front matter
+       *
+       * @type  {Object}
+       */
+
       var yfm  = page.data;
 
+
       /**
-       * EXCLUSION PATTERNS OPTION
-       * Properties to omit from the params object.
+       * Omit properties from Assemble options, to prevent them
+       * from poluting the context.
+       *
+       * @type  {Array}
        */
+
       var exclusions = ['_page', 'data', 'filePair', 'page', 'pageName'];
-          exclusions = _.union([], exclusions, options.exclusions || []);
+          exclusions = _.union(exclusions, options.exclusions || []);
 
 
       /**
-       * `slugify` option
-       * Ensure that basenames are suitable to be used as URLs.
+       * `options.permalinks.slugify`. Ensure that basenames are
+       * suitable to be used as URLs.
        */
+
       if(options.slugify) {
         if(!yfm.slug) {
           page.slug = _str.slugify(page.basename);
@@ -92,6 +114,7 @@ module.exports = function(params, callback) {
        * @examples
        *   010foo.html,011bar.html => foo.html,bar.html
        */
+
       if(options.stripnumber === true) {
         page.basename = page.basename.replace(/^\d+\-?/, '');
       }
@@ -99,28 +122,29 @@ module.exports = function(params, callback) {
 
       // Best guesses at some useful patterns
       var specialPatterns = {
-        'category': new strings.Pattern(/:\bcategory\b/, _str.slugify(_.first(yfm.categories))),
-        'num': new strings.Pattern(/:\bnum\b/, digits.pad(i, {auto: len})),
-        'digits': new strings.Pattern(/:(0)+/, function (match) {
-            var matchLen = String(match).length - 1;
-            return digits.pad(i, {digits: matchLen});
-          }),
-        'random': new strings.Pattern(/:random\(([^)]+)\)/, function (a, b) {
-            var len, chars;
-            if(b.match(/,/)) {
-              len = parseInt(b.split(',')[1], 10);
-              chars = b.split(',')[0];
-              return utils.randomize(chars, len);
-            } else {
-              var len = b.length;
-              return utils.randomize(b, len);
-            }
-          })
+        category: new strings.Pattern(/:\bcategory\b/, _str.slugify(_.first(yfm.categories))),
+        num:      new strings.Pattern(/:\bnum\b/, digits.pad(i, {auto: len})),
+        digits:   new strings.Pattern(/:(0)+/, function (match) {
+          var matchLen = String(match).length - 1;
+          return digits.pad(i, {digits: matchLen});
+        }),
+        random:   new strings.Pattern(/:random\(([^)]+)\)/, function (a, b) {
+          var len, chars;
+          if(b.match(/,/)) {
+            len = parseInt(b.split(',')[1], 10);
+            chars = b.split(',')[0];
+            return utils.randomize(chars, len);
+          } else {
+            var len = b.length;
+            return utils.randomize(b, len);
+          }
+        })
       };
 
       // register the replacements as middleware
       strings
-        .use(specialPatterns) // specialPatterns
+        // special patterns
+        .use(specialPatterns)
 
         // expose page data to Strings
         .use(page)
@@ -131,8 +155,11 @@ module.exports = function(params, callback) {
         // use the yfm.date for dates
         .use(strings.dates(yfm.date, _.pick(options, 'lang'))) // datePatterns
 
+        // wrap middlewares
+        // .use(middlewares)
+
         // wrap any additional patterns
-        .use(wrapper(options.patterns || []))
+        .use(wrapper(options.replacements || []))
 
         // exclude some fields
         .exclude(exclusions)
@@ -176,7 +203,7 @@ module.exports = function(params, callback) {
       /**
        * CREATE PERMALINKS
        * Construct the permalink string. Modifies string with an array
-       * of replacement patterns passed into options.patterns
+       * of replacement patterns passed into options.replacements
        */
       var permalink = strings.run(structure || page.dest);
 

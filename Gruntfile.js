@@ -261,14 +261,14 @@ module.exports = function(grunt) {
           permalinks: {
             preset: 'pretty',
             structure: ':project/:author',
-            patterns: [
+            replacements: [
               {
-                // should be "assemble-contrib-permalinks"
+                // should return "assemble-contrib-permalinks"
                 pattern: ':project',
                 replacement: '<%= pkg.name %>'
               },
               {
-                // should be "jon-schlinkert"
+                // should return "jon-schlinkert"
                 pattern: ':author',
                 replacement: '<%= _.slugify(pkg.author.name) %>'
               }
@@ -284,7 +284,7 @@ module.exports = function(grunt) {
         options: {
           permalinks: {
             structure: ':tag/:basename.html',
-            patterns: [
+            replacements: [
               {
                 pattern: ':tag',
                 replacement: function (src) {
@@ -321,7 +321,7 @@ module.exports = function(grunt) {
       assemble: {
         options: {
           username: 'assemble',
-          include: ['contrib'],
+          include: ['assemble-contrib'],
           exclude: ['example', 'permalinks', 'rss']
         },
         files: {
