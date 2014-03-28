@@ -155,8 +155,8 @@ module.exports = function(params, callback) {
         // use the yfm.date for dates
         .use(strings.dates(yfm.date, _.pick(options, 'lang'))) // datePatterns
 
-        // wrap middlewares
-        // .use(middlewares)
+        // middleware
+        // .use(middleware)
 
         // wrap any additional patterns
         .use(wrapper(options.replacements || []))

@@ -10,6 +10,8 @@
 
 module.exports = function(grunt) {
 
+  var date = require('./test/middleware/dates');
+
   // Project configuration.
   grunt.initConfig({
 
@@ -279,6 +281,8 @@ module.exports = function(grunt) {
           {expand: true, cwd: 'test/fixtures/pages', src: ['**/*.hbs'], dest: 'test/actual/replacement_pattern/', ext: '.html'}
         ]
       },
+
+
       // Should modify dest path using a custom replacement function
       custom_replacement_function: {
         options: {
@@ -298,6 +302,45 @@ module.exports = function(grunt) {
           {expand: true, cwd: 'test/fixtures/pages', src: ['**/*.hbs'], dest: 'test/actual/replacement_function/', ext: '.html'}
         ]
       },
+
+      // Should modify dest path using a custom replacement function
+      post: {
+        options: {
+          permalinks: {
+            structure: 'blog/:year/:month/:day/:postname/index.html',
+            replacements: [
+              {
+                pattern: ':year',
+                replacement: function (pattern, index, structure) {
+                  return date.year(this.basename);
+                }
+              },
+              {
+                pattern: ':month',
+                replacement: function (pattern, index, structure) {
+                  return date.month(this.basename);
+                }
+              },
+              {
+                pattern: ':day',
+                replacement: function (pattern, index, structure) {
+                  return date.day(this.basename);
+                }
+              },
+              {
+                pattern: ':postname',
+                replacement: function (pattern, index, structure) {
+                  return date.postname(this.basename);
+                }
+              }
+            ]
+          }
+        },
+        files: [
+          {expand: true, cwd: 'test/fixtures', src: ['*.md'], dest: 'test/actual/blog_post/'}
+        ]
+      },
+
       // Should generate a javascript file with all non-function replacement patterns
       debug_option: {
         options: {
