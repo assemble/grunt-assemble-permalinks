@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Post One</title>
+  </head>
+  <body>
+    <ul id="list">
+      <li class="active">
+        <a href="index.html">Post One</a>
+      </li>
+      <li> <a href="../test-two/index.html">Post Two</a> </li>
+    </ul>
+    <p>I have confirmed that this already works. You need to use <code>this.src</code>, since the context is available to the patterns, not just the <code>src</code>.</p>
+    <p>Here is an example, given you have a filename like <code>2014-03-27-test-blah-something.md</code>, you can create a function like this:
+    </p>
+    <pre><code class="language-js"><span class="keyword">var</span> toPost = <span class="function"><span class="keyword">function</span><span class="params">(str)</span> {</span>  <span class="keyword">var</span> path = require(<span class="string">'path'</span>);
+  <span class="keyword">var</span> name = path.basename(str, path.extname(str));
+    <span class="keyword">var</span> re = <span class="regexp">/(\d{4})-(\d{2})-(\d{2})-(.+)/
+  </span>;
+  <span class="keyword">return</span> name.replace(re, 
+    <span class="string">'$1/$2/$3/$4'
+  </span>);
+};</code></pre>
+    <p>Then use it in the replacement patterns:</p>
+    <pre><code class="language-js">options: {
+  permalinks: {
+    structure: <span class="string">':year/:month/:day/index.html'</span>,
+    patterns: [
+      {
+        pattern: <span class="string">':year'</span>,
+        replacement: <span class="function"><span class="keyword">function</span><span class="params">()</span> {</span>   <span class="keyword">return</span> toPost(<span class="keyword">this </span>.src);
+        }
+      },
+      {
+        pattern: <span class="string">':month'</span>,
+        replacement: <span class="function"><span class="keyword">function</span><span class="params">()</span> {</span>   <span class="keyword">return</span> toPost(<span class="keyword">this </span>.src);
+        }
+      },
+      {
+        pattern: <span class="string">':day'</span>,
+        replacement: <span class="function"><span class="keyword">function</span><span class="params">()</span> {</span>   <span class="keyword">return</span> toPost(<span class="keyword">this </span>.src);
+        }
+      }
+    ]
+  }
+}</code></pre>
+    <p>Resulting in: <code>2014/03/27/test-blah-something/index.html</code></p>
+    <p>I&#39;m updating the docs for this.
+    </p>
+  </body>
+</html>

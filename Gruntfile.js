@@ -306,6 +306,7 @@ module.exports = function(grunt) {
       // Should modify dest path using a custom replacement function
       post: {
         options: {
+          layout: 'test/fixtures/blog.hbs',
           permalinks: {
             structure: 'blog/:year/:month/:day/:postname/index.html',
             replacements: [
@@ -330,7 +331,10 @@ module.exports = function(grunt) {
               {
                 pattern: ':postname',
                 replacement: function (pattern, index, structure) {
-                  return date.postname(this.basename);
+                  var name = date.postname(this.basename);
+                  this.filename = name;
+                  // console.log(this);
+                  return name;
                 }
               }
             ]

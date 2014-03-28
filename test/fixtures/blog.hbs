@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>{{title}}</title>
+  </head>
+  <body>
+    <ul id="list">
+    {{#each pages}}
+      <li{{#is ../page.dest dest}} class="active"{{/is}}>
+        <a href="{{rel ../page.dest}}">{{{data.title}}}</a>
+      </li>
+    {{/each}}
+    </ul>
+
+    {{> body }}
+  </body>
+</html>

@@ -1,12 +1,12 @@
 /**
- * Handlebars Helpers: {{rel}}
- * Copyright (c) 2013 Jon Schlinkert
+ * Copyright (c) 2014 Jon Schlinkert
  * Licensed under the MIT License (MIT).
  */
 
 // Node.js
 var path   = require('path');
 var fs     = require('fs');
+var relative = require('relative');
 
 
 // Export helpers
@@ -14,19 +14,10 @@ module.exports.register = function (Handlebars, options, params) {
   'use strict';
 
   /**
-   * {{rel}}
+   * Calculate the relative path to the given file.
    */
-  exports.rel = function(context) {
-    var newDest      = this.dest;
-    var destDirname  = path.dirname(context);
-    var relativePath = path.relative(path.resolve(destDirname), path.resolve(newDest));
 
-    return relativePath.replace(/\\/g, '/');
-  };
-
-  for (var helper in exports) {
-    if (exports.hasOwnProperty(helper)) {
-      Handlebars.registerHelper(helper, exports[helper]);
-    }
-  }
+  Handlebars.registerHelper("rel", function(context) {
+    return relative(context, this.dest);
+  });
 };
