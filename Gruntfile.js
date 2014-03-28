@@ -10,6 +10,15 @@
 
 module.exports = function(grunt) {
 
+  // Custom function for task assemble:filename_replacement
+  var toPost = function(str) {
+    var path = require('path');
+    var name = path.basename(str, path.extname(str));
+    var re = /(\d{4})-(\d{2})-(\d{2})-(.+)/;
+    // $1 = yyyy, $2 = mm, $3 = dd, $4 = basename
+    return name.replace(re, '$4');
+  };
+
   // Project configuration.
   grunt.initConfig({
 
@@ -296,6 +305,26 @@ module.exports = function(grunt) {
         },
         files: [
           {expand: true, cwd: 'test/fixtures/pages', src: ['**/*.hbs'], dest: 'test/actual/replacement_function/', ext: '.html'}
+        ]
+      },
+      // Should modify dest path using a filename replacement function
+      filename_replacement: {
+        options: {
+          engine: 'handlebars',
+          permalinks: {
+            structure: ':post/index.html',
+            patterns: [
+              {
+                pattern: ':post',
+                replacement: function() {
+                  return toPost(this.src);
+                }
+              }
+            ]
+          }
+        },
+        files: [
+          {expand: true, cwd: 'test/fixtures/posts', src: ['**/*.md'], dest: 'test/actual/filename_replacement/', ext: '.html'}
         ]
       },
       // Should generate a javascript file with all non-function replacement patterns
