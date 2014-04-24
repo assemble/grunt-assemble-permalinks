@@ -45,6 +45,14 @@ module.exports = function(grunt) {
       options: {
         plugins: ['permalinks.js'],
         //helpers: ['test/fixtures/helpers/*.js'],
+        helpers: [
+          'test/fixtures/helpers/navigation.js',
+          'test/fixtures/helpers/not.js',
+          'test/fixtures/helpers/pager.js',
+          'test/fixtures/helpers/pagination.js',
+          'test/fixtures/helpers/rel.js',
+          'test/fixtures/helpers/times.js'
+        ],
         //layout: 'test/fixtures/default.hbs',
         data: 'test/fixtures/ipsum.json',
         assets: 'test/assets'

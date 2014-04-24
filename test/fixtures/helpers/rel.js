@@ -10,13 +10,13 @@ var fs     = require('fs');
 
 
 // Export helpers
-module.exports.register = function (Handlebars, options, params) {
-  'use strict';
+module.exports = function (config) {
+  var helpers = {};
 
   /**
    * {{rel}}
    */
-  exports.rel = function(context) {
+  helpers.rel = function(context) {
     var newDest      = this.dest;
     var destDirname  = path.dirname(context);
     var relativePath = path.relative(path.resolve(destDirname), path.resolve(newDest));
@@ -24,9 +24,5 @@ module.exports.register = function (Handlebars, options, params) {
     return relativePath.replace(/\\/g, '/');
   };
 
-  for (var helper in exports) {
-    if (exports.hasOwnProperty(helper)) {
-      Handlebars.registerHelper(helper, exports[helper]);
-    }
-  }
+  return helpers;
 };
