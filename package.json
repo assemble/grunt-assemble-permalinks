@@ -39,7 +39,8 @@
     "grunt-prettify": "~0.3.1",
     "grunt-repos": "~0.1.2",
     "handlebars-helper-eachitems": "git://github.com/helpers/handlebars-helper-eachItems#v0.2.0",
-    "handlebars-helper-paginate": "git://github.com/helpers/handlebars-helper-paginate#v0.3.0"
+    "handlebars-helper-paginate": "git://github.com/helpers/handlebars-helper-paginate#v0.3.0",
+    "grunt-verb": "^0.2.0"
   },
   "keywords": [
     "assemble",

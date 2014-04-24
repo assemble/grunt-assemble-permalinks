@@ -363,6 +363,12 @@ module.exports = function(grunt) {
       }
     },
 
+    verb: {
+      options:{
+        repos: require('./docs/repos.json')
+      }
+    },
+
     /**
      * Beautify generated HTML for easier diffs
      */

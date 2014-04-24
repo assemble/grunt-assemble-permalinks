@@ -32,7 +32,7 @@ Also see the [Gruntfile](./Gruntfile.js) for example usage.
 {%= contrib("contributing") %}
 
 ## Other Assemble plugins
-{%= include("related-repos-list") %}
+{%= include("repos-list") %}
 
 ## Authors
 {%= contrib("authors") %}
