@@ -33,15 +33,13 @@
   },
   "devDependencies": {
     "grunt": "~0.4.2",
+    "grunt-assemble": "^0.1.10",
     "grunt-contrib-clean": "~0.5.0",
     "grunt-contrib-jshint": "~0.7.2",
     "grunt-prettify": "~0.3.1",
     "grunt-repos": "~0.1.2",
     "handlebars-helper-eachitems": "~0.1.2",
     "handlebars-helper-paginate": "~0.2.0"
-  },
-  "peerDependencies": {
-    "assemble": "~0.4.12"
   },
   "keywords": [
     "assemble",

@@ -43,9 +43,9 @@ module.exports = function(grunt) {
 
     assemble: {
       options: {
-        plugins: ['./permalinks.js'],
-        helpers: ['test/fixtures/helpers/*.js'],
-        layout: 'test/fixtures/default.hbs',
+        plugins: ['permalinks.js'],
+        //helpers: ['test/fixtures/helpers/*.js'],
+        //layout: 'test/fixtures/default.hbs',
         data: 'test/fixtures/ipsum.json',
         assets: 'test/assets'
       },
@@ -392,7 +392,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-prettify');
   grunt.loadNpmTasks('grunt-repos');
   grunt.loadNpmTasks('grunt-verb');
-  grunt.loadNpmTasks('assemble');
+  grunt.loadNpmTasks('grunt-assemble');
 
   // By default, lint and run all tests.
   grunt.registerTask('default', [
