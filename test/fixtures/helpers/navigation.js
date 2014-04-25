@@ -26,17 +26,17 @@ module.exports = function (config) {
   helpers.navigation = function(context, options) {
 
     // get the current context
-    var ctx = config.context();
+    var ctx = _.omit(this, ['first', 'prev', 'next', 'last']);
 
     options = options || {};
     options.hash = options.hash || {};
-    context = _.extend({modifier: ''}, context, ctx, this, options.hash);
+    context = _.extend({modifier: ''}, context, ctx, options.hash);
 
     var template = [
       '<div class="list-group">',
       '  {{#eachItems pages}}',
-      '  <a href="{{relative ../page.dest this.dest}}" class="list-group-item{{#is ../page.dest this.dest}} active{{/is}}">',
-      '    {{default title basename}}',
+      '  <a href="{{relative ../page.dest this.metadata.dest}}" class="list-group-item{{#is ../page.dest this.metadata.dest}} active{{/is}}">',
+      '    {{default this.metadata.title this.metadata.basename}}',
       '  </a>',
       '  {{/eachItems}}',
       '</div>'

@@ -41,7 +41,7 @@ module.exports = function (assemble) {
 
   var plugin = function(params, done) {
 
-    var grunt          = assemble.grunt;
+    var grunt          = assemble.options.grunt;
 
     var options        = assemble.options.permalinks;
     var pages          = assemble.pages;
@@ -50,11 +50,13 @@ module.exports = function (assemble) {
     // Skip over the plugin if it isn't defined in the options.
     if(!_.isUndefined(options)) {
 
+      var pageKeys = _.keys(pages);
       var i = 0;
-      var len = pages.length;
+      var len = pageKeys.length;
 
-      async.forEach(pages, function(page, next) {
+      async.forEach(pageKeys, function(pageKey, next) {
 
+        var page = pages[pageKey];
         i++;
 
         // Slugify basenames by default.
@@ -65,7 +67,7 @@ module.exports = function (assemble) {
         var structure = options.structure;
 
         // Convenience variable for YAML front matter.
-        var yfm  = page.data;
+        var yfm  = page.metadata;
 
         /**
          * EXCLUSION PATTERNS OPTION
@@ -81,9 +83,9 @@ module.exports = function (assemble) {
          */
         if(options.slugify) {
           if(!yfm.slug) {
-            page.slug = _str.slugify(page.basename);
+            page.metadata.slug = _str.slugify(page.metadata.basename);
           }
-          page.basename = _str.slugify(page.basename);
+          page.metadata.basename = _str.slugify(page.metadata.basename);
         }
 
         /**
@@ -93,7 +95,7 @@ module.exports = function (assemble) {
          *   010foo.html,011bar.html => foo.html,bar.html
          */
         if(options.stripnumber === true) {
-          page.basename = page.basename.replace(/^\d+\-?/, '');
+          page.metadata.basename = page.metadata.basename.replace(/^\d+\-?/, '');
         }
 
 
@@ -178,28 +180,28 @@ module.exports = function (assemble) {
          * Construct the permalink string. Modifies string with an array
          * of replacement patterns passed into options.patterns
          */
-        var permalink = strings.run(structure || page.dest);
+        var permalink = strings.run(structure || page.metadata.dest);
 
         /**
          * WRITE PERMALINKS
          * Append the permalink to the dest path defined in the target.
          */
         if(_.isUndefined(options.structure) && _.isUndefined(structure)) {
-          page.dest = page.dest;
+          page.metadata.dest = page.dest = page.metadata.dest || page.dest;
         } else {
-          if (page.basename === 'index') {
-            page.dest = page.dest;
+          if (page.metadata.basename === 'index') {
+            page.metadata.dest = page.dest = page.metadata.dest || page.dest;
           } else {
-            page.dest = utils.normalizePath(path.join(page.dirname, permalink));
+            page.metadata.dest = page.dest = utils.normalizePath(path.join(page.metadata.dirname, permalink));
           }
         }
 
-        page.assets = utils.calculatePath(page.dest, originalAssets, originalAssets);
+        page.metadata.assets = utils.calculatePath(page.metadata.dest, originalAssets, originalAssets);
 
         grunt.verbose.ok('page'.yellow, page);
-        grunt.verbose.ok('page.dest'.yellow, page.dest);
-        grunt.verbose.ok('page.assets'.yellow, page.assets);
-        grunt.verbose.ok('Generated permalink for:'.yellow, page.dest);
+        grunt.verbose.ok('page.metadata.dest'.yellow, page.metadata.dest);
+        grunt.verbose.ok('page.metadata.assets'.yellow, page.metadata.assets);
+        grunt.verbose.ok('Generated permalink for:'.yellow, page.metadata.dest);
         next();
       });
 

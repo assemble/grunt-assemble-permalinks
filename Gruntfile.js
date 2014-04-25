@@ -43,6 +43,16 @@ module.exports = function(grunt) {
 
     assemble: {
       options: {
+        collections: [
+          {
+            name: 'tag',
+            plural: 'tags'
+          },
+          {
+            name: 'category',
+            plural: 'categories'
+          }
+        ],
         plugins: ['permalinks.js'],
         helpers: [
           'handlebars-helper-eachItems',

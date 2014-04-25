@@ -20,7 +20,6 @@ module.exports = function (config) {
     var newDest      = this.dest;
     var destDirname  = path.dirname(context);
     var relativePath = path.relative(path.resolve(destDirname), path.resolve(newDest));
-
     return relativePath.replace(/\\/g, '/');
   };
 

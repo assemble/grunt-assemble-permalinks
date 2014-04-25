@@ -28,11 +28,11 @@ module.exports = function (config) {
    */
   helpers.pager = function(context, options) {
     // get the current context
-    var ctx = config.context();
+    var ctx = _.omit(this, ['first', 'prev', 'next', 'last']);
 
     options = options || {};
     options.hash = options.hash || {};
-    context = _.extend({modifier: ''}, context, ctx, this, options.hash);
+    context = _.extend({modifier: ''}, context, ctx, options.hash);
 
     var template = [
       '<ul class="nav nav-pills nav-stacked">',
