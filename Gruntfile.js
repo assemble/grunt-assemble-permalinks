@@ -284,7 +284,7 @@ module.exports = function(grunt) {
           permalinks: {
             preset: 'pretty',
             structure: ':project/:author',
-            patterns: [
+            replacements: [
               {
                 // should be "assemble-contrib-permalinks"
                 pattern: ':project',
@@ -307,7 +307,7 @@ module.exports = function(grunt) {
         options: {
           permalinks: {
             structure: ':tag/:basename.html',
-            patterns: [
+            replacements: [
               {
                 pattern: ':tag',
                 replacement: function (src) {
@@ -324,10 +324,9 @@ module.exports = function(grunt) {
       // Should modify dest path using a filename replacement function
       filename_replacement: {
         options: {
-          engine: 'handlebars',
           permalinks: {
             structure: ':post/index.html',
-            patterns: [
+            replacements: [
               {
                 pattern: ':post',
                 replacement: function() {
@@ -353,29 +352,6 @@ module.exports = function(grunt) {
         files: [
           {expand: true, cwd: 'test/fixtures/pages', src: ['**/*.hbs'], dest: 'test/actual/collections_complex/', ext: '.html'}
         ]
-      }
-    },
-
-    /**
-     * Pull down a list of repos from Github.
-     * (bundled with the readme task)
-     */
-    repos: {
-      assemble: {
-        options: {
-          username: 'assemble',
-          include: ['contrib'],
-          exclude: ['example', 'permalinks', 'rss']
-        },
-        files: {
-          'docs/repos.json': ['repos?page=1&per_page=100']
-        }
-      }
-    },
-
-    verb: {
-      options:{
-        repos: require('./docs/repos.json')
       }
     },
 
@@ -407,12 +383,11 @@ module.exports = function(grunt) {
   });
 
   // These plugins provide necessary tasks.
+  grunt.loadNpmTasks('grunt-assemble');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-prettify');
-  grunt.loadNpmTasks('grunt-repos');
   grunt.loadNpmTasks('grunt-verb');
-  grunt.loadNpmTasks('grunt-assemble');
 
   // By default, lint and run all tests.
   grunt.registerTask('default', [
