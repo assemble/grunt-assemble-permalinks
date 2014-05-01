@@ -1,16 +1,11 @@
 /**
- * Handlebars Helpers: {{navigation}}
- * Copyright (c) 2013 Jon Schlinkert
+ * Copyright (c) 2014 Jon Schlinkert
  * Licensed under the MIT License (MIT).
  */
 
 'use strict';
 
-// Node.js
-var path = require('path');
-var fs = require('fs');
 var _ = require('lodash');
-
 
 module.exports = function (config) {
   var Handlebars = config.Handlebars;

@@ -654,7 +654,8 @@ Visit [assemble.io/plugins](http:/assemble.io/plugins/) for more information abo
 **Brian Woodward**
 
 + [github/doowb](https://github.com/doowb)
-+ [twitter/doowb](http://twitter.com/jonschlinkert)
++ [twitter/doowb](http://twitter.com/doowb)
+
 
 ## License
 Copyright (c) 2014 Jon Schlinkert, contributors.  

@@ -1,17 +1,10 @@
 /**
- * Handlebars Helpers: {{times}}
- * Copyright (c) 2013 Jon Schlinkert
+ * Copyright (c) 2014 Jon Schlinkert
  * Licensed under the MIT License (MIT).
  */
 
 'use strict';
 
-// Node.js
-var path = require('path');
-var fs = require('fs');
-
-
-// Export helpers
 module.exports = function (config) {
   var Handlebars = config.Handlebars;
   var helpers = {};

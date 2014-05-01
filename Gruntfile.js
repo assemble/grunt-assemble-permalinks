@@ -24,20 +24,10 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('package.json'),
 
     jshint: {
+      all: ['Gruntfile.js', 'test/**/*.js'],
       options: {
-        curly: true,
-        eqeqeq: true,
-        immed: true,
-        latedef: true,
-        newcap: true,
-        noarg: true,
-        sub: true,
-        undef: true,
-        boss: true,
-        eqnull: true,
-        node: true
-      },
-      all: ['Gruntfile.js', 'tasks/*.js', '<%= nodeunit.tests %>']
+        jshintrc: '.jshintrc',
+      }
     },
 
     assemble: {
@@ -309,7 +299,7 @@ module.exports = function(grunt) {
             replacements: [
               {
                 pattern: ':tag',
-                replacement: function (src) {
+                replacement: function () {
                   return this.tags ? this.tags[0] : 'default';
                 }
               }

@@ -1,23 +1,16 @@
-
 /**
- * Handlebars Helpers: {{relative}}
- * Copyright (c) 2013 Jon Schlinkert
+ * Copyright (c) 2014 Jon Schlinkert
  * Licensed under the MIT License (MIT).
  */
+'use strict';
 
-// Node.js
-var path   = require('path');
+var relative = require('relative');
 
-// Export helpers
-module.exports = function (config) {
+module.exports = function () {
   var helpers = {};
 
-  /**
-   * {{relative}}
-   */
   helpers.relative = function(from, to) {
-    var relativePath = path.relative(path.dirname(from), path.dirname(to));
-    return path.join(relativePath, path.basename(to)).replace(/\\/g, '/');
+    return relative(from, to);
   };
 
   return helpers;

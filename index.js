@@ -1,10 +1,6 @@
-/*
- * Assemble Plugin: Permalinks
- * https://github.com/assemble/permalinks
- * Assemble is the 100% JavaScript static site generator for Node.js, Grunt.js, and Yeoman.
- *
- * Copyright (c) 2013 Jon Schlinkert, Brian Woodward, contributors.
- * Licensed under the MIT license.
+/**
+ * Copyright (c) 2014 Jon Schlinkert, Brian Woodward, contributors.
+ * Licensed under the MIT License (MIT).
  */
 
 // Node.js
@@ -16,8 +12,6 @@ var permalinks = require('permalinks');
 var calculatePath = require('calculate-assets');
 var _str = require('underscore.string');
 var _ = require('lodash');
-var utils  = require('./lib/utils');
-
 
 /**
  * Permalinks Plugin
@@ -93,7 +87,6 @@ module.exports = function (assemble) {
 
         var permalink = permalinks(structure, context, options);
 
-
         /**
          * WRITE PERMALINKS
          * Append the permalink to the dest path defined in the target.
@@ -105,7 +98,7 @@ module.exports = function (assemble) {
           if (page.data.basename === 'index') {
             page.data.dest = page.dest = page.data.dest || page.dest;
           } else {
-            page.data.dest = page.dest = path.join(page.data.dirname, permalink).replace(/\\/, '/');
+            page.data.dest = page.dest = path.join(page.data.dirname, permalink).replace(/\\/g, '/');
           }
         }
         page.data.assets = calculatePath(page.data.dest, originalAssets);

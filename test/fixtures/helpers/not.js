@@ -1,24 +1,16 @@
 /**
- * Handlebars Helper: {{not}}
- * Copyright (c) 2013 Jon Schlinkert
+ * Copyright (c) 2014 Jon Schlinkert
  * Licensed under the MIT License (MIT).
  */
-
 'use strict';
 
-
-// Node.js
-var path = require('path');
-var fs   = require('fs');
-
-// node_modules
-var _ = require('lodash');
-
-module.exports = function (config) {
+module.exports = function () {
   var helpers = {};
+
   /**
    * {{not}}
    */
+
   helpers.not = function (value, test, options) {
     if (value !== test) {
       return options.fn(this);
