@@ -1,8 +1,7 @@
 /*
- * Assemble Plugin: Permalinks
- * https://github.com/assemble/permalinks
+ * assemble-plugin-permalinks <https://github.com/assemble/permalinks>
  *
- * Copyright (c) 2013 Jon Schlinkert, contributors
+ * Copyright (c) 2014 Jon Schlinkert, Brian Woodward, contributors
  * Licensed under the MIT license.
  */
 
@@ -10,7 +9,7 @@
 
 module.exports = function(grunt) {
 
-  // Custom function for task assemble:filename_replacement
+  // For task assemble:filename_replacement
   var toPost = function(str) {
     var path = require('path');
     var name = path.basename(str, path.extname(str));
@@ -53,7 +52,7 @@ module.exports = function(grunt) {
             plural: 'categories'
           }
         ],
-        plugins: ['permalinks.js'],
+        plugins: ['index.js'],
         helpers: [
           'handlebars-helper-eachItems',
           'handlebars-helper-paginate',

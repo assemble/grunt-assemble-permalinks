@@ -20,7 +20,7 @@
       "url": "https://github.com/assemble/assemble-contrib-permalinks/blob/master/LICENSE-MIT"
     }
   ],
-  "main": "permalinks.js",
+  "main": "index.js",
   "engines": {
     "node": ">= 0.8.0"
   },
@@ -28,7 +28,8 @@
     "async": "~0.8.0",
     "lodash": "~2.4.1",
     "permalinks": "~0.2.0",
-    "underscore.string": "~2.3.3"
+    "underscore.string": "~2.3.3",
+    "calculate-assets": "~0.1.1"
   },
   "devDependencies": {
     "grunt": "~0.4.4",
@@ -41,24 +42,29 @@
     "handlebars-helper-paginate": "git://github.com/helpers/handlebars-helper-paginate#v0.3.0"
   },
   "keywords": [
+    "SEO",
     "assemble",
     "assemblecollection",
     "assembleplugin",
     "blog",
+    "front",
+    "generator",
     "handlebars-helper-eachitems",
     "handlebars-helper-paginate",
+    "links",
+    "matter",
     "moment",
     "moment.js",
-    "parse url",
+    "parse",
     "permalink",
     "permalinks",
     "post",
-    "pretty links",
-    "SEO",
+    "pretty",
+    "site",
     "slug",
-    "static site generator",
+    "static",
     "uri",
     "url",
-    "yaml front matter"
+    "yaml"
   ]
 }
