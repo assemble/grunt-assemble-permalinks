@@ -1,6 +1,0 @@
-# ===============================================
-# Verb config > https://github.com/assemble/verb
-# ===============================================
-
-username: jonschlinkert
-data:     docs/repos.json

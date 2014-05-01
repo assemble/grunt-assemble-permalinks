@@ -1,8 +1,7 @@
 /*
- * Assemble Plugin: Permalinks
- * https://github.com/assemble/permalinks
+ * assemble-plugin-permalinks <https://github.com/assemble/permalinks>
  *
- * Copyright (c) 2013 Jon Schlinkert, contributors
+ * Copyright (c) 2014 Jon Schlinkert, Brian Woodward, contributors
  * Licensed under the MIT license.
  */
 
@@ -10,7 +9,7 @@
 
 module.exports = function(grunt) {
 
-  // Custom function for task assemble:filename_replacement
+  // For task assemble:filename_replacement
   var toPost = function(str) {
     var path = require('path');
     var name = path.basename(str, path.extname(str));
@@ -43,8 +42,22 @@ module.exports = function(grunt) {
 
     assemble: {
       options: {
-        plugins: ['./permalinks.js'],
-        helpers: ['test/fixtures/helpers/*.js'],
+        collections: [
+          {
+            name: 'tag',
+            plural: 'tags'
+          },
+          {
+            name: 'category',
+            plural: 'categories'
+          }
+        ],
+        plugins: ['index.js'],
+        helpers: [
+          'handlebars-helper-eachItems',
+          'handlebars-helper-paginate',
+          'test/fixtures/helpers/*.js'
+        ],
         layout: 'test/fixtures/default.hbs',
         data: 'test/fixtures/ipsum.json',
         assets: 'test/assets'
@@ -270,7 +283,7 @@ module.exports = function(grunt) {
           permalinks: {
             preset: 'pretty',
             structure: ':project/:author',
-            patterns: [
+            replacements: [
               {
                 // should be "assemble-contrib-permalinks"
                 pattern: ':project',
@@ -293,7 +306,7 @@ module.exports = function(grunt) {
         options: {
           permalinks: {
             structure: ':tag/:basename.html',
-            patterns: [
+            replacements: [
               {
                 pattern: ':tag',
                 replacement: function (src) {
@@ -310,10 +323,9 @@ module.exports = function(grunt) {
       // Should modify dest path using a filename replacement function
       filename_replacement: {
         options: {
-          engine: 'handlebars',
           permalinks: {
             structure: ':post/index.html',
-            patterns: [
+            replacements: [
               {
                 pattern: ':post',
                 replacement: function() {
@@ -339,23 +351,6 @@ module.exports = function(grunt) {
         files: [
           {expand: true, cwd: 'test/fixtures/pages', src: ['**/*.hbs'], dest: 'test/actual/collections_complex/', ext: '.html'}
         ]
-      }
-    },
-
-    /**
-     * Pull down a list of repos from Github.
-     * (bundled with the readme task)
-     */
-    repos: {
-      assemble: {
-        options: {
-          username: 'assemble',
-          include: ['contrib'],
-          exclude: ['example', 'permalinks', 'rss']
-        },
-        files: {
-          'docs/repos.json': ['repos?page=1&per_page=100']
-        }
       }
     },
 
@@ -387,12 +382,11 @@ module.exports = function(grunt) {
   });
 
   // These plugins provide necessary tasks.
+  grunt.loadNpmTasks('grunt-assemble');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-prettify');
-  grunt.loadNpmTasks('grunt-repos');
   grunt.loadNpmTasks('grunt-verb');
-  grunt.loadNpmTasks('assemble');
 
   // By default, lint and run all tests.
   grunt.registerTask('default', [

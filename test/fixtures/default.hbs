@@ -41,11 +41,11 @@
             <h4>Sanity Check</h4>
             <ul class="list-group">
               <li class="list-group-item">
-                <span class="badge">{{length categories}}</span>
+                <span class="badge">{{length collections.categories}}</span>
                 Total Categories
               </li>
               <li class="list-group-item">
-                <span class="badge">{{length tags}}</span>
+                <span class="badge">{{length collections.tags}}</span>
                 Total Tags
               </li>
             </ul>
@@ -94,7 +94,7 @@
               <div class="panel panel-default">
                 <div class="panel-heading">Tags</div>
                 <div class="panel-body">
-                {{#each tags}}
+                {{#each collections.tags}}
                   <div>Related pages for: <span class="label label-warning">{{tag}}</span></div>
                   <ul>
                   {{#each pages}}
@@ -113,7 +113,7 @@
               <div class="panel panel-default">
                 <div class="panel-heading">Categories</div>
                 <div class="panel-body">
-                {{#each categories}}
+                {{#each collections.categories}}
                   <div>Related pages for: <span class="label label-warning">{{category}}</span></div>
                   <ul>
                   {{#each pages}}

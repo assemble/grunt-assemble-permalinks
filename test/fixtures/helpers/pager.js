@@ -10,12 +10,14 @@
 var path = require('path');
 var fs = require('fs');
 
+// node_modules
+var _ = require('lodash');
+
 
 // Export helpers
-module.exports.register = function (Handlebars, options, params) {
-
-  var opts = options || {};
-  var _ = params.grunt.util._;
+module.exports = function (config) {
+  var Handlebars = config.Handlebars;
+  var helpers = {};
 
   /**
    * {{pager}}
@@ -24,10 +26,13 @@ module.exports.register = function (Handlebars, options, params) {
    * @param  {Object} options Pass a modifier class to the helper.
    * @return {String}         The pager, HTML.
    */
-  exports.pager = function(context, options) {
+  helpers.pager = function(context, options) {
+    // get the current context
+    var ctx = _.omit(this, ['first', 'prev', 'next', 'last']);
+
     options = options || {};
     options.hash = options.hash || {};
-    context = _.extend({modifier: ''}, context, opts.data, this, options.hash);
+    context = _.extend({modifier: ''}, context, ctx, options.hash);
 
     var template = [
       '<ul class="nav nav-pills nav-stacked">',
@@ -80,9 +85,5 @@ module.exports.register = function (Handlebars, options, params) {
     return new Handlebars.SafeString(Handlebars.compile(template)(context));
   };
 
-  for (var helper in exports) {
-    if (exports.hasOwnProperty(helper)) {
-      Handlebars.registerHelper(helper, exports[helper]);
-    }
-  }
+  return helpers;
 };

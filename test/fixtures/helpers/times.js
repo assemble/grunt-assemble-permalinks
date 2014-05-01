@@ -12,12 +12,14 @@ var fs = require('fs');
 
 
 // Export helpers
-module.exports.register = function (Handlebars, options, params) {
+module.exports = function (config) {
+  var Handlebars = config.Handlebars;
+  var helpers = {};
 
   /**
    * {{times}}
    */
-  exports.times = function(value, options) {
+  helpers.times = function(value, options) {
     var data, i, content = "";
 
     for (i = 1; i <= value; i++) {
@@ -30,10 +32,6 @@ module.exports.register = function (Handlebars, options, params) {
     return content;
   };
 
-  for (var helper in exports) {
-    if (exports.hasOwnProperty(helper)) {
-      Handlebars.registerHelper(helper, exports[helper]);
-    }
-  }
+  return helpers;
 };
 
