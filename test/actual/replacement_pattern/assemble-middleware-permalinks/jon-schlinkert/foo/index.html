@@ -2,9 +2,9 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <title>Quux</title>
+    <title>Foo Foo</title>
     <link rel="stylesheet" href="http://getbootstrap.com/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../../../../../../../assets/validation.css">
+    <link rel="stylesheet" href="../../../../../assets/validation.css">
   </head>
   <body>
     <div class="container">
@@ -15,16 +15,16 @@
       <h4>pagination</h4>
       <ul class="pagination pagination-lg">
         <li class="prev">
-          <a href="../../../../assemble-contrib-permalinks/jon-schlinkert/bar/index.html">&laquo;</a>
+          <a href="../../../articles/assemble-middleware-permalinks/jon-schlinkert/bar/index.html">&laquo;</a>
         </li>
         <li class="prev">
-          <a href="../../../../index.html">&lsaquo;</a>
+          <a href="../../../articles/nested/assemble-middleware-permalinks/jon-schlinkert/quux/index.html">&lsaquo;</a>
         </li>
         <li class="next">
-          <a href="../../../../../assemble-contrib-permalinks/jon-schlinkert/foo/index.html">&rsaquo;</a>
+          <a href="../../../index.html">&rsaquo;</a>
         </li>
         <li class="next">
-          <a href="../../../../../index.html">&raquo;</a>
+          <a href="../../../index.html">&raquo;</a>
         </li>
       </ul>
       <style>
@@ -40,16 +40,16 @@
       <h4>pagination-justified</h4>
       <ul class="pagination pagination-lg justified">
         <li class="prev">
-          <a href="../../../../assemble-contrib-permalinks/jon-schlinkert/bar/index.html">&laquo;</a>
+          <a href="../../../articles/assemble-middleware-permalinks/jon-schlinkert/bar/index.html">&laquo;</a>
         </li>
         <li class="prev">
-          <a href="../../../../index.html">&lsaquo;</a>
+          <a href="../../../articles/nested/assemble-middleware-permalinks/jon-schlinkert/quux/index.html">&lsaquo;</a>
         </li>
         <li class="next">
-          <a href="../../../../../assemble-contrib-permalinks/jon-schlinkert/foo/index.html">&rsaquo;</a>
+          <a href="../../../index.html">&rsaquo;</a>
         </li>
         <li class="next">
-          <a href="../../../../../index.html">&raquo;</a>
+          <a href="../../../index.html">&raquo;</a>
         </li>
       </ul>
       <style>
@@ -67,10 +67,10 @@
       <h4>paginate</h4>
       <ul class="pager">
         <li class="previous">
-          <a href="../../../../assemble-contrib-permalinks/jon-schlinkert/bar/index.html">&larr; Prev</a>
+          <a href="../../../articles/assemble-middleware-permalinks/jon-schlinkert/bar/index.html">&larr; Prev</a>
         </li>
         <li class="next">
-          <a href="../../../../../index.html">Next &rarr;</a>
+          <a href="../../../index.html">Next &rarr;</a>
         </li>
       </ul>
       <style>
@@ -95,16 +95,16 @@
             <!-- pagination -->
             <ul class="nav nav-pills nav-stacked">
               <li class="prev">
-                <a href="../../../../assemble-contrib-permalinks/jon-schlinkert/bar/index.html">First</a>
+                <a href="../../../articles/assemble-middleware-permalinks/jon-schlinkert/bar/index.html">First</a>
               </li>
               <li class="prev">
-                <a href="../../../../index.html">&larr; Previous</a>
+                <a href="../../../articles/nested/assemble-middleware-permalinks/jon-schlinkert/quux/index.html">&larr; Previous</a>
               </li>
               <li class="next">
-                <a href="../../../../../assemble-contrib-permalinks/jon-schlinkert/foo/index.html">Next &rarr;</a>
+                <a href="../../../index.html">Next &rarr;</a>
               </li>
               <li class="next">
-                <a href="../../../../../index.html">Last</a>
+                <a href="../../../index.html">Last</a>
               </li>
             </ul>
             <style>
@@ -140,7 +140,7 @@
               <div class="docs-section">
                 <div class="docs-header" id="content">
                   <h4>{{relative}} helper</h4>
-                  <strong>Page title: Quux</strong>
+                  <strong>Page title: Foo Foo</strong>
                 </div>
                 <ul class="nav nav-pills nav-stacked">
                 </ul>
@@ -151,7 +151,7 @@
               <div class="docs-section">
                 <div class="docs-header" id="content">
                   <h4>{{rel}} helper</h4>
-                  <strong>Page title: Quux</strong>
+                  <strong>Page title: Foo Foo</strong>
                 </div>
                 <ul class="nav nav-pills nav-stacked">
                 </ul>
@@ -166,26 +166,26 @@
                   <div>Related pages for: <span class="label label-warning">bbb</span>
                   </div>
                   <ul>
-                    <li> <a href="../../../../assemble-contrib-permalinks/jon-schlinkert/bar/index.html">Bar</a> </li>
+                    <li> <a href="../../../articles/assemble-middleware-permalinks/jon-schlinkert/bar/index.html">Bar</a> </li>
                   </ul>
                   <div>Related pages for: <span class="label label-warning">one</span>
                   </div>
                   <ul>
-                    <li> <a href="../../../../../assemble-contrib-permalinks/jon-schlinkert/foo/index.html">Foo Foo</a> </li>
-                    <li> <a href="../../../../../index.html">Home</a> </li>
+                    <li class="active">
+                      <a href="index.html">Foo Foo</a>
+                    </li>
+                    <li> <a href="../../../index.html">Home</a> </li>
                   </ul>
                   <div>Related pages for: <span class="label label-warning">three</span>
                   </div>
                   <ul>
-                    <li> <a href="../../../../index.html">Category Index</a> </li>
-                    <li> <a href="../../../../../index.html">Home</a> </li>
+                    <li> <a href="../../../articles/index.html">Category Index</a> </li>
+                    <li> <a href="../../../index.html">Home</a> </li>
                   </ul>
                   <div>Related pages for: <span class="label label-warning">two</span>
                   </div>
                   <ul>
-                    <li class="active">
-                      <a href="index.html">Quux</a>
-                    </li>
+                    <li> <a href="../../../articles/nested/assemble-middleware-permalinks/jon-schlinkert/quux/index.html">Quux</a> </li>
                   </ul>
                 </div>
               </div>
@@ -199,19 +199,17 @@
                   <div>Related pages for: <span class="label label-warning">nested</span>
                   </div>
                   <ul>
-                    <li class="active">
-                      <a href="index.html">Quux</a>
-                    </li>
+                    <li> <a href="../../../articles/nested/assemble-middleware-permalinks/jon-schlinkert/quux/index.html">Quux</a> </li>
                   </ul>
                   <div>Related pages for: <span class="label label-warning">yyy</span>
                   </div>
                   <ul>
-                    <li> <a href="../../../../assemble-contrib-permalinks/jon-schlinkert/baz/index.html">Baz</a> </li>
+                    <li> <a href="../../../articles/assemble-middleware-permalinks/jon-schlinkert/baz/index.html">Baz</a> </li>
                   </ul>
                   <div>Related pages for: <span class="label label-warning">zzz</span>
                   </div>
                   <ul>
-                    <li> <a href="../../../../assemble-contrib-permalinks/jon-schlinkert/baz/index.html">Baz</a> </li>
+                    <li> <a href="../../../articles/assemble-middleware-permalinks/jon-schlinkert/baz/index.html">Baz</a> </li>
                   </ul>
                 </div>
               </div>
@@ -219,23 +217,22 @@
           </div>
 
           <!-- Content -->
-          <h1>Quux</h1>
-          <p></p>
+          <h1>Foo Foo</h1>
+          Aliquip id aute tempor dolore non non elit elit mollit do est tempor voluptate minim. Ut magna do dolor sit aliqua proident duis nulla eu consectetur id. Consectetur ullamco ullamco exercitation esse nostrud id duis duis ex fugiat voluptate.
           <hr>
-          <blockquote class="callout callout-warning">
-            <p>laboris ad incididunt et aliquip</p>
+          <blockquote class="callout callout-success">
+            <p>proident non consequat aliquip et</p>
           </blockquote>
           <hr>
-          <p>Pariatur enim mollit nostrud aute qui consectetur dolore Lorem ad fugiat aute anim aliquip mollit veniam. Magna ad amet eiusmod officia excepteur minim eiusmod fugiat nisi ad do velit nisi consequat ullamco est. Ad nisi veniam cillum excepteur
-            velit voluptate officia esse velit tempor aliquip. Qui dolor consequat nostrud aute elit elit sunt ea do magna cupidatat nisi. Ea quis aliqua proident Lorem commodo incididunt nulla sint cupidatat nisi excepteur eiusmod aliquip duis in proident
-            consectetur tempor veniam.</p>
-          <p>Voluptate occaecat reprehenderit adipisicing sint enim ut voluptate qui ad. Aute ipsum cillum labore sit in aliqua nulla ullamco exercitation nulla ipsum proident incididunt. Cillum deserunt magna sint ullamco officia veniam fugiat sint do nisi
-            cillum culpa laboris ut id aute dolor. Excepteur deserunt consectetur nostrud deserunt nostrud irure amet officia minim nostrud ad magna. Voluptate nostrud excepteur enim Lorem adipisicing enim proident incididunt labore anim. Non exercitation
-            minim sint cupidatat veniam voluptate amet amet veniam adipisicing culpa enim duis eiusmod commodo reprehenderit deserunt. Sit consequat consectetur nostrud esse do quis excepteur consectetur pariatur ea officia occaecat dolor ex.</p>
-          <p>Nostrud cupidatat ea non sit id veniam nostrud mollit elit eiusmod pariatur consequat adipisicing ea amet officia reprehenderit nulla. Tempor sunt qui irure do velit culpa consectetur eiusmod duis deserunt. Velit ullamco ipsum aute nisi eiusmod
-            pariatur ut sit sit Lorem adipisicing exercitation occaecat magna. Laboris ipsum reprehenderit consectetur ullamco excepteur pariatur qui deserunt ut elit eiusmod consectetur proident amet officia anim quis.</p>
-          <hr>Minim sunt nulla in tempor officia eu consectetur in incididunt est enim in culpa incididunt. Ea non cillum laboris excepteur exercitation veniam sit quis fugiat labore qui et eu eu. Minim quis proident sint id consequat laboris ex minim exercitation
-          id nisi.
+          <p>Nisi occaecat est excepteur tempor enim pariatur in dolore magna magna. Sunt non eiusmod ex veniam incididunt consequat culpa consequat esse aliquip ex sunt mollit officia veniam deserunt tempor laboris. Nulla aliqua id do id mollit eiusmod
+            id excepteur culpa magna aute aute elit nostrud ullamco. Dolor deserunt ea do incididunt et eiusmod fugiat commodo qui laborum. Sint deserunt fugiat ullamco magna magna quis veniam non amet elit.</p>
+          <p>Esse amet adipisicing dolor sunt pariatur sint enim sunt occaecat. Dolore culpa ea aliqua non laboris excepteur enim consectetur minim sit enim cupidatat esse deserunt tempor. Fugiat cupidatat ut fugiat aute fugiat et excepteur incididunt consequat
+            enim ullamco dolore cupidatat dolore ut velit incididunt aliqua. Occaecat consequat sunt aliqua exercitation deserunt culpa eiusmod eu exercitation exercitation Lorem consequat velit. Cillum aute Lorem consectetur veniam dolor dolor officia
+            aute incididunt ad laboris nostrud aute do incididunt. Excepteur est aliquip ullamco fugiat fugiat aliquip do est elit qui ea nisi deserunt adipisicing in fugiat. Dolore in magna nostrud do non mollit cupidatat ea aliqua aute ut.</p>
+          <p>Officia et deserunt tempor commodo aliqua enim labore aliquip minim ea laboris magna dolor ullamco. Magna eiusmod sit adipisicing tempor eiusmod laboris consectetur duis consectetur enim esse laboris. Ex cupidatat nulla non laboris duis nisi
+            amet ipsum duis duis est anim do minim aliqua cillum aliquip excepteur. Commodo aute excepteur fugiat mollit aliqua eiusmod commodo mollit sunt quis anim mollit ipsum reprehenderit ex aute. Consectetur laborum labore irure eiusmod excepteur
+            adipisicing ut est cupidatat consectetur commodo est ea do qui fugiat.</p>
+          <hr>Mollit id duis cillum eu ex incididunt pariatur exercitation ullamco consequat nostrud. Eiusmod consequat non quis ad mollit ad in mollit veniam amet aliqua duis non. Amet deserunt labore deserunt enim qui eu sit proident anim minim do est.
           <hr>
           <hr>
         </div>
