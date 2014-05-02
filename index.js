@@ -14,29 +14,29 @@ var _str = require('underscore.string');
 var _ = require('lodash');
 
 /**
- * Permalinks Plugin
+ * Permalinks Middleware
  * @param  {Object}   params
- * @param  {Function} done
+ * @param  {Function} next
  * @return {String}   The permalink string
  */
 
 module.exports = function (assemble) {
 
-  var plugin = function(params, done) {
+  var middleware = function(params, next) {
 
     var grunt          = assemble.config.grunt;
     var options        = assemble.config.permalinks;
     var originalAssets = assemble.config.assets;
     var pages          = assemble.pages;
 
-    // Skip over the plugin if it isn't defined in the options.
+    // Skip over the middleware if it isn't defined in the options.
     if(!_.isUndefined(options)) {
 
       var pageKeys = _.keys(pages);
       options.index = 0;
       options.length = pageKeys.length;
 
-      async.forEach(pageKeys, function(pageKey, next) {
+      async.forEach(pageKeys, function(pageKey, nextPage) {
 
         var page = pages[pageKey];
         options.index++;
@@ -106,24 +106,17 @@ module.exports = function (assemble) {
         grunt.verbose.ok('page'.yellow, page);
         grunt.verbose.ok('page.data.dest'.yellow, page.data.dest);
         grunt.verbose.ok('page.data.assets'.yellow, page.data.assets);
-        next();
+        nextPage();
       });
 
     }
 
-    done();
+    next();
   };
 
-
-  plugin.options = {
-    name: 'assemble-contrib-permalinks',
-    events: [
-      'assemble:before:render'
-    ]
+  middleware.event = 'assemble:before:render';
+  return {
+    'assemble-middleware-permalinks': middleware
   };
-
-  var rtn = {};
-  rtn[plugin.options.name] = plugin;
-  return rtn;
 };
 
