@@ -341,6 +341,14 @@ module.exports = function(grunt) {
         files: [
           {expand: true, cwd: 'test/fixtures/pages', src: ['**/*.hbs'], dest: 'test/actual/collections_complex/', ext: '.html'}
         ]
+      },
+      // Should modify dest path using permalink options from the page yfm
+      yfm_permalinks: {
+        options: {
+        },
+        files: [
+          {expand: true, cwd: 'test/fixtures/yfm-pages', src: ['**/*.hbs'], dest: 'test/actual/yfm_permalinks/', ext: '.html'}
+        ]
       }
     },
 
