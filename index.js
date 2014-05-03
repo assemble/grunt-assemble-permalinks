@@ -24,7 +24,6 @@ module.exports = function (assemble) {
 
   var middleware = function(params, next) {
 
-    var grunt          = assemble.config.grunt;
     var originalAssets = assemble.config.assets;
     var pages          = assemble.pages;
 
@@ -106,9 +105,9 @@ module.exports = function (assemble) {
       }
       page.data.assets = calculatePath(page.data.dest, originalAssets);
 
-      grunt.verbose.ok('page'.yellow, page);
-      grunt.verbose.ok('page.data.dest'.yellow, page.data.dest);
-      grunt.verbose.ok('page.data.assets'.yellow, page.data.assets);
+      assemble.log.verbose('page'.yellow, page);
+      assemble.log.verbose('page.data.dest'.yellow, page.data.dest);
+      assemble.log.verbose('page.data.assets'.yellow, page.data.assets);
       nextPage();
     },
     next);
