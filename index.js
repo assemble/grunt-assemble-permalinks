@@ -34,7 +34,7 @@ module.exports = function (assemble) {
     async.forEach(pageKeys, function(pageKey, nextPage) {
 
       var page = pages[pageKey];
-      var opts = assemble.config.permalinks || page.data.permalinks;
+      var opts = page.data.permalinks || assemble.config.permalinks;
       if (_.isUndefined(opts)) {
         return nextPage();
       }
