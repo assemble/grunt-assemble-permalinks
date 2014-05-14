@@ -97,7 +97,7 @@ module.exports = function (assemble) {
       if(_.isUndefined(opts.structure) && _.isEmpty(permalink)) {
         page.data.dest = page.dest = page.data.dest || page.dest;
       } else {
-        if (page.data.basename === 'index') {
+        if (opts.ignoreIndexFiles && page.data.basename === 'index') {
           page.data.dest = page.dest = page.data.dest || page.dest;
         } else {
           page.data.dest = page.dest = path.join(page.data.dirname, permalink).replace(/\\/g, '/');

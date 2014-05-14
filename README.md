@@ -325,7 +325,17 @@ options: {
 
 #### 'index' pages
 
-Note that permalink structures will be ignored for files with the basename `index`. See [Issue #20](https://github.com/assemble/permalinks/issues/20) for more info.
+Note that permalink structures will be ignored by default for files with the basename `index`. See [Issue #20](https://github.com/assemble/permalinks/issues/20) for more info.
+
+If you don't want to ignore `index` files, you can set the option `ignoreIndexFiles` to `false`:
+
+```js
+options: {
+  permalinks: {
+    ignoreIndexFiles: false
+  }
+}
+```
 
 
 ### preset
