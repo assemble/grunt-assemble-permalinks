@@ -46,6 +46,11 @@ module.exports = function (assemble) {
       // Slugify basenames by default.
       opts.slugify = true;
 
+      // Ignore files with a basename of 'index' by default
+      if (_.isUndefined(opts.ignoreIndexFiles)) {
+        opts.ignoreIndexFiles = true;
+      }
+
       // Get the permalink pattern to use from options.permalinks.structure.
       // If one isn't defined, don't change anything.
       var structure = opts.structure;
