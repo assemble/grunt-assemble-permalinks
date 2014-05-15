@@ -220,6 +220,18 @@ module.exports = function(grunt) {
           {expand: true, cwd: 'test/fixtures/pages', src: ['**/*.hbs'], dest: 'test/actual/index_pages/', ext: '.html'}
         ]
       },
+      // Should add basename to index if told to
+      index_pages_override: {
+        options: {
+          permalinks: {
+            ignoreIndexFiles: false,
+            structure: ':basename/index:ext'
+          }
+        },
+        files: [
+          {expand: true, cwd: 'test/fixtures/pages', src: ['**/*.hbs'], dest: 'test/actual/index_pages/', ext: '.html'}
+        ]
+      },
       // Should properly calculate dest path for collections
       collections_pretty: {
         options: {
