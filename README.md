@@ -4,6 +4,14 @@
 
 **Heads up!** permalinks v0.4.0 and greater require Assemble v0.5.0!
 
+### For Assemble v0.4.x
+
+To continue using the stable, supported version that works with Assemble v0.4.x, run:
+
+```bash
+npm install assemble-contrib-permalinks --save-dev
+```
+
 ## Table of Contents
 
 <!-- toc -->
