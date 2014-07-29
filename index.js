@@ -46,6 +46,11 @@ module.exports = function (assemble) {
       // Slugify basenames by default.
       opts.slugify = true;
 
+      // Ignore files with a basename of 'index' by default
+      if (_.isUndefined(opts.ignoreIndexFiles)) {
+        opts.ignoreIndexFiles = true;
+      }
+
       // Get the permalink pattern to use from options.permalinks.structure.
       // If one isn't defined, don't change anything.
       var structure = opts.structure;
@@ -97,7 +102,7 @@ module.exports = function (assemble) {
       if(_.isUndefined(opts.structure) && _.isEmpty(permalink)) {
         page.data.dest = page.dest = page.data.dest || page.dest;
       } else {
-        if (page.data.basename === 'index') {
+        if (opts.ignoreIndexFiles && page.data.basename === 'index') {
           page.data.dest = page.dest = page.data.dest || page.dest;
         } else {
           page.data.dest = page.dest = path.join(page.data.dirname, permalink).replace(/\\/g, '/');
