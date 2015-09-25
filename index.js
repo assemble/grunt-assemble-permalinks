@@ -105,9 +105,10 @@ module.exports = function (params, next) {
     }
     page.assets = calculatePath(page.dest, originalAssets);
 
-    grunt.log.verbose('page'.yellow, page);
-    grunt.log.verbose('page.dest'.yellow, page.dest);
-    grunt.log.verbose('page.assets'.yellow, page.assets);
+    grunt.verbose.ok('page'.yellow, page);
+    grunt.verbose.ok('page.dest'.yellow, page.dest);
+    grunt.verbose.ok('page.assets'.yellow, page.assets);
+    grunt.verbose.ok('Generated permalink for:'.yellow, page.dest);
     nextPage();
   },
   next);
