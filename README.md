@@ -48,7 +48,7 @@ module.exports = function(grunt) {
       files: {'blog/archives/': ['archives/*.hbs']}
     }
   });
-  grunt.loadNpmTasks('assemble');
+  grunt.loadNpmTasks('grunt-assemble');
   grunt.registerTask('default', ['assemble']);
 };
 ```
