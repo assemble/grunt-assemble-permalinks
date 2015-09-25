@@ -6,12 +6,19 @@
 
 var relative = require('relative');
 
-module.exports = function () {
-  var helpers = {};
+module.exports.register = function (Handlebars, options, params) {
+  'use strict';
 
-  helpers.relative = function(from, to) {
+  /**
+   * {{relative}}
+   */
+  exports.relative = function(from, to) {
     return relative(from, to);
   };
 
-  return helpers;
+  for (var helper in exports) {
+    if (exports.hasOwnProperty(helper)) {
+      Handlebars.registerHelper(helper, exports[helper]);
+    }
+  }
 };
