@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Foo</title>
     <link rel="stylesheet" href="http://getbootstrap.com/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../../../assets/validation.css">
+    <link rel="stylesheet" href="../../../../../../assets/validation.css">
   </head>
   <body>
     <div class="container">
@@ -14,12 +14,18 @@
       <!-- pagination -->
       <h4>pagination</h4>
       <ul class="pagination pagination-lg">
-        <li class="prev">
-          <a href="index.html">&laquo;</a>
+        <li class="prev disabled">
+          <a unselectable="on" class="unselectable">&laquo;</a>
         </li>
-        <li class="prev">
-          <a href="index.html">&lsaquo;</a>
+        <li class="prev disabled">
+          <a unselectable="on" class="unselectable">&lsaquo;</a>
         </li>
+        <li class="active">
+          <a href="index.html">1</a>
+        </li>
+        <li> <a href="../last-year/index.html">2</a> </li>
+        <li> <a href="../new-year/index.html">3</a> </li>
+        <li> <a href="../bar/index.html">4</a> </li>
         <li class="next">
           <a href="../last-year/index.html">&rsaquo;</a>
         </li>
@@ -27,24 +33,21 @@
           <a href="../bar/index.html">&raquo;</a>
         </li>
       </ul>
-      <style>
-      .unselectable {
-        -webkit-touch-callout: none;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-      }
-      </style>
       <hr>
       <h4>pagination-justified</h4>
       <ul class="pagination pagination-lg justified">
-        <li class="prev">
-          <a href="index.html">&laquo;</a>
+        <li class="prev disabled">
+          <a unselectable="on" class="unselectable">&laquo;</a>
         </li>
-        <li class="prev">
-          <a href="index.html">&lsaquo;</a>
+        <li class="prev disabled">
+          <a unselectable="on" class="unselectable">&lsaquo;</a>
         </li>
+        <li class="active">
+          <a href="index.html">1</a>
+        </li>
+        <li> <a href="../last-year/index.html">2</a> </li>
+        <li> <a href="../new-year/index.html">3</a> </li>
+        <li> <a href="../bar/index.html">4</a> </li>
         <li class="next">
           <a href="../last-year/index.html">&rsaquo;</a>
         </li>
@@ -52,23 +55,20 @@
           <a href="../bar/index.html">&raquo;</a>
         </li>
       </ul>
-      <style>
-      .unselectable {
-        -webkit-touch-callout: none;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-      }
-      </style>
       <hr>
 
       <!-- paginate -->
       <h4>paginate</h4>
       <ul class="pager">
-        <li class="previous">
-          <a href="index.html">&larr; Prev</a>
+        <li class="previous disabled">
+          <a unselectable="on" class="unselectable">&larr; Prev</a>
         </li>
+        <li class="active">
+          <a href="index.html">1</a>
+        </li>
+        <li> <a href="../last-year/index.html">2</a> </li>
+        <li> <a href="../new-year/index.html">3</a> </li>
+        <li> <a href="../bar/index.html">4</a> </li>
         <li class="next">
           <a href="../bar/index.html">Next &rarr;</a>
         </li>
@@ -89,17 +89,35 @@
 
             <!-- navigation -->
             <div class="list-group">
+              <a href="index.html" class="list-group-item active">
+    2013-10-11-foo
+  </a>
+              <a href="../last-year/index.html" class="list-group-item">
+    2013-12-31-last-year
+  </a>
+              <a href="../new-year/index.html" class="list-group-item">
+    2014-01-01-new-year
+  </a>
+              <a href="../bar/index.html" class="list-group-item">
+    2014-02-12-bar
+  </a>
             </div>
             <hr>
 
             <!-- pagination -->
             <ul class="nav nav-pills nav-stacked">
-              <li class="prev">
-                <a href="index.html">First</a>
+              <li class="prev disabled">
+                <a unselectable="on" class="unselectable">First</a>
               </li>
-              <li class="prev">
-                <a href="index.html">&larr; Previous</a>
+              <li class="prev disabled">
+                <a unselectable="on" class="unselectable">&larr; Previous</a>
               </li>
+              <li class="active">
+                <a href="index.html">1</a>
+              </li>
+              <li> <a href="../last-year/index.html">2</a> </li>
+              <li> <a href="../new-year/index.html">3</a> </li>
+              <li> <a href="../bar/index.html">4</a> </li>
               <li class="next">
                 <a href="../last-year/index.html">Next &rarr;</a>
               </li>
@@ -107,15 +125,6 @@
                 <a href="../bar/index.html">Last</a>
               </li>
             </ul>
-            <style>
-            .unselectable {
-              -webkit-touch-callout: none;
-              -webkit-user-select: none;
-              -moz-user-select: none;
-              -ms-user-select: none;
-              user-select: none;
-            }
-            </style>
             <hr>
 
             <!-- Summaries -->
@@ -126,7 +135,7 @@
                 Total Categories
               </li>
               <li class="list-group-item">
-                <span class="badge">8</span>
+                <span class="badge">0</span>
                 Total Tags
               </li>
             </ul>
@@ -143,6 +152,12 @@
                   <strong>Page title: Foo</strong>
                 </div>
                 <ul class="nav nav-pills nav-stacked">
+                  <li class="active">
+                    <a href="index.html">Foo</a>
+                  </li>
+                  <li> <a href="../last-year/index.html">Last Year</a> </li>
+                  <li> <a href="../new-year/index.html">New Year</a> </li>
+                  <li> <a href="../bar/index.html">Bar</a> </li>
                 </ul>
               </div>
               <hr>
@@ -154,6 +169,12 @@
                   <strong>Page title: Foo</strong>
                 </div>
                 <ul class="nav nav-pills nav-stacked">
+                  <li class="active">
+                    <a href="index.html">Foo</a>
+                  </li>
+                  <li> <a href="../last-year/index.html">Last Year</a> </li>
+                  <li> <a href="../new-year/index.html">New Year</a> </li>
+                  <li> <a href="../bar/index.html">Bar</a> </li>
                 </ul>
               </div>
             </div>
@@ -163,60 +184,6 @@
               <div class="panel panel-default">
                 <div class="panel-heading">Tags</div>
                 <div class="panel-body">
-                  <div>Related pages for: <span class="label label-warning">advanced</span>
-                  </div>
-                  <ul>
-                    <li> <a href="../bar/index.html">Bar</a> </li>
-                  </ul>
-                  <div>Related pages for: <span class="label label-warning">android</span>
-                  </div>
-                  <ul>
-                    <li> <a href="../bar/index.html">Bar</a> </li>
-                  </ul>
-                  <div>Related pages for: <span class="label label-warning">assemble</span>
-                  </div>
-                  <ul>
-                    <li class="active">
-                      <a href="index.html">Foo</a>
-                    </li>
-                    <li> <a href="../last-year/index.html">Last Year</a> </li>
-                  </ul>
-                  <div>Related pages for: <span class="label label-warning">beginner</span>
-                  </div>
-                  <ul>
-                    <li class="active">
-                      <a href="index.html">Foo</a>
-                    </li>
-                    <li> <a href="../last-year/index.html">Last Year</a> </li>
-                    <li> <a href="../new-year/index.html">New Year</a> </li>
-                  </ul>
-                  <div>Related pages for: <span class="label label-warning">intro</span>
-                  </div>
-                  <ul>
-                    <li class="active">
-                      <a href="index.html">Foo</a>
-                    </li>
-                  </ul>
-                  <div>Related pages for: <span class="label label-warning">javascript</span>
-                  </div>
-                  <ul>
-                    <li> <a href="../last-year/index.html">Last Year</a> </li>
-                  </ul>
-                  <div>Related pages for: <span class="label label-warning">php</span>
-                  </div>
-                  <ul>
-                    <li> <a href="../new-year/index.html">New Year</a> </li>
-                  </ul>
-                  <div>Related pages for: <span class="label label-warning">tutorial</span>
-                  </div>
-                  <ul>
-                    <li class="active">
-                      <a href="index.html">Foo</a>
-                    </li>
-                    <li> <a href="../last-year/index.html">Last Year</a> </li>
-                    <li> <a href="../new-year/index.html">New Year</a> </li>
-                    <li> <a href="../bar/index.html">Bar</a> </li>
-                  </ul>
                 </div>
               </div>
             </div>
