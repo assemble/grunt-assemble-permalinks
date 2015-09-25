@@ -1,18 +1,23 @@
 /**
- * Copyright (c) 2014 Jon Schlinkert
+ * Handlebars Helpers: {{times}}
+ * Copyright (c) 2013 Jon Schlinkert
  * Licensed under the MIT License (MIT).
  */
 
 'use strict';
 
-module.exports = function (config) {
-  var Handlebars = config.Handlebars;
-  var helpers = {};
+// Node.js
+var path = require('path');
+var fs = require('fs');
+
+
+// Export helpers
+module.exports.register = function (Handlebars, options, params) {
 
   /**
    * {{times}}
    */
-  helpers.times = function(value, options) {
+  exports.times = function(value, options) {
     var data, i, content = "";
 
     for (i = 1; i <= value; i++) {
@@ -25,6 +30,10 @@ module.exports = function (config) {
     return content;
   };
 
-  return helpers;
+  for (var helper in exports) {
+    if (exports.hasOwnProperty(helper)) {
+      Handlebars.registerHelper(helper, exports[helper]);
+    }
+  }
 };
 

@@ -1,14 +1,21 @@
 /**
- * Copyright (c) 2014 Jon Schlinkert
+ * Handlebars Helpers: {{pager}}
+ * Copyright (c) 2013 Jon Schlinkert
  * Licensed under the MIT License (MIT).
  */
+
 'use strict';
 
-var _ = require('lodash');
+// Node.js
+var path = require('path');
+var fs = require('fs');
 
-module.exports = function (config) {
-  var Handlebars = config.Handlebars;
-  var helpers = {};
+
+// Export helpers
+module.exports.register = function (Handlebars, options, params) {
+
+  var opts = options || {};
+  var _ = params.grunt.util._;
 
   /**
    * {{pager}}
@@ -17,13 +24,10 @@ module.exports = function (config) {
    * @param  {Object} options Pass a modifier class to the helper.
    * @return {String}         The pager, HTML.
    */
-  helpers.pager = function(context, options) {
-    // get the current context
-    var ctx = _.omit(this, ['first', 'prev', 'next', 'last']);
-
+  exports.pager = function(context, options) {
     options = options || {};
     options.hash = options.hash || {};
-    context = _.extend({modifier: ''}, context, ctx, options.hash);
+    context = _.extend({modifier: ''}, context, opts.data, this, options.hash);
 
     var template = [
       '<ul class="nav nav-pills nav-stacked">',
@@ -76,5 +80,9 @@ module.exports = function (config) {
     return new Handlebars.SafeString(Handlebars.compile(template)(context));
   };
 
-  return helpers;
+  for (var helper in exports) {
+    if (exports.hasOwnProperty(helper)) {
+      Handlebars.registerHelper(helper, exports[helper]);
+    }
+  }
 };
