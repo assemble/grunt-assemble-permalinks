@@ -6,18 +6,8 @@
 
 'use strict';
 
-
-// Node.js
-var path = require('path');
-var fs   = require('fs');
-
-// node_modules
-
-
 // Export helpers
-module.exports.register = function (Handlebars, options, params) {
-  var _ = params.grunt.util._;
-
+module.exports.register = function (Handlebars) {
   /**
    * {{not}}
    */

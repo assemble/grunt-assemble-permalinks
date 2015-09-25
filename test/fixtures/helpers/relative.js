@@ -6,9 +6,7 @@
 
 var relative = require('relative');
 
-module.exports.register = function (Handlebars, options, params) {
-  'use strict';
-
+module.exports.register = function (Handlebars) {
   /**
    * {{relative}}
    */

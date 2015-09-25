@@ -6,11 +6,6 @@
 
 'use strict';
 
-// Node.js
-var path = require('path');
-var fs = require('fs');
-
-
 // Export helpers
 module.exports.register = function (Handlebars, options, params) {
 
