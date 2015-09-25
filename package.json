@@ -73,8 +73,13 @@
         "grunt-assemble-contextual",
         "grunt-assemble-decompress",
         "grunt-assemble-download",
+        "grunt-assemble-i18n",
         "grunt-assemble-lunr",
-        "grunt-assemble-permalinks"
+        "grunt-assemble-navigation",
+        "grunt-assemble-permalinks",
+        "grunt-assemble-sitemap",
+        "grunt-assemble-toc",
+        "grunt-assemble-wordcount"
       ]
     }
   }
