@@ -1,6 +1,8 @@
-/**
- * Copyright (c) 2014 Jon Schlinkert, Brian Woodward, contributors.
- * Licensed under the MIT License (MIT).
+/*!
+ * grunt-assemble-permalinks <https://github.com/assemble/grunt-assemble-permalinks>
+ *
+ * Copyright (c) 2014-2015, Jon Schlinkert.
+ * Licensed under the MIT License.
  */
 
 // Node.js

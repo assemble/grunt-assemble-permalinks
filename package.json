@@ -11,11 +11,12 @@
   "bugs": {
     "url": "https://github.com/assemble/assemble-grunt-middleware-issues"
   },
-  "licenses": [
-    {
-      "type": "MIT",
-      "url": "https://github.com/assemble/assemble-grunt-middleware-blob/master/LICENSE-MIT"
-    }
+  "license": {
+    "type": "MIT",
+    "url": "https://github.com/assemble/assemble-grunt-middleware-blob/master/LICENSE"
+  },
+  "files": [
+    "index.js"
   ],
   "main": "index.js",
   "engines": {
