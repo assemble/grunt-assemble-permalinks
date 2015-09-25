@@ -14,108 +14,105 @@ var _str = require('underscore.string');
 var _ = require('lodash');
 
 /**
- * Permalinks Middleware
+ * Permalinks Plugin
  * @param  {Object}   params
  * @param  {Function} next
  * @return {String}   The permalink string
  */
 
-module.exports = function (assemble) {
+module.exports = function (params, next) {
 
-  var middleware = function(params, next) {
+  var assemble = params.assemble;
+  var grunt = params.grunt;
 
-    var originalAssets = assemble.config.assets;
-    var pages          = assemble.pages;
+  var options = assemble.options.permalinks;
+  var originalAssets = assemble.options.assets;
+  var pages          = assemble.options.pages;
 
-    var pageKeys = _.keys(pages);
-    var index = 0;
-    var totalPages = pageKeys.length;
+  var index = 0;
+  var totalPages = pages.length;
 
-    async.forEach(pageKeys, function(pageKey, nextPage) {
+  async.forEach(pages, function(page, nextPage) {
 
-      var page = pages[pageKey];
-      var opts = page.data.permalinks || assemble.config.permalinks;
-      if (_.isUndefined(opts)) {
-        return nextPage();
+    var opts = page.data.permalinks || options;
+    if (_.isUndefined(opts)) {
+      return nextPage();
+    }
+    index++;
+
+    opts.index = index;
+    opts.length = totalPages;
+
+    // Slugify basenames by default.
+    opts.slugify = true;
+
+    // Get the permalink pattern to use from options.permalinks.structure.
+    // If one isn't defined, don't change anything.
+    var structure = opts.structure;
+
+    // Convenience variable for YAML front matter.
+    var yfm  = page.data;
+
+    // exclusion patterns option. properties to omit from the params object.
+    var exclusions = ['_page', 'data', 'filePair', 'page', 'pageName'];
+        exclusions = _.union([], exclusions, opts.exclusions || []);
+
+
+    // `slugify` option. Ensure that basenames are suitable to be used as URLs.
+    if(opts.slugify) {
+      if(!yfm.slug) {
+        page.slug = _str.slugify(page.basename);
       }
-      index++;
+      page.basename = _str.slugify(page.basename);
+    }
 
-      opts.index = index;
-      opts.length = totalPages;
+    /**
+     * Strip leading numbers from pages
+     * Works well with `:num` pattern
+     * @examples
+     *   010foo.html,011bar.html => foo.html,bar.html
+     */
 
-      // Slugify basenames by default.
-      opts.slugify = true;
-
-      // Get the permalink pattern to use from options.permalinks.structure.
-      // If one isn't defined, don't change anything.
-      var structure = opts.structure;
-
-      // Convenience variable for YAML front matter.
-      var yfm  = page.data;
-
-      // exclusion patterns option. properties to omit from the params object.
-      var exclusions = ['_page', 'data', 'filePair', 'page', 'pageName'];
-          exclusions = _.union([], exclusions, opts.exclusions || []);
+    if(opts.stripnumber === true) {
+      page.basename = page.basename.replace(/^\d+\-?/, '');
+    }
 
 
-      // `slugify` option. Ensure that basenames are suitable to be used as URLs.
-      if(opts.slugify) {
-        if(!yfm.slug) {
-          page.data.slug = _str.slugify(page.data.basename);
-        }
-        page.data.basename = _str.slugify(page.data.basename);
-      }
+    var context = _.extend({}, yfm, page);
+    context = _.omit(context, exclusions);
 
-      /**
-       * Strip leading numbers from pages
-       * Works well with `:num` pattern
-       * @examples
-       *   010foo.html,011bar.html => foo.html,bar.html
-       */
+    /**
+     * CREATE PERMALINKS
+     * Construct the permalink string. Modifies string with an array
+     * of replacement patterns passed into options.patterns
+     */
 
-      if(opts.stripnumber === true) {
-        page.data.basename = page.data.basename.replace(/^\d+\-?/, '');
-      }
+    var permalink = permalinks(structure, context, opts);
 
+    /**
+     * WRITE PERMALINKS
+     * Append the permalink to the dest path defined in the target.
+     */
 
-      var context = _.extend({}, yfm, page);
-      context = _.omit(context, exclusions);
-
-      /**
-       * CREATE PERMALINKS
-       * Construct the permalink string. Modifies string with an array
-       * of replacement patterns passed into options.patterns
-       */
-
-      var permalink = permalinks(structure, context, opts);
-
-      /**
-       * WRITE PERMALINKS
-       * Append the permalink to the dest path defined in the target.
-       */
-
-      if(_.isUndefined(opts.structure) && _.isEmpty(permalink)) {
-        page.data.dest = page.dest = page.data.dest || page.dest;
+    if(_.isUndefined(opts.structure) && _.isEmpty(permalink)) {
+      page.dest = page.dest;
+    } else {
+      if (page.basename === 'index') {
+        page.dest = page.dest;
       } else {
-        if (page.data.basename === 'index') {
-          page.data.dest = page.dest = page.data.dest || page.dest;
-        } else {
-          page.data.dest = page.dest = path.join(page.data.dirname, permalink).replace(/\\/g, '/');
-        }
+        page.dest = page.dest = path.join(page.dirname, permalink).replace(/\\/g, '/');
       }
-      page.data.assets = calculatePath(page.data.dest, originalAssets);
+    }
+    page.assets = calculatePath(page.dest, originalAssets);
 
-      assemble.log.verbose('page'.yellow, page);
-      assemble.log.verbose('page.data.dest'.yellow, page.data.dest);
-      assemble.log.verbose('page.data.assets'.yellow, page.data.assets);
-      nextPage();
-    },
-    next);
-  };
-
-  middleware.event = 'assemble:before:render';
-  return {
-    'assemble-middleware-permalinks': middleware
-  };
+    grunt.log.verbose('page'.yellow, page);
+    grunt.log.verbose('page.dest'.yellow, page.dest);
+    grunt.log.verbose('page.assets'.yellow, page.assets);
+    nextPage();
+  },
+  next);
 };
 
+module.exports.options = {
+  stage: 'render:pre:pages'
+};

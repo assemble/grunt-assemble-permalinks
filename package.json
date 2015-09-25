@@ -33,11 +33,10 @@
   },
   "devDependencies": {
     "grunt": "~0.4.4",
-    "grunt-assemble": "^0.1.10",
+    "grunt-assemble": "^0.4.0",
     "grunt-contrib-clean": "~0.5.0",
     "grunt-contrib-jshint": "~0.10.0",
     "grunt-prettify": "~0.3.4",
-    "grunt-verb": "^0.2.0",
     "handlebars-helper-eachitems": "git://github.com/helpers/handlebars-helper-eachItems#v0.2.0",
     "handlebars-helper-paginate": "git://github.com/helpers/handlebars-helper-paginate#v0.3.0",
     "relative": "^0.1.4"
