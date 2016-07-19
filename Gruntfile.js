@@ -7,6 +7,10 @@
 
 'use strict';
 
+require('grunt');
+require('handlebars-helper-eachitems');
+require('handlebars-helper-paginate');
+
 module.exports = function(grunt) {
 
   // For task assemble:filename_replacement
@@ -20,15 +24,14 @@ module.exports = function(grunt) {
 
   // Project configuration.
   grunt.initConfig({
-
     pkg: grunt.file.readJSON('package.json'),
 
-    jshint: {
-      all: ['Gruntfile.js', 'test/**/*.js'],
-      options: {
-        jshintrc: '.jshintrc',
-      }
-    },
+    // jshint: {
+    //   src: ['Gruntfile.js', 'test/**/*.js'],
+    //   options: {
+    //     jshintrc: '.jshintrc',
+    //   }
+    // },
 
     assemble: {
       options: {
@@ -387,7 +390,7 @@ module.exports = function(grunt) {
 
   // By default, lint and run all tests.
   grunt.registerTask('default', [
-    'jshint',
+    // 'jshint',
     'clean',
     'assemble',
     'prettify'

@@ -4,16 +4,16 @@
  * Copyright (c) 2014-2015, Jon Schlinkert.
  * Licensed under the MIT License.
  */
+'use strict';
 
-// Node.js
-var path  = require('path');
-
-// node_modules
-var async = require('async');
+var path = require('path');
+var each = require('async-each');
 var permalinks = require('permalinks');
-var calculatePath = require('calculate-assets');
-var _str = require('underscore.string');
-var _ = require('lodash');
+var calculate = require('calculate-assets');
+var slugify = require('helper-slugify');
+var union = require('arr-union');
+var merge = require('mixin-deep');
+var omit = require('object.omit');
 
 /**
  * Permalinks Plugin
@@ -22,26 +22,25 @@ var _ = require('lodash');
  * @return {String}   The permalink string
  */
 
-module.exports = function (params, next) {
-
+module.exports = function(params, cb) {
   var assemble = params.assemble;
   var grunt = params.grunt;
 
   var options = assemble.options.permalinks;
   var originalAssets = assemble.options.assets;
-  var pages          = assemble.options.pages;
+  var pages = assemble.options.pages;
 
   var index = 0;
   var totalPages = pages.length;
 
-  async.forEach(pages, function(page, nextPage) {
-
+  each(pages, function(page, next) {
     var opts = page.data.permalinks || options;
-    if (_.isUndefined(opts)) {
-      return nextPage();
+    if (typeof opts === 'undefined') {
+      next();
+      return;
     }
-    index++;
 
+    index++;
     opts.index = index;
     opts.length = totalPages;
 
@@ -53,19 +52,18 @@ module.exports = function (params, next) {
     var structure = opts.structure;
 
     // Convenience variable for YAML front matter.
-    var yfm  = page.data;
+    var yfm = page.data;
 
     // exclusion patterns option. properties to omit from the params object.
     var exclusions = ['_page', 'data', 'filePair', 'page', 'pageName'];
-        exclusions = _.union([], exclusions, opts.exclusions || []);
-
+    exclusions = union([], exclusions, opts.exclusions || []);
 
     // `slugify` option. Ensure that basenames are suitable to be used as URLs.
-    if(opts.slugify) {
-      if(!yfm.slug) {
-        page.slug = _str.slugify(page.basename);
+    if (opts.slugify) {
+      page.basename = slugify(page.basename);
+      if (!yfm.slug) {
+        page.slug = page.basename;
       }
-      page.basename = _str.slugify(page.basename);
     }
 
     /**
@@ -75,13 +73,12 @@ module.exports = function (params, next) {
      *   010foo.html,011bar.html => foo.html,bar.html
      */
 
-    if(opts.stripnumber === true) {
+    if (opts.stripnumber === true) {
       page.basename = page.basename.replace(/^\d+\-?/, '');
     }
 
-
-    var context = _.extend({}, yfm, page);
-    context = _.omit(context, exclusions);
+    var context = merge({}, yfm, page);
+    context = omit(context, exclusions);
 
     /**
      * CREATE PERMALINKS
@@ -96,24 +93,17 @@ module.exports = function (params, next) {
      * Append the permalink to the dest path defined in the target.
      */
 
-    if(_.isUndefined(opts.structure) && _.isEmpty(permalink)) {
-      page.dest = page.dest;
-    } else {
-      if (page.basename === 'index') {
-        page.dest = page.dest;
-      } else {
-        page.dest = page.dest = path.join(page.dirname, permalink).replace(/\\/g, '/');
-      }
+    if (permalink && page.basename !== 'index') {
+      page.dest = path.join(page.dirname, permalink).split(/\\/).join('/');
     }
-    page.assets = calculatePath(page.dest, originalAssets);
 
+    page.assets = calculate(page.dest, originalAssets);
     grunt.verbose.ok('page'.yellow, page);
     grunt.verbose.ok('page.dest'.yellow, page.dest);
     grunt.verbose.ok('page.assets'.yellow, page.assets);
     grunt.verbose.ok('Generated permalink for:'.yellow, page.dest);
-    nextPage();
-  },
-  next);
+    next();
+  }, cb);
 };
 
 module.exports.options = {
