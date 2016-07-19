@@ -5,15 +5,17 @@
 Permalinks are **appended to the dest directory**. So given this config:
 
 ```js
-assemble: {
-  blog: {
-    options: {
-      permalinks: {
-        structure: ':year/:month/:day/:basename:ext'
+{
+  assemble: {
+    blog: {
+      options: {
+        permalinks: {
+          structure: ':year/:month/:day/:basename:ext'
+        }
+      },
+      files: {
+        'blog/archives/': ['archives/*.hbs']
       }
-    },
-    files: {
-      'blog/archives/': ['archives/*.hbs']
     }
   }
 }

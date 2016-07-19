@@ -33,20 +33,22 @@ If you need to use a custom variable, such as `:author` or `:title`, just add it
 ```js
 var _str = require('underscore.string');
 
-assemble: {
-  options: {
-    permalinks: {
-      structure: ':author:ext',
-      patterns: [
-        {
-          pattern: ':author',
-          replacement: '<%= _str.slugify(pkg.author.name) %>'
-        }
-      ]
-    }
-  },
-  files: {},
-...
+{
+  assemble: {
+    options: {
+      permalinks: {
+        structure: ':author:ext',
+        patterns: [
+          {
+            pattern: ':author',
+            replacement: '<%= _str.slugify(pkg.author.name) %>'
+          }
+        ]
+      }
+    },
+    files: {},
+  }
+}
 ```
 
 [moment]: http://momentjs.com/ "Moment.js Permalinks"
